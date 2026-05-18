@@ -1,0 +1,132 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { addDays, api, formatIsoDate, mondayOfWeek, type ShoppingList } from "../api";
+
+const CATEGORY_ORDER = [
+  "produce",
+  "meat",
+  "dairy",
+  "bakery",
+  "frozen",
+  "pantry",
+  "other",
+];
+
+export default function ShoppingListPage() {
+  const { weekStart: weekStartParam } = useParams();
+  const weekStart = useMemo(() => {
+    if (weekStartParam) {
+      const d = new Date(`${weekStartParam}T12:00:00`);
+      if (!Number.isNaN(d.getTime())) return mondayOfWeek(d);
+    }
+    return mondayOfWeek(new Date());
+  }, [weekStartParam]);
+  const weekEnd = useMemo(() => addDays(weekStart, 6), [weekStart]);
+  const startIso = formatIsoDate(weekStart);
+  const endIso = formatIsoDate(weekEnd);
+
+  const [list, setList] = useState<ShoppingList | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [regenerating, setRegenerating] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      setList(await api.getShoppingList(startIso, endIso));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No shopping list yet");
+      setList(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [startIso, endIso]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  async function toggleItem(id: number, checked: boolean) {
+    const updated = await api.toggleShoppingItem(id, !checked);
+    setList((prev) => {
+      if (!prev) return prev;
+      const items_by_category = { ...prev.items_by_category };
+      for (const cat of Object.keys(items_by_category)) {
+        items_by_category[cat] = items_by_category[cat].map((item) =>
+          item.id === id ? { ...item, checked: updated.checked } : item,
+        );
+      }
+      return { ...prev, items_by_category };
+    });
+  }
+
+  async function handleRegenerate() {
+    if (!confirm("Regenerate list? All check marks will reset.")) return;
+    setRegenerating(true);
+    setError("");
+    try {
+      setList(await api.generateShoppingList(startIso, endIso));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Regenerate failed");
+    } finally {
+      setRegenerating(false);
+    }
+  }
+
+  return (
+    <div className="page">
+      <header className="page-header">
+        <h1>Shopping list</h1>
+        <Link to={`/plan/${startIso}`} className="btn btn-secondary">
+          Back to plan
+        </Link>
+      </header>
+
+      <p className="muted week-label">
+        {startIso} – {endIso}
+      </p>
+
+      {error && !list && <p className="error">{error}</p>}
+      {loading && <p className="muted">Loading…</p>}
+
+      {list &&
+        CATEGORY_ORDER.map((category) => {
+          const items = list.items_by_category[category] ?? [];
+          if (items.length === 0) return null;
+          return (
+            <section key={category} className="card-section">
+              <h2 className="section-title">{category}</h2>
+              <ul className="list">
+                {items.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      className={`check-row ${item.checked ? "checked" : ""}`}
+                      onClick={() => toggleItem(item.id, item.checked)}
+                    >
+                      <span className="checkbox" aria-hidden>
+                        {item.checked ? "✓" : ""}
+                      </span>
+                      <span className="check-text">{item.text}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+
+      {list && (
+        <button
+          type="button"
+          className="btn btn-danger btn-block"
+          onClick={handleRegenerate}
+          disabled={regenerating}
+        >
+          {regenerating ? "Regenerating…" : "Regenerate list"}
+        </button>
+      )}
+    </div>
+  );
+}

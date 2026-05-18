@@ -172,3 +172,11 @@ secrets.yaml
 # Build artifacts
 *.whl
 *.tar.gz
+
+# Mealpad
+.worktrees/
+frontend/node_modules/
+frontend/dist/
+backend/data/
+backend/.env
+backend/.venv/

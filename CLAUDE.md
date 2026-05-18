@@ -1,0 +1,53 @@
+# Mealpad
+
+Family-oriented meal planning + recipe + shopping-list tool. Single FastAPI server on the household LAN serves both a JSON API and a React PWA from the same origin.
+
+See `SPEC.md` for the goal and `PLAN.md` for the milestone-by-milestone build plan.
+
+## Stack
+
+- **Backend:** Python 3.11+, FastAPI, SQLModel, SQLite. Lives in `backend/`.
+- **Frontend:** React + Vite + TypeScript, PWA. Lives in `frontend/`.
+- **AI:** Anthropic Claude (`anthropic` SDK) — tool use for structured JSON, prompt caching on system prompts. Server-side only; API key in `backend/.env`.
+- **Auth:** none. Trusted local-network deployment.
+
+## Commands
+
+```
+make dev-backend       # uvicorn app.main:app --reload (port 8000)
+make dev-frontend      # vite dev server (port 5173, proxies /api → 8000)
+make build             # build frontend into frontend/dist
+make serve             # run prod server: uvicorn --host 0.0.0.0 --port 8000
+cd backend && pytest   # backend tests
+```
+
+Anthropic key lives in `backend/.env` (see `backend/.env.example`). The DB file is `backend/data/mealpad.db`, gitignored.
+
+## Conventions
+
+- **TDD for backend.** Write the failing test, see it fail, implement, see it pass, commit. See `PLAN.md` for per-milestone test lists.
+- **One commit per milestone.** Milestones in `PLAN.md` are sized to be demoable on their own.
+- **Mobile-first frontend.** Min 44px tap targets. Test at 375×667 (iPhone SE) before claiming a UI task done.
+- **Free-text ingredients.** Recipes store ingredients as a JSON array of strings. The shopping list merge is Claude's job — do not introduce a normalized ingredient table.
+- **Meal plan is keyed by date, not by a weekly container.** There is no `MealPlan` entity. `MealPlanEntry` rows have `(date, slot, recipe_id)` with a unique constraint on `(date, slot)`. Empty slot = no row. To clear a slot, `DELETE` the entry. The "weekly view" is a UI rendering of a date-range query.
+- **Shopping lists are keyed by `(start_date, end_date)`.** Regenerating for the same range updates the existing row in place (same id, items wiped, checks reset).
+- **AI calls are server-side only.** The browser never sees the Anthropic key. Always use tool use + `tool_choice` for guaranteed JSON. Validate Claude's output (recipe IDs exist, slots are still empty, dates are in range) before applying.
+- **Don't overwrite manual choices.** AI fill only touches `(date, slot)` pairs that have no entry at the moment of application.
+
+## Out of scope for v1
+
+No auth, no recipe-import-from-URL, no photos, no nutrition, no calendar export, no grocery delivery integration. Resist scope creep — add to a follow-up SPEC if wanted later.
+
+## Working with this repo
+
+When implementing a milestone from `PLAN.md`:
+1. Read the milestone's Files / Tests / Verify sections.
+2. Follow TDD for backend work — tests first.
+3. Run the milestone's Verify steps before committing.
+4. Use the exact commit message listed at the end of the milestone.
+
+When adding to the AI service (`backend/app/services/ai.py`):
+- Use `claude-sonnet-4-6` by default.
+- Always declare a tool with a strict `input_schema` and set `tool_choice` to force its use.
+- Mark long, stable system prompts with `cache_control: {"type": "ephemeral"}`.
+- Validate every field of `block.input` before trusting it — never apply Claude's output directly to the DB without checking referential integrity.
