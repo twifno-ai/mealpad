@@ -16,8 +16,10 @@ export default function RecipeFormPage() {
   const isEdit = Boolean(id);
   const [form, setForm] = useState(emptyForm);
   const [ingredientsText, setIngredientsText] = useState("");
+  const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(isEdit);
+  const [coverBusy, setCoverBusy] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -31,6 +33,7 @@ export default function RecipeFormPage() {
           ingredients: recipe.ingredients,
         });
         setIngredientsText(recipe.ingredients.join("\n"));
+        setCoverUrl(recipe.cover_url);
       } catch (e) {
         console.error(e);
         setError(e instanceof Error ? e.message : zh.error.loadFailed);
@@ -39,6 +42,36 @@ export default function RecipeFormPage() {
       }
     })();
   }, [id]);
+
+  async function handleCoverChange(file: File | undefined) {
+    if (!file || !id) return;
+    setCoverBusy(true);
+    setError("");
+    try {
+      const res = await api.uploadRecipeCover(Number(id), file);
+      setCoverUrl(res.cover_url);
+    } catch (err) {
+      console.error(err);
+      setError(err instanceof Error ? err.message : zh.error.saveFailed);
+    } finally {
+      setCoverBusy(false);
+    }
+  }
+
+  async function handleDeleteCover() {
+    if (!id) return;
+    setCoverBusy(true);
+    setError("");
+    try {
+      await api.deleteRecipeCover(Number(id));
+      setCoverUrl(null);
+    } catch (err) {
+      console.error(err);
+      setError(err instanceof Error ? err.message : zh.error.deleteFailed);
+    } finally {
+      setCoverBusy(false);
+    }
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -119,6 +152,32 @@ export default function RecipeFormPage() {
             onChange={(e) => setForm({ ...form, description: e.target.value })}
           />
         </label>
+
+        {isEdit && (
+          <div className="field">
+            <span>{zh.recipeForm.cover}</span>
+            {coverUrl && (
+              <img src={coverUrl} alt="" className="recipe-cover-preview" />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="input"
+              disabled={coverBusy}
+              onChange={(e) => handleCoverChange(e.target.files?.[0])}
+            />
+            {coverUrl && (
+              <button
+                type="button"
+                className="btn btn-danger btn-block"
+                disabled={coverBusy}
+                onClick={handleDeleteCover}
+              >
+                {zh.recipeForm.removeCover}
+              </button>
+            )}
+          </div>
+        )}
 
         <label className="field">
           <span>{zh.recipeForm.ingredients}</span>

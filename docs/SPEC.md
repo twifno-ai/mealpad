@@ -11,12 +11,15 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 5. **Shopping list** — AI merges ingredients across all planned recipes for a date range; check off items; regenerate list (resets checks).
 6. **UI language** — Simplified Chinese throughout the frontend.
 7. **AI providers** — Anthropic Claude or OpenAI (ChatGPT API), configured in `backend/.env` only (no UI). Auto-detect: Anthropic key preferred if both set.
+8. **Cooking log** — Mark planned dishes as actually cooked; add off-plan dishes from the recipe library; optional one photo per log.
+9. **Recipe covers** — One cover image per recipe (local upload).
+10. **Journal page** — Browse weekly cooking history with photos.
 
 ## Users & deployment
 
 - **Users:** One household on a trusted LAN; no login.
 - **Server:** One machine runs `make serve` (`0.0.0.0:8000`); family devices use `http://<host-lan-ip>:8000`.
-- **Data:** Single SQLite file `backend/data/mealpad.db` (backup = copy file).
+- **Data:** `backend/data/` — SQLite (`mealpad.db`) plus uploaded images (`uploads/`). Backup = copy the whole `data/` directory.
 
 ## Meal plan model
 
@@ -25,7 +28,14 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 - **Dishes** = one or more entries per meal (`recipe_id` + `sort_order`). Unique per `(date, slot, recipe_id)`.
 - **Empty meal** = no entries for that `(date, slot)`.
 - AI fill targets **empty meals only** and adds **three** recipes (one `meat`, one `veg`, one `soup`) when the recipe library includes all three types.
-- **Regenerate** clears all entries in the range, re-runs AI for every meal in the range (3 dishes each), and removes the shopping list for that `(start_date, end_date)`.
+- **Regenerate** clears all entries in the range, re-runs AI for every meal in the range (3 dishes each), and removes the shopping list for that `(start_date, end_date)`. **Does not delete** cooking log entries (links to plan entries may be cleared).
+
+## Cooking log model (v2)
+
+- **Planned cooked** — One log per `MealPlanEntry` when marked done (`kind=planned`).
+- **Extra cooked** — Dishes actually made but not on the plan (`kind=extra`), chosen from the recipe library; unique per `(date, slot, recipe_id)`.
+- **Photos** — At most one image per log; stored under `backend/data/uploads/`.
+- **Recipe covers** — `RecipeImage` table; v2 allows one `is_cover` row per recipe.
 
 ## Shopping list model
 
@@ -43,7 +53,8 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 
 - Auth / multi-user accounts
 - Recipe import from URL
-- Photos, nutrition, calendar export, grocery delivery
+- Recipe step photos / multi-image gallery (v2 is cover-only)
+- Nutrition, calendar export, grocery delivery
 - Configurable dishes-per-meal or per-meal type rules in UI
 - English UI (Chinese only for now)
 

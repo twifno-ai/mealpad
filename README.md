@@ -10,6 +10,9 @@ Family-oriented meal planning, recipes, and shopping lists for your home LAN. UI
 - **AI regenerate plan** — Rebuilds the whole week (3 dishes per meal); deletes that week's shopping list
 - **Shopping list** — AI-merged ingredients by category, check off while shopping, regenerate list
 - **PWA** — Add to home screen from the phone browser
+- **Cooking log** — Mark meals as actually cooked, optional photo per dish, add off-plan dishes
+- **Recipe covers** — Upload a cover image per recipe
+- **Journal** — Weekly view of what you actually cooked (with photos)
 
 ## Prereqs
 
@@ -84,7 +87,7 @@ make serve
 
 ## Backups
 
-All app state lives in `backend/data/mealpad.db` — copy that file to back up. On first start after upgrades, the server runs a small SQLite migration automatically.
+Copy the entire `backend/data/` directory to back up SQLite (`mealpad.db`) and uploaded images (`uploads/`). On first start after upgrades, the server runs a small SQLite migration automatically.
 
 ## Icons
 
@@ -96,6 +99,7 @@ Replace `frontend/public/icon-192.png` and `icon-512.png`, then `make build`.
 |---|---|
 | [docs/SPEC.md](docs/SPEC.md) | Product spec |
 | [docs/PLAN.md](docs/PLAN.md) | Architecture & implementation plan |
+| [docs/PLAN-v2.md](docs/PLAN-v2.md) | v2 milestones (cooking log + images) |
 | [CLAUDE.md](CLAUDE.md) | Agent/convention guide |
 
 ## Tests
@@ -109,7 +113,8 @@ cd frontend && npm test && npm run build
 
 | Area | Endpoints |
 |---|---|
-| Recipes | `GET/POST /api/recipes`, `GET/PUT/DELETE /api/recipes/{id}` |
+| Recipes | `GET/POST /api/recipes`, `GET/PUT/DELETE /api/recipes/{id}`, `POST/DELETE /api/recipes/{id}/cover` |
+| Cooking log | `GET /api/cooked-dishes?start&end`, `POST /api/cooked-dishes/planned/{entry_id}`, `POST /api/cooked-dishes/extra` |
 | Meal plan | `GET /api/meal-plan?start&end` |
 | Dishes | `POST /api/meal-plan/{date}/{slot}/items`, `PUT/DELETE /api/meal-plan/items/{id}`, `DELETE /api/meal-plan/{date}/{slot}` |
 | AI plan | `POST /api/meal-plan/generate` (fill empty meals), `POST /api/meal-plan/regenerate` (full week) |

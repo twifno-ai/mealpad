@@ -84,9 +84,14 @@ export default function RecipesPage() {
             {items.map((recipe) => (
               <li key={recipe.id} className="list-row">
                 <Link to={`/recipes/${recipe.id}/edit`} className="list-row-main">
-                  <span className="list-row-title">{recipe.name}</span>
-                  <span className="list-row-sub">
-                    {zh.recipes.ingredientsCount(recipe.ingredients.length)}
+                  {recipe.cover_url && (
+                    <img src={recipe.cover_url} alt="" className="recipe-list-thumb" />
+                  )}
+                  <span className="list-row-text">
+                    <span className="list-row-title">{recipe.name}</span>
+                    <span className="list-row-sub">
+                      {zh.recipes.ingredientsCount(recipe.ingredients.length)}
+                    </span>
                   </span>
                 </Link>
                 <button

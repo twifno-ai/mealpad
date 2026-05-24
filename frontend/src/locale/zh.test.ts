@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { formatDayHeader } from "./format";
-import { categoryLabel, recipeTypeLabel, slotLabel } from "./zh";
+import { categoryLabel, recipeTypeLabel, slotLabel, zh } from "./zh";
 
 describe("recipeTypeLabel", () => {
   it("maps known types", () => {
@@ -24,6 +24,14 @@ describe("categoryLabel", () => {
   it("maps produce and pantry", () => {
     expect(categoryLabel("produce")).toBe("蔬果");
     expect(categoryLabel("pantry")).toBe("干货调料");
+  });
+});
+
+describe("v2 zh keys", () => {
+  it("includes cooked and journal strings", () => {
+    expect(zh.cooked.markDone).toBe("标记已做");
+    expect(zh.journal.title).toBe("饮食记录");
+    expect(zh.recipeForm.cover).toBe("食谱封面");
   });
 });
 

@@ -13,6 +13,7 @@ export interface Recipe {
   type: RecipeType;
   ingredients: string[];
   created_at: string;
+  cover_url: string | null;
 }
 
 export interface RecipeInput {
@@ -26,6 +27,19 @@ export interface RecipeSummary {
   id: number;
   name: string;
   type: string;
+  cover_url?: string | null;
+}
+
+export interface CookedDishLog {
+  id: number;
+  date: string;
+  slot: "lunch" | "dinner";
+  recipe_id: number | null;
+  recipe_name: string;
+  kind: "planned" | "extra";
+  meal_plan_entry_id: number | null;
+  photo_url: string | null;
+  logged_at: string;
 }
 
 export interface MealPlanEntry {
@@ -54,10 +68,20 @@ export interface ShoppingList {
 }
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(path, {
-    headers: { "content-type": "application/json" },
-    ...init,
-  });
+  const headers = new Headers(init?.headers);
+  if (init?.body && !headers.has("content-type")) {
+    headers.set("content-type", "application/json");
+  }
+  const res = await fetch(path, { ...init, headers });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new ApiError(res.status, body);
+  }
+  return res.status === 204 ? (undefined as T) : res.json();
+}
+
+async function reqForm<T>(path: string, form: FormData, method = "POST"): Promise<T> {
+  const res = await fetch(path, { method, body: form });
   if (!res.ok) {
     const body = await res.text();
     throw new ApiError(res.status, body);
@@ -78,6 +102,38 @@ export const api = {
     }),
   deleteRecipe: (id: number) =>
     req<void>(`/api/recipes/${id}`, { method: "DELETE" }),
+  uploadRecipeCover: (id: number, photo: File) => {
+    const form = new FormData();
+    form.append("photo", photo);
+    return reqForm<{ cover_url: string }>(`/api/recipes/${id}/cover`, form);
+  },
+  deleteRecipeCover: (id: number) =>
+    req<void>(`/api/recipes/${id}/cover`, { method: "DELETE" }),
+
+  getCookedDishes: (start: string, end: string) =>
+    req<CookedDishLog[]>(`/api/cooked-dishes?start=${start}&end=${end}`),
+  markPlannedCooked: (entryId: number, photo?: File) => {
+    const form = new FormData();
+    if (photo) form.append("photo", photo);
+    return reqForm<CookedDishLog>(`/api/cooked-dishes/planned/${entryId}`, form);
+  },
+  addExtraCooked: (date: string, slot: string, recipeId: number, photo?: File) => {
+    const form = new FormData();
+    form.append("date", date);
+    form.append("slot", slot);
+    form.append("recipe_id", String(recipeId));
+    if (photo) form.append("photo", photo);
+    return reqForm<CookedDishLog>("/api/cooked-dishes/extra", form);
+  },
+  replaceCookedPhoto: (logId: number, photo: File) => {
+    const form = new FormData();
+    form.append("photo", photo);
+    return reqForm<CookedDishLog>(`/api/cooked-dishes/${logId}/photo`, form, "PUT");
+  },
+  deleteCookedPhoto: (logId: number) =>
+    req<CookedDishLog>(`/api/cooked-dishes/${logId}/photo`, { method: "DELETE" }),
+  deleteCookedLog: (logId: number) =>
+    req<void>(`/api/cooked-dishes/${logId}`, { method: "DELETE" }),
 
   getMealPlan: (start: string, end: string) =>
     req<MealPlanEntry[]>(`/api/meal-plan?start=${start}&end=${end}`),

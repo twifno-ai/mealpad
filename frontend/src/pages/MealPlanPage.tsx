@@ -8,6 +8,7 @@ import {
   api,
   formatIsoDate,
   mondayOfWeek,
+  type CookedDishLog,
   type MealPlanEntry,
 } from "../api";
 import { formatDayHeader } from "../locale/format";
@@ -18,7 +19,7 @@ const SLOTS = ["lunch", "dinner"] as const;
 type PickerState = {
   date: string;
   slot: string;
-  mode: "add" | "replace";
+  mode: "add" | "replace" | "extra-cooked";
   entryId?: number;
 };
 
@@ -31,9 +32,14 @@ function mealKey(date: string, slot: string) {
   return `${date}:${slot}`;
 }
 
-function formatMealSummary(entries: MealPlanEntry[]) {
-  if (entries.length === 0) return zh.mealPlan.addSlot;
-  return entries.map((e) => e.recipe.name).join(" · ");
+function formatMealSummary(entries: MealPlanEntry[], cooked: CookedDishLog[]) {
+  if (entries.length === 0 && cooked.length === 0) return zh.mealPlan.addSlot;
+  const names = entries.map((e) => e.recipe.name).join(" · ");
+  if (cooked.length > 0) {
+    const base = names || zh.cooked.sectionActual;
+    return `${base} · ✓${cooked.length}`;
+  }
+  return names;
 }
 
 export default function MealPlanPage() {
@@ -52,6 +58,7 @@ export default function MealPlanPage() {
   const endIso = formatIsoDate(weekEnd);
 
   const [entries, setEntries] = useState<MealPlanEntry[]>([]);
+  const [cookedLogs, setCookedLogs] = useState<CookedDishLog[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
@@ -64,8 +71,12 @@ export default function MealPlanPage() {
     setLoading(true);
     setError("");
     try {
-      const data = await api.getMealPlan(startIso, endIso);
-      setEntries(data);
+      const [plan, cooked] = await Promise.all([
+        api.getMealPlan(startIso, endIso),
+        api.getCookedDishes(startIso, endIso),
+      ]);
+      setEntries(plan);
+      setCookedLogs(cooked);
     } catch (e) {
       console.error(e);
       setError(zh.mealPlan.loadFailed);
@@ -119,6 +130,13 @@ export default function MealPlanPage() {
     if (!mealModal) return [];
     return entriesByMeal.get(mealKey(mealModal.date, mealModal.slot)) ?? [];
   }, [mealModal, entriesByMeal]);
+
+  const modalCookedLogs = useMemo(() => {
+    if (!mealModal) return [];
+    return cookedLogs.filter(
+      (log) => log.date === mealModal.date && log.slot === mealModal.slot,
+    );
+  }, [mealModal, cookedLogs]);
 
   function goWeek(offset: number) {
     const next = addDays(weekStart, offset * 7);
@@ -174,10 +192,22 @@ export default function MealPlanPage() {
     if (!picker) return;
     if (picker.mode === "add") {
       await api.addMealPlanItem(picker.date, picker.slot, recipeId);
+    } else if (picker.mode === "extra-cooked") {
+      await api.addExtraCooked(picker.date, picker.slot, recipeId);
     } else if (picker.entryId != null) {
       await api.updateMealPlanItem(picker.entryId, recipeId);
     }
     setPicker(null);
+    await load();
+  }
+
+  async function handleMarkCooked(entryId: number, photo?: File) {
+    await api.markPlannedCooked(entryId, photo);
+    await load();
+  }
+
+  async function handleUnmarkCooked(logId: number) {
+    await api.deleteCookedLog(logId);
     await load();
   }
 
@@ -197,9 +227,14 @@ export default function MealPlanPage() {
     <div className="page">
       <header className="page-header">
         <h1>{zh.mealPlan.title}</h1>
-        <Link to="/recipes" className="btn btn-secondary">
-          {zh.mealPlan.recipes}
-        </Link>
+        <div className="header-actions">
+          <Link to={`/journal/${startIso}`} className="btn btn-secondary">
+            {zh.journal.title}
+          </Link>
+          <Link to="/recipes" className="btn btn-secondary">
+            {zh.mealPlan.recipes}
+          </Link>
+        </div>
       </header>
 
       <div className="toolbar week-nav">
@@ -256,6 +291,9 @@ export default function MealPlanPage() {
               <h2 className="day-title">{formatDayHeader(day)}</h2>
               {SLOTS.map((slot) => {
                 const mealEntries = entriesByMeal.get(mealKey(iso, slot)) ?? [];
+                const mealCooked = cookedLogs.filter(
+                  (log) => log.date === iso && log.slot === slot,
+                );
                 return (
                   <button
                     key={slot}
@@ -264,7 +302,9 @@ export default function MealPlanPage() {
                     onClick={() => setMealModal({ date: iso, slot })}
                   >
                     <span className="slot-label">{slotLabel(slot)}</span>
-                    <span className="slot-value">{formatMealSummary(mealEntries)}</span>
+                    <span className="slot-value">
+                      {formatMealSummary(mealEntries, mealCooked)}
+                    </span>
                   </button>
                 );
               })}
@@ -277,6 +317,7 @@ export default function MealPlanPage() {
           date={mealModal.date}
           slot={mealModal.slot}
           entries={modalEntries}
+          cookedLogs={modalCookedLogs}
           onAdd={() => {
             setPicker({ date: mealModal.date, slot: mealModal.slot, mode: "add" });
           }}
@@ -290,13 +331,28 @@ export default function MealPlanPage() {
           }}
           onRemove={handleRemoveDish}
           onClearMeal={handleClearMeal}
+          onMarkCooked={handleMarkCooked}
+          onUnmarkCooked={handleUnmarkCooked}
+          onAddExtra={() => {
+            setPicker({
+              date: mealModal.date,
+              slot: mealModal.slot,
+              mode: "extra-cooked",
+            });
+          }}
           onClose={() => setMealModal(null)}
         />
       )}
 
       {picker && (
         <RecipePicker
-          title={picker.mode === "add" ? zh.mealPlan.addDish : zh.mealPlan.replaceDish}
+          title={
+            picker.mode === "add"
+              ? zh.mealPlan.addDish
+              : picker.mode === "extra-cooked"
+                ? zh.cooked.addExtra
+                : zh.mealPlan.replaceDish
+          }
           showClear={false}
           onSelect={handleRecipeSelected}
           onClose={() => setPicker(null)}
