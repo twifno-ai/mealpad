@@ -10,6 +10,7 @@ from ..schemas import DateRange, EntryUpsert, MealPlanEntryRead, RecipeSummary
 from ..services import ai as ai_service
 from ..services.llm_config import AIServiceError
 from ..services.providers.base import REQUIRED_MEAL_TYPES, TYPE_SORT_ORDER
+from ..services.recipe_images import cover_url_for_recipe
 
 router = APIRouter()
 
@@ -17,14 +18,19 @@ VALID_SLOTS = {"lunch", "dinner"}
 TYPE_LABELS = {"meat": "荤菜", "veg": "素菜", "soup": "汤类"}
 
 
-def _entry_read(entry: MealPlanEntry, recipe: Recipe) -> MealPlanEntryRead:
+def _entry_read(session: Session, entry: MealPlanEntry, recipe: Recipe) -> MealPlanEntryRead:
     return MealPlanEntryRead(
         id=entry.id,
         date=entry.date,
         slot=entry.slot,
         recipe_id=entry.recipe_id,
         sort_order=entry.sort_order,
-        recipe=RecipeSummary(id=recipe.id, name=recipe.name, type=recipe.type),
+        recipe=RecipeSummary(
+            id=recipe.id,
+            name=recipe.name,
+            type=recipe.type,
+            cover_url=cover_url_for_recipe(session, recipe.id),
+        ),
         created_at=entry.created_at,
     )
 
@@ -164,7 +170,7 @@ def get_meal_plan(
     for entry in entries:
         recipe = session.get(Recipe, entry.recipe_id)
         if recipe is not None:
-            result.append(_entry_read(entry, recipe))
+            result.append(_entry_read(session, entry, recipe))
     return result
 
 
@@ -199,7 +205,7 @@ def add_meal_item(
     session.add(entry)
     session.commit()
     session.refresh(entry)
-    return _entry_read(entry, recipe)
+    return _entry_read(session, entry, recipe)
 
 
 @router.put("/items/{entry_id}", response_model=MealPlanEntryRead)
@@ -229,7 +235,7 @@ def update_meal_item(
     session.add(entry)
     session.commit()
     session.refresh(entry)
-    return _entry_read(entry, recipe)
+    return _entry_read(session, entry, recipe)
 
 
 @router.delete("/items/{entry_id}", status_code=204)

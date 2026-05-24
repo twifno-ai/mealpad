@@ -34,12 +34,14 @@ class RecipeUpdate(RecipeBase):
 class RecipeRead(RecipeBase):
     id: int
     created_at: datetime
+    cover_url: str | None = None
 
 
 class RecipeSummary(BaseModel):
     id: int
     name: str
     type: str
+    cover_url: str | None = None
 
 
 class MealPlanEntryRead(BaseModel):
