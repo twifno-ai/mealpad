@@ -1,0 +1,142 @@
+[
+  {
+    "type": "soup",
+    "name": "新英格兰蛤蜊浓汤（New England Clam Chowder）",
+    "description": "1. bacon 煎脆，留 fat 炒 onion 与 celery。\n2. 加 diced potato、 clam juice、 simmer 15 分钟。\n3. 加入 clams 与 heavy cream，勿 boil。\n4. 调 salt pepper，撒 bacon 与 parsley。",
+    "ingredients": [
+      "canned clams 400g",
+      "clam juice 500ml",
+      "土豆 2个",
+      "洋葱 1个",
+      "celery 2根",
+      "heavy cream 200ml",
+      "培根 4片"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "曼哈顿蛤蜊浓汤（Manhattan Clam Chowder）",
+    "description": "1. 番茄 base： onion、 celery、 bell pepper 炒香。\n2. 加 diced tomato、 clam juice、 potato cubes。\n3. simmer 20 分钟后加入 clams。\n4. 调 oregano、 bay leaf、 salt pepper。",
+    "ingredients": [
+      "canned clams 400g",
+      "clam juice 500ml",
+      "番茄罐头 400g",
+      "土豆 2个",
+      "彩椒 1个",
+      "onion 1个",
+      "oregano 1勺"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式鸡肉面条汤（Chicken Noodle Soup）",
+    "description": "1. chicken thighs 与 mirepoix 同锅煮 broth 40 分钟。\n2. 取出 chicken 撕丝，过滤 broth。\n3. 加 egg noodles 与 carrot 片煮 8 分钟。\n4. 回入 chicken，调 salt pepper 与 parsley。",
+    "ingredients": [
+      "鸡腿 4只",
+      "egg noodles 200g",
+      "胡萝卜 2根",
+      "celery 2根",
+      "onion 1个",
+      "chicken broth 1L",
+      "parsley 2勺"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式番茄浓汤（Tomato Soup）",
+    "description": "1. onion 与 garlic 用 butter 炒 soft。\n2. 加 canned tomato、 chicken broth、 bay leaf simmer 20 分钟。\n3.  blender 打 smooth，回锅加 cream。\n4. 配 grilled cheese 上桌。",
+    "ingredients": [
+      "番茄罐头 800g",
+      "chicken broth 500ml",
+      "onion 1个",
+      "大蒜 3瓣",
+      "heavy cream 100ml",
+      "butter 2勺",
+      "basil 少许"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式杂蔬浓汤（Vegetable Soup）",
+    "description": "1. onion、 carrot、 celery 用 olive oil 炒 5 分钟。\n2. 加 diced tomato、 green beans、 potato、 vegetable broth。\n3. simmer 25 分钟至蔬菜 soft。\n4. 加 frozen peas 2 分钟，调 salt pepper。",
+    "ingredients": [
+      "mixed vegetables 600g",
+      "vegetable broth 1L",
+      "番茄 2个",
+      "土豆 2个",
+      "green beans 150g",
+      "onion 1个",
+      "olive oil 2勺"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式玉米浓汤（Corn Chowder）",
+    "description": "1. bacon 煎脆，用 fat 炒 onion 与 potato dice。\n2. 加 corn kernels、 broth、 thyme simmer 15 分钟。\n3. 部分 soup 打泥回锅增稠。\n4. 加 cream、 bacon 碎、 chives。",
+    "ingredients": [
+      "corn kernels 400g",
+      "土豆 2个",
+      "onion 1个",
+      "chicken broth 750ml",
+      "heavy cream 150ml",
+      "bacon 4片",
+      "thyme 1枝"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式姜黄鸡汤（Golden Chicken Soup）",
+    "description": "1. chicken breast 与 ginger、 turmeric、 garlic 同煮 25 分钟。\n2. 取出 chicken 撕丝， broth 过滤。\n3. 加 rice 或 noodles 与 carrot 片煮 10 分钟。\n4. 回入 chicken，挤 lemon，撒 cilantro。",
+    "ingredients": [
+      "鸡胸肉 400g",
+      "ginger 3片",
+      "turmeric 1勺",
+      "garlic 3瓣",
+      "rice 100g",
+      "carrot 1根",
+      "lemon 半个"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式黑豆汤（Black Bean Soup）",
+    "description": "1. black beans 浸泡后煮 soft，或 canned 冲洗。\n2. sauté onion、 bell pepper、 cumin、 chili powder。\n3. 加 beans 与 broth， simmer 20 分钟。\n4. 部分打泥回锅，配 sour cream 与 cilantro。",
+    "ingredients": [
+      "black beans 400g",
+      "onion 1个",
+      "彩椒 1个",
+      "cumin 1勺",
+      "vegetable broth 750ml",
+      "sour cream 4勺",
+      "cilantro 2勺"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式蘑菇奶油汤（Cream of Mushroom Soup）",
+    "description": "1. mixed mushrooms 切片， butter 分批煎至 golden。\n2. 加 shallot、 garlic、 thyme 炒 2 分钟。\n3. 加 flour 再 Gradually 加 broth 与 cream。\n4. simmer 15 分钟， blender 部分打泥。",
+    "ingredients": [
+      "mixed mushrooms 500g",
+      "shallot 2个",
+      "chicken broth 500ml",
+      "heavy cream 150ml",
+      "butter 40g",
+      "thyme 2枝",
+      "flour 2勺"
+    ]
+  },
+  {
+    "type": "soup",
+    "name": "美式豌豆分瓣汤（Split Pea Soup）",
+    "description": "1. ham bone 或 diced ham 与 split peas、 mirepoix 同锅。\n2. 加 bay leaf， simmer 1.5 小时至 peas 分解。\n3. 取出 bone 撕肉回锅。\n4. 调 salt pepper，配 crusty bread。",
+    "ingredients": [
+      "split peas 400g",
+      "ham 200g",
+      "carrot 2根",
+      "onion 1个",
+      "celery 2根",
+      "bay leaf 2片",
+      "chicken broth 1L"
+    ]
+  }
+]

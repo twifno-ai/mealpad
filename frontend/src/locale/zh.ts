@@ -133,7 +133,10 @@ const CUISINE_LABELS: Record<string, string> = {
   japanese: "日餐",
   korean: "韩餐",
   thai: "泰餐",
-  western: "西餐",
+  french: "法餐",
+  spanish: "西班牙餐",
+  italian: "意餐",
+  american: "美式",
   other: "其他",
 };
 

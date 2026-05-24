@@ -22,6 +22,10 @@ def _seed_names(pattern: str) -> set[str]:
     return names
 
 
+def _migrate_western_to_other(conn) -> None:
+    conn.execute(text("UPDATE recipe SET cuisine = 'other' WHERE cuisine = 'western'"))
+
+
 def _backfill_recipe_cuisine(conn) -> None:
     chinese = _seed_names("classic_recipes_*.json")
     japanese = _seed_names("japanese_recipes_*.json")
@@ -77,6 +81,7 @@ def migrate_db() -> None:
                 conn.execute(text("CREATE INDEX IF NOT EXISTS ix_recipe_cuisine ON recipe (cuisine)"))
         with engine.begin() as conn:
             _backfill_recipe_cuisine(conn)
+            _migrate_western_to_other(conn)
 
     if not inspector.has_table("mealplanentry"):
         return

@@ -34,12 +34,27 @@ def test_invalid_cuisine_returns_422(client):
         json={
             "name": "X",
             "type": "soup",
-            "cuisine": "italian",
+            "cuisine": "western",
             "description": "",
-            "ingredients": [],
+            "ingredients": ["水"],
         },
     )
     assert response.status_code == 422
+
+
+def test_italian_cuisine_is_valid(client):
+    response = client.post(
+        "/api/recipes",
+        json={
+            "name": "番茄意面",
+            "type": "other",
+            "cuisine": "italian",
+            "description": "",
+            "ingredients": ["意面 200g"],
+        },
+    )
+    assert response.status_code == 201
+    assert response.json()["cuisine"] == "italian"
 
 
 def test_filter_by_cuisine(client):
@@ -89,10 +104,26 @@ def test_migration_does_not_overwrite_user_cuisine(session: Session):
             type="meat",
             description="",
             ingredients=["鸡蛋"],
-            cuisine="western",
+            cuisine="korean",
         )
     )
     session.commit()
     migrate_db()
     recipe = session.exec(select(Recipe).where(Recipe.name == "番茄炒蛋")).one()
-    assert recipe.cuisine == "western"
+    assert recipe.cuisine == "korean"
+
+
+def test_migration_converts_western_to_other(session: Session):
+    session.add(
+        Recipe(
+            name="旧西餐",
+            type="meat",
+            description="",
+            ingredients=["牛肉"],
+            cuisine="western",
+        )
+    )
+    session.commit()
+    migrate_db()
+    recipe = session.exec(select(Recipe).where(Recipe.name == "旧西餐")).one()
+    assert recipe.cuisine == "other"

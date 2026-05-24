@@ -1,0 +1,142 @@
+[
+  {
+    "type": "other",
+    "name": "美式苹果派（Apple Pie）",
+    "description": "1. 派皮铺入派盘，青苹果片与肉桂糖拌匀。\n2. 填入派皮，点缀黄油，盖上层派皮并封边。\n3. 刷蛋液，220°C 烤 15 分钟后降至 190°C 烤 35 分钟。\n4. 静置 2 小时再切，配香草冰淇淋。",
+    "ingredients": [
+      "派皮 2张",
+      "苹果 6个",
+      "brown sugar 100g",
+      "cinnamon 2勺",
+      "黄油 30g",
+      "鸡蛋 1个",
+      "lemon juice 1勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "美式布朗尼（Brownies）",
+    "description": "1.黄油与黑巧克力隔水融化。\n2. 拌入 sugar、 eggs、 vanilla、 flour、cocoa。\n3. 倒入方盘，175°C 烤 25–28 分钟至中心略软。\n4. 完全冷却再切方块。",
+    "ingredients": [
+      "dark chocolate 200g",
+      "黄油 150g",
+      "糖 200g",
+      "鸡蛋 3个",
+      "中筋面粉 100g",
+      "cocoa powder 30g",
+      "vanilla 1勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "巧克力曲奇（Chocolate Chip Cookies）",
+    "description": "1.黄油与红糖、白糖打发。\n2. 加 eggs、 vanilla，再 sift flour、baking soda、 salt。\n3. 拌入巧克力豆，冷藏面团 30 分钟。\n4. 190°C 烤 10–12 分钟至边缘金黄。",
+    "ingredients": [
+      "黄油 200g",
+      "brown sugar 150g",
+      "白糖 100g",
+      "鸡蛋 2个",
+      "中筋面粉 280g",
+      "chocolate chips 300g",
+      "vanilla 1勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "美式松饼（American Pancakes）",
+    "description": "1. 混合 flour、baking powder、sugar、 salt。\n2. 另碗 whisk buttermilk、 eggs、melted butter。\n3. 湿料倒入干料，轻拌至略带颗粒。\n4. 平底锅中火 每面煎 2 分钟，配 maple syrup。",
+    "ingredients": [
+      "中筋面粉 200g",
+      "buttermilk 350ml",
+      "鸡蛋 2个",
+      "黄油 40g",
+      "baking powder 2勺",
+      "糖 2勺",
+      "maple syrup 适量"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "美式华夫饼（Belgian Waffles）",
+    "description": "1. 分离 egg whites 与 yolks； yolks 与 milk、butter、 flour 混合。\n2. whites 打硬性发泡，拌入面糊。\n3. waffle iron 预热，倒入 batter 至 golden crisp。\n4. 配 berries 与 whipped cream。",
+    "ingredients": [
+      "中筋面粉 250g",
+      "鸡蛋 3个",
+      "牛奶 350ml",
+      "黄油 80g",
+      "baking powder 2勺",
+      "糖 2勺",
+      "vanilla 1勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "蓝莓马芬（Blueberry Muffins）",
+    "description": "1. 混合 flour、baking powder、 salt、sugar。\n2. 另碗 whisk eggs、milk、melted butter、 vanilla。\n3. 湿干合并， fold fresh blueberries。\n4. 190°C 烤 20–22 分钟至牙签插入无黏糊。",
+    "ingredients": [
+      "中筋面粉 250g",
+      "blueberries 200g",
+      "鸡蛋 2个",
+      "牛奶 120ml",
+      "黄油 80g",
+      "baking powder 2勺",
+      "糖 80g"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "香蕉面包（Banana Bread）",
+    "description": "1. 熟 banana 压泥，与 melted butter、sugar、 eggs 混合。\n2. sift flour、baking soda、 salt 拌入。\n3. 可选 fold walnuts，倒入 loaf pan。\n4. 175°C 烤 55–60 分钟，冷却再切片。",
+    "ingredients": [
+      "熟香蕉 3根",
+      "黄油 100g",
+      "brown sugar 150g",
+      "鸡蛋 2个",
+      "中筋面粉 200g",
+      "baking soda 1勺",
+      "walnuts 80g"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "纽约芝士蛋糕（New York Cheesecake）",
+    "description": "1. graham cracker crumbs 与 butter 压底，冷藏。\n2. cream cheese 打 smooth， Gradually 加 sugar、 eggs、sour cream、 vanilla。\n3. 倒入 springform，水浴 160°C 烤 55 分钟。\n4. 关炉静置 1 小时，冷藏 overnight 再切。",
+    "ingredients": [
+      "cream cheese 600g",
+      "graham crackers 200g",
+      "sour cream 150ml",
+      "鸡蛋 3个",
+      "糖 150g",
+      "黄油 80g",
+      "vanilla 2勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "苹果脆顶（Apple Crisp）",
+    "description": "1. 苹果片与 lemon juice、cinnamon、brown sugar 拌匀铺盘。\n2. 混合 oats、 flour、butter、brown sugar 成 crumb topping。\n3. 撒在苹果上，180°C 烤 40 分钟至 bubble。\n4. 配香草冰淇淋 热食。",
+    "ingredients": [
+      "苹果 6个",
+      "oats 100g",
+      "brown sugar 100g",
+      "中筋面粉 80g",
+      "黄油 80g",
+      "cinnamon 2勺",
+      "lemon juice 1勺"
+    ]
+  },
+  {
+    "type": "other",
+    "name": "山核桃派（Pecan Pie）",
+    "description": "1. pie crust 铺盘， blind bake 10 分钟。\n2. 混合 corn syrup、 eggs、butter、 vanilla、brown sugar。\n3. 铺 pecan halves，倒入 filling。\n4. 175°C 烤 45–50 分钟至中心略晃。",
+    "ingredients": [
+      "派皮 1张",
+      "pecans 300g",
+      "corn syrup 200ml",
+      "鸡蛋 3个",
+      "brown sugar 100g",
+      "黄油 50g",
+      "vanilla 1勺"
+    ]
+  }
+]

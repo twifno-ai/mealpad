@@ -1,0 +1,351 @@
+[
+  {
+    "type": "meat",
+    "name": "经典芝士汉堡（Classic Cheeseburger）",
+    "description": "1. 牛肉馅加盐、胡椒、洋葱末拌匀，压成厚饼。\n2. 铸铁锅或烤盘高温煎肉饼，每面 3–4 分钟至所需熟度。\n3. 最后 1 分钟放切达芝士片至融化。\n4. 烤汉堡胚，依次放生菜、番茄、洋葱与肉饼，挤番茄酱即可。",
+    "ingredients": [
+      "牛肉馅 400g",
+      "切达芝士 4片",
+      "汉堡胚 4个",
+      "生菜 4片",
+      "番茄 1个",
+      "洋葱 半个",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式烤肋排（BBQ Ribs）",
+    "description": "1. 猪肋排抹干，撒盐、胡椒、烟熏 paprika 腌制 1 小时。\n2. 烤箱 150°C 包锡纸慢烤 2.5 小时至脱骨。\n3. 刷 BBQ 酱，230°C 再烤 10 分钟至表面焦糖化。\n4. 切块装盘，淋剩余酱汁。",
+    "ingredients": [
+      "猪肋排 1kg",
+      "BBQ 酱 150ml",
+      "烟熏 paprika 1勺",
+      "大蒜粉 1勺",
+      "红糖 2勺",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式炸鸡（Southern Fried Chicken）",
+    "description": "1. 鸡腿加盐、胡椒、蒜粉、酪乳腌 4 小时。\n2. 面粉与玉米粉、 paprika 混合，鸡肉裹粉静置 10 分钟。\n3. 油温 175°C 下锅，中火炸 12–15 分钟至金黄。\n4. 沥油后配乡村肉汁或蜂蜜芥末酱。",
+    "ingredients": [
+      "整鸡切块 1只",
+      "酪乳 300ml",
+      "中筋面粉 200g",
+      "玉米粉 100g",
+      "paprika 2勺",
+      "盐胡椒 适量",
+      "炸用油 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式烤鸡（Roast Chicken）",
+    "description": "1. 整鸡内外抹黄油、盐、胡椒、百里香与柠檬片。\n2. 425°F/220°C 烤 15 分钟至皮开始上色。\n3. 降至 375°F/190°C 继续烤 50–60 分钟，中途淋汁。\n4. 静置 15 分钟后切块，配盘底肉汁。",
+    "ingredients": [
+      "整鸡 1.5kg",
+      "黄油 50g",
+      "柠檬 1个",
+      "百里香 4枝",
+      "大蒜 4瓣",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "纽约西冷牛排（New York Strip Steak）",
+    "description": "1. 牛排提前 30 分钟回温，擦干表面。\n2. 铸铁锅极高温下油，每面煎 3–4 分钟。\n3. 加黄油、大蒜、迷迭香，淋油 baste 30 秒。\n4. 静置 5 分钟后切片，撒粗盐。",
+    "ingredients": [
+      "西冷牛排 2块",
+      "黄油 30g",
+      "大蒜 2瓣",
+      "迷迭香 2枝",
+      "橄榄油 1勺",
+      "粗盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "德州烟熏牛胸（Texas Smoked Brisket）",
+    "description": "1. 牛胸肉抹粗盐、粗 pepper、黄糖，冷藏腌 overnight。\n2. 烟熏炉 110°C 熏 8–10 小时至 internal 93°C。\n3. 用 butcher paper 包裹再熏 2 小时。\n4. 静置 1 小时后逆纹切片，配 pickle 与 white bread。",
+    "ingredients": [
+      "牛胸肉 2kg",
+      "粗盐 3勺",
+      "粗黑胡椒 2勺",
+      "黄糖 1勺",
+      "烟熏木屑 适量",
+      "黄芥末 2勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "培根芝士汉堡（Bacon Cheeseburger）",
+    "description": "1. 培根煎至酥脆，牛肉饼加盐胡椒后煎熟。\n2. 肉饼上放切达与 American 芝士至融化。\n3. 汉堡胚烤至微焦，抹 mayo 与 mustard。\n4. 叠放生菜、番茄、培根与肉饼即可。",
+    "ingredients": [
+      "牛肉馅 400g",
+      "培根 8片",
+      "切达芝士 4片",
+      "汉堡胚 4个",
+      "生菜 适量",
+      "番茄 1个",
+      "蛋黄酱 2勺",
+      "黄芥末 1勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式肉loaf（Meatloaf）",
+    "description": "1. 牛肉馅与 breadcrumbs、鸡蛋、洋葱末、 ketchup 拌匀。\n2. 整形放入 loaf pan，表面刷 ketchup。\n3. 180°C 烤 55–60 分钟至 internal 71°C。\n4. 静置 10 分钟后切片，配土豆泥。",
+    "ingredients": [
+      "牛肉馅 600g",
+      "面包屑 1杯",
+      "鸡蛋 1个",
+      "洋葱 1个",
+      "ketchup 4勺",
+      "伍斯特酱 1勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "新英格兰龙虾卷（Lobster Roll）",
+    "description": "1. 龙虾肉切大块，与 mayo、柠檬汁、 celery 末、 chives 轻拌。\n2. 热狗面包两侧刷黄油，平底锅煎至金黄。\n3. 面包内铺 lettuce，填入龙虾沙拉。\n4. 撒 paprika，立即上桌。",
+    "ingredients": [
+      "龙虾肉 400g",
+      "蛋黄酱 3勺",
+      "芹菜 2根",
+      "柠檬汁 1勺",
+      "chives 2勺",
+      "热狗面包 4个",
+      "黄油 2勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "费城芝士牛排（Philly Cheesesteak）",
+    "description": "1.  ribeye 切薄片，洋葱、彩椒切丝。\n2. 铁板或大火快炒牛肉至变色，加蔬菜。\n3. 铺 provolone 或 Cheez Whiz，至芝士融化。\n4. 夹入法棍，对半切开即可。",
+    "ingredients": [
+      "ribeye 500g",
+      "洋葱 1个",
+      "彩椒 2个",
+      "provolone 200g",
+      "法棍 4根",
+      "橄榄油 2勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式蜜汁猪肋（Honey Glazed Pork Ribs）",
+    "description": "1. 猪小排用 dry rub 腌 2 小时。\n2. 160°C 包 foil 烤 2 小时。\n3. 调 honey、 soy、 garlic  glaze，刷在肋排上。\n4. 220°C 开盖烤 15 分钟至 sticky 焦糖色。",
+    "ingredients": [
+      "猪小排 1kg",
+      "蜂蜜 4勺",
+      "酱油 2勺",
+      "大蒜 4瓣",
+      "paprika 1勺",
+      "brown sugar 2勺",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "感恩节烤火鸡（Roast Turkey）",
+    "description": "1. 火鸡解冻擦干，腔内塞洋葱、 celery、 herbs。\n2. 表面抹黄油与 herb butter，撒 salt pepper。\n3. 165°C 烤约 3 小时， thigh 达 74°C。\n4. 静置 30 分钟后再切，配 gravy。",
+    "ingredients": [
+      "火鸡 5kg",
+      "黄油 100g",
+      "洋葱 2个",
+      "celery 3根",
+      "sage 1把",
+      "thyme 1把",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "索尔兹伯里牛排（Salisbury Steak）",
+    "description": "1. 牛肉馅与 breadcrumbs、 egg、 onion 末、 Worcestershire 拌匀。\n2. 压成 oval 肉饼，平底锅煎至两面焦黄。\n3. 加入蘑菇洋葱，倒入 beef broth 与 ketchup 炖 15 分钟。\n4. 配土豆泥与 peas 上桌。",
+    "ingredients": [
+      "牛肉馅 500g",
+      "面包屑 半杯",
+      "鸡蛋 1个",
+      "蘑菇 200g",
+      "牛肉高汤 250ml",
+      "ketchup 3勺",
+      "洋葱 1个"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式香煎羊排（Grilled Lamb Chops）",
+    "description": "1. 羊排抹 olive oil、 garlic、 rosemary、 salt pepper 腌 30 分钟。\n2.  grill 或 cast iron 高温每面 3–4 分钟。\n3. 至 medium-rare internal 57°C。\n4. 静置 5 分钟，挤 lemon 即可。",
+    "ingredients": [
+      "羊排 8块",
+      "橄榄油 3勺",
+      "迷迭香 3枝",
+      "大蒜 3瓣",
+      "柠檬 1个",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "新奥尔良烤鸡（Cajun Roasted Chicken）",
+    "description": "1. 整鸡抹 Cajun spice、 paprika、 garlic powder。\n2. 腔内塞 lemon 与 onion quarters。\n3. 200°C 烤 1 小时 15 分钟至 thigh 74°C。\n4. 静置后切块，配 dirty rice。",
+    "ingredients": [
+      "整鸡 1.5kg",
+      "Cajun 调料 3勺",
+      "paprika 1勺",
+      "柠檬 1个",
+      "洋葱 1个",
+      "大蒜 4瓣",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式炖牛肉（Pot Roast）",
+    "description": "1. chuck roast 拍粉，煎至各面焦黄。\n2. 加入 onion、 carrot、 celery、 garlic、 tomato paste。\n3. 倒入 beef broth 与 red wine，盖 lid 小火炖 3 小时。\n4. 蔬菜与肉同盘，淋 reduced 汤汁。",
+    "ingredients": [
+      "牛肩肉 1.2kg",
+      "胡萝卜 3根",
+      "洋葱 2个",
+      "celery 3根",
+      "beef broth 500ml",
+      "red wine 150ml",
+      "tomato paste 2勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "培根卷烤鸡胸（Bacon-Wrapped Chicken）",
+    "description": "1. 鸡胸抹 cream cheese 与 chives 混合馅。\n2. 用 bacon 条紧紧包裹，牙签固定。\n3. 190°C 烤 25–30 分钟至 bacon 酥脆、 chicken 74°C。\n4. 静置 5 分钟后切片。",
+    "ingredients": [
+      "鸡胸肉 4块",
+      "培根 8片",
+      "cream cheese 100g",
+      "chives 2勺",
+      "garlic powder 1勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式手撕猪肉（Pulled Pork）",
+    "description": "1. pork shoulder 抹 dry rub，冷藏 overnight。\n2. 120°C 慢烤或 crock pot 8 小时至 fork-tender。\n3. 撕成丝，拌 apple cider vinegar BBQ sauce。\n4. 夹 bun 配 coleslaw。",
+    "ingredients": [
+      "猪肩肉 2kg",
+      "brown sugar 2勺",
+      "paprika 2勺",
+      "cumin 1勺",
+      "apple cider vinegar 3勺",
+      "BBQ 酱 150ml",
+      "汉堡胚 6个"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式烤猪肩（Pork Shoulder Roast）",
+    "description": "1. 猪肩肉划口塞 garlic slices。\n2. 抹 mustard、 brown sugar、 paprika rub。\n3. 160°C 烤 3–4 小时至 internal 88°C。\n4. 静置 20 分钟后切片或撕碎。",
+    "ingredients": [
+      "猪肩肉 2kg",
+      "黄芥末 3勺",
+      "brown sugar 2勺",
+      "paprika 2勺",
+      "大蒜 6瓣",
+      "橄榄油 2勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "牛仔肋眼牛排（Cowboy Ribeye）",
+    "description": "1. bone-in ribeye 回温，擦干，抹 olive oil 与 steak rub。\n2.  grill 高温 sear 每面 4 分钟。\n3. indirect heat 至 medium 57°C internal。\n4. 静置 8 分钟，顶部可加 herb butter。",
+    "ingredients": [
+      "带骨 ribeye 2块",
+      "牛排 rub 2勺",
+      "橄榄油 2勺",
+      "黄油 30g",
+      "迷迭香 2枝",
+      "粗盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "威士忌 glaze 肋排（Whiskey Glazed Ribs）",
+    "description": "1. 猪肋排用 salt pepper 腌 1 小时。\n2. 150°C 包 foil 烤 2.5 小时。\n3. 威士忌、 brown sugar、 soy、 garlic 煮成 glaze。\n4. 刷 glaze 220°C 烤 12 分钟至亮泽。",
+    "ingredients": [
+      "猪肋排 1kg",
+      "威士忌 60ml",
+      "brown sugar 3勺",
+      "酱油 2勺",
+      "大蒜 3瓣",
+      "黄油 1勺",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式 Buffalo 鸡翅（Buffalo Wings）",
+    "description": "1. 鸡翅对半切开，拍干，抹 baking powder。\n2. 220°C 烤 45 分钟至皮酥脆。\n3. 融化 butter 与 hot sauce 拌匀。\n4. 鸡翅裹 sauce，配 blue cheese dip 与 celery。",
+    "ingredients": [
+      "鸡翅 1kg",
+      "hot sauce 100ml",
+      "黄油 60g",
+      "baking powder 1勺",
+      "blue cheese 50g",
+      "celery 4根",
+      "酸奶油 2勺"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式海军豆火腿（Navy Bean Ham）",
+    "description": "1. navy beans 浸泡 overnight， ham hock 焯水。\n2.  beans、 ham、 onion、 bay leaf 同锅小火炖 2 小时。\n3. 取出 ham 撕肉回锅，调 salt pepper。\n4. 配 cornbread 上桌。",
+    "ingredients": [
+      "navy beans 400g",
+      "ham hock 1块",
+      "洋葱 1个",
+      "carrot 1根",
+      "bay leaf 2片",
+      "大蒜 2瓣",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式香煎猪排（Pan-Fried Pork Chops）",
+    "description": "1. bone-in pork chops 抹 salt pepper paprika。\n2.  cast iron 高温下油，每面煎 4 分钟。\n3. 加 butter garlic thyme baste 1 分钟。\n4. 静置 5 分钟，配 apple sauce。",
+    "ingredients": [
+      "带骨猪排 4块",
+      "paprika 1勺",
+      "黄油 30g",
+      "大蒜 2瓣",
+      "thyme 2枝",
+      "苹果酱 4勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "type": "meat",
+    "name": "美式乡村炸牛排（Country Fried Steak）",
+    "description": "1. cube steak 拍松， salt pepper 调味。\n2. 裹 flour、 egg、 seasoned flour 三层。\n3. 175°C 油中炸 3–4 分钟至 golden。\n4. 配 white pepper gravy 与 mashed potatoes。",
+    "ingredients": [
+      "cube steak 4块",
+      "中筋面粉 200g",
+      "鸡蛋 2个",
+      "buttermilk 100ml",
+      "white pepper 1勺",
+      "beef broth 250ml",
+      "植物油 适量"
+    ]
+  }
+]

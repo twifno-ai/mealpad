@@ -6,14 +6,26 @@ export type RecipeType = "soup" | "meat" | "veg" | "other";
 
 export const RECIPE_TYPES: RecipeType[] = ["soup", "meat", "veg", "other"];
 
-export type CuisineType = "chinese" | "japanese" | "korean" | "thai" | "western" | "other";
+export type CuisineType =
+  | "chinese"
+  | "japanese"
+  | "korean"
+  | "thai"
+  | "french"
+  | "spanish"
+  | "italian"
+  | "american"
+  | "other";
 
 export const CUISINE_TYPES: CuisineType[] = [
   "chinese",
   "japanese",
   "korean",
   "thai",
-  "western",
+  "french",
+  "spanish",
+  "italian",
+  "american",
   "other",
 ];
 

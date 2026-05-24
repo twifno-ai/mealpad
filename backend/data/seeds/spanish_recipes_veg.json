@@ -1,0 +1,209 @@
+[
+  {
+    "name": "辣番茄酱炸土豆（Patatas bravas）",
+    "type": "veg",
+    "description": "1. 土豆切 2cm 块，盐水煮 8 分钟，沥干。\n2. 200℃ 烤箱或油炸至外脆内软。\n3. 番茄酱、烟熏 paprika 与 Tabasco 调成 bravas 酱。\n4. 土豆装盘，淋酱与 aioli 即可。",
+    "ingredients": [
+      "土豆 500g",
+      "番茄酱 3勺",
+      "烟熏 paprika 1勺",
+      "Tabasco 少许",
+      "蛋黄酱 2勺",
+      "大蒜 1瓣",
+      "橄榄油 适量",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "加泰罗尼亚烤蔬菜（Escalivada）",
+    "type": "veg",
+    "description": "1. 茄子、甜椒、洋葱刷橄榄油，200℃ 烤 40 分钟。\n2. 取出去皮去籽，撕成条。\n3. 淋优质橄榄油，撒盐与 sherry  vinegar。\n4. 冷藏 1 小时风味更佳，可夹面包。",
+    "ingredients": [
+      "茄子 1个",
+      "红甜椒 2个",
+      "洋葱 1个",
+      "橄榄油 4勺",
+      "雪莉 vinegar 1勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "拉曼查蔬菜炖（Pisto manchego）",
+    "type": "veg",
+    "description": "1. 西葫芦、甜椒、洋葱、番茄切小丁。\n2. 橄榄油小火依次炒软洋葱、甜椒、西葫芦。\n3. 加入番茄与少许 paprika，盖盖炖 20 分钟。\n4. 调味后可配煎蛋。",
+    "ingredients": [
+      "番茄 3个",
+      "西葫芦 1根",
+      "甜椒 2个",
+      "洋葱 1个",
+      "橄榄油 3勺",
+      "烟熏 paprika 1/2勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "番茄面包（Pan con tomate）",
+    "type": "veg",
+    "description": "1. 法棍切片，烤至微脆。\n2. 大蒜切半，在热面包上摩擦。\n3. 番茄对半摩擦出蓉，淋橄榄油与盐。\n4. 按喜好加 anchovy 或 jamón。",
+    "ingredients": [
+      "法棍 1根",
+      "成熟番茄 2个",
+      "大蒜 1瓣",
+      "橄榄油 3勺",
+      "粗盐 适量",
+      "欧芹 少许"
+    ]
+  },
+  {
+    "name": "帕德龙小辣椒（Pimientos de Padrón）",
+    "type": "veg",
+    "description": "1. Padron 辣椒洗净擦干，保留蒂。\n2. 平底铸铁锅极热，倒大量橄榄油。\n3. 辣椒入锅快速翻炒至起泡焦斑。\n4. 撒粗盐，趁热整盘上桌。",
+    "ingredients": [
+      "Padron 辣椒 250g",
+      "橄榄油 4勺",
+      "粗盐 适量",
+      "柠檬 半个"
+    ]
+  },
+  {
+    "name": "西班牙混合沙拉（Ensalada mixta española）",
+    "type": "veg",
+    "description": "1. 生菜、番茄、洋葱、橄榄、 pepper 切配。\n2. 金枪鱼罐头沥干（可选），白芦笋切段。\n3. 橄榄油、 vinegar 与盐调成油醋汁。\n4. 所有材料拌匀，冷藏 10 分钟。",
+    "ingredients": [
+      "生菜 1颗",
+      "番茄 2个",
+      "白芦笋 100g",
+      "黑橄榄 50g",
+      "红洋葱 半个",
+      "橄榄油 2勺",
+      "雪莉 vinegar 1勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "蜜汁炸茄子（Berenjenas con miel）",
+    "type": "veg",
+    "description": "1. 茄子切圆片，盐腌 15 分钟挤干。\n2. 面粉裹匀，180℃ 油炸至金黄。\n3. 沥油摆盘，淋 molasses 或 honey。\n4. 撒 sesame 与 paprika 即可。",
+    "ingredients": [
+      "茄子 2个",
+      "面粉 80g",
+      "蜂蜜 3勺",
+      "橄榄油 适量",
+      "烟熏 paprika 少许",
+      "芝麻 1勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "西班牙番茄沙拉（Ensalada de tomate）",
+    "type": "veg",
+    "description": "1. 成熟番茄切厚片，摆盘。\n2. 红洋葱切细丝，撒其上。\n3. 淋橄榄油、 sherry vinegar 与 oregano。\n4. 静置 10 分钟入味即可。",
+    "ingredients": [
+      "番茄 4个",
+      "红洋葱 半个",
+      "橄榄油 3勺",
+      "雪莉 vinegar 1勺",
+      "牛至 少许",
+      "盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "加利西亚炒芜菁叶（Grelos salteados）",
+    "type": "veg",
+    "description": "1. 芜菁叶洗净，粗茎切段。\n2. chorizo 切片，锅中逼出油脂。\n3. 下蒜片与 grelos 大火快炒 3 分钟。\n4. 加盐胡椒，淋 lemon 即可。",
+    "ingredients": [
+      "芜菁叶 400g",
+      "chorizo 80g",
+      "大蒜 3瓣",
+      "橄榄油 1勺",
+      "柠檬 半个",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "name": "西班牙烤彩椒（Pimientos asados）",
+    "type": "veg",
+    "description": "1. 整颗甜椒放明火上烤至表皮焦黑。\n2. 转入密封袋或盖碗焖 10 分钟。\n3. 撕去焦皮，去籽切条。\n4. 淋橄榄油、 garlic 与 vinegar 腌制。",
+    "ingredients": [
+      "红甜椒 4个",
+      "橄榄油 3勺",
+      "大蒜 2瓣",
+      "雪莉 vinegar 1勺",
+      "盐 适量",
+      "欧芹 少许"
+    ]
+  },
+  {
+    "name": "西班牙鹰嘴豆沙拉（Ensalada de garbanzos）",
+    "type": "veg",
+    "description": "1. 熟鹰嘴豆、番茄、黄瓜、 pepper 切丁。\n2. 红洋葱切细丝， parsley 切碎。\n3. 橄榄油、 lemon 与 cumin 调汁。\n4. 拌匀冷藏 30 分钟。",
+    "ingredients": [
+      "鹰嘴豆 400g",
+      "番茄 2个",
+      "黄瓜 1根",
+      "红洋葱 半个",
+      "欧芹 少许",
+      "橄榄油 2勺",
+      "柠檬汁 1勺",
+      " cumin 少许"
+    ]
+  },
+  {
+    "name": "西班牙蒜香蘑菇（Champiñones al ajillo）",
+    "type": "veg",
+    "description": "1. 蘑菇对半或切厚片，蒜切薄片。\n2. 小平底锅倒入大量橄榄油，小火炸蒜至金黄。\n3. 转大火下蘑菇快炒 4 分钟。\n4. 加 sherry、 parsley 与 salt 即可。",
+    "ingredients": [
+      "白蘑菇 400g",
+      "大蒜 6瓣",
+      "橄榄油 80ml",
+      "雪莉酒 2勺",
+      "欧芹 少许",
+      "盐 适量",
+      "干辣椒 1根"
+    ]
+  },
+  {
+    "name": "西班牙烤芦笋（Espárragos a la plancha）",
+    "type": "veg",
+    "description": "1. 芦笋削老根， blanch 2 分钟过冷。\n2. 铸铁锅极热，橄榄油煎芦笋至焦斑。\n3. 挤 lemon，撒 salt 与 shaved manchego。\n4. 趁热上桌。",
+    "ingredients": [
+      "绿芦笋 400g",
+      "橄榄油 2勺",
+      "曼彻格芝士 40g",
+      "柠檬 半个",
+      "盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "西班牙焗填茄子（Berenjenas rellenas）",
+    "type": "veg",
+    "description": "1. 茄子对半挖瓤，撒盐静置；瓤切碎。\n2. 炒香 onion、 pepper 与茄子瓤，加 rice 与 tomato。\n3. 填回茄子壳，撒 breadcrumb 与 cheese。\n4. 180℃ 烤 35 分钟。",
+    "ingredients": [
+      "茄子 2个",
+      "米饭 150g",
+      "番茄 2个",
+      "洋葱 1个",
+      "甜椒 1个",
+      "面包屑 2勺",
+      "曼彻格芝士 50g",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "西班牙杂烤蔬菜（Verduras al horno）",
+    "type": "veg",
+    "description": "1. 南瓜、胡萝卜、洋葱、 pepper 切大块。\n2. 拌橄榄油、 thyme、 salt 与 pepper。\n3. 200℃ 烤 35 分钟，中途翻动。\n4. 出炉淋 balsamic 即可。",
+    "ingredients": [
+      "南瓜 300g",
+      "胡萝卜 2根",
+      "洋葱 1个",
+      "甜椒 2个",
+      "橄榄油 3勺",
+      "百里香 1枝",
+      "盐胡椒 适量",
+      " balsamic 1勺"
+    ]
+  }
+]

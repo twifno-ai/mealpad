@@ -1,0 +1,142 @@
+[
+  {
+    "name": "意式杂菜汤（Minestrone）",
+    "type": "soup",
+    "description": "1. 橄榄油炒香 onion、celery、carrot。\n2. 加 cannellini 豆、番茄、diced vegetables。\n3. 倒入 vegetable broth 煮 30 分钟。\n4. 最后 10 分钟加短意面或小饺子。\n5. 淋 olive oil 与帕玛森皮。",
+    "ingredients": [
+      "白芸豆 200g",
+      "番茄 2个",
+      "西葫芦 1根",
+      "胡萝卜 2根",
+      "短意面 100g",
+      "蔬菜高汤 1L",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "托斯卡纳白豆汤（Ribollita）",
+    "type": "soup",
+    "description": "1. soffritto 炒香，加 cannellini 与 kale。\n2. 倒入 broth 与 stale bread 炖 40 分钟。\n3. 至 thick 可勺起。\n4. 次日 reboil 风味更佳。\n5. 淋 olive oil。",
+    "ingredients": [
+      "白芸豆 300g",
+      "羽衣甘蓝 200g",
+      "旧面包 150g",
+      "洋葱 1个",
+      "蔬菜高汤 800ml",
+      "番茄 1个",
+      "橄榄油 3勺"
+    ]
+  },
+  {
+    "name": "意式婚礼汤（Minestra maritata）",
+    "type": "soup",
+    "description": "1. 猪骨与蔬菜熬 broth 1 小时。\n2. 加入 mixed greens 与 tiny meatballs。\n3. 小火煮 20 分钟。\n4. 加 tiny pasta。\n5. 撒帕玛森上桌。",
+    "ingredients": [
+      "混合绿叶菜 300g",
+      "迷你肉丸 200g",
+      "小意面 80g",
+      "鸡高汤 1L",
+      "帕玛森芝士 30g",
+      "大蒜 2瓣",
+      "橄榄油 1勺"
+    ]
+  },
+  {
+    "name": "意式蔬菜浓汤（Zuppa di verdure）",
+    "type": "soup",
+    "description": "1. 洋葱、土豆、西葫芦、胡萝卜切块。\n2. olive oil 炒香后加 broth。\n3. 煮 25 分钟至 soft。\n4. 部分 blend 成 creamy，留部分 chunks。\n5. 调 salt 与 pepper。",
+    "ingredients": [
+      "土豆 3个",
+      "西葫芦 2根",
+      "胡萝卜 2根",
+      "洋葱 1个",
+      "蔬菜高汤 800ml",
+      "橄榄油 2勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "name": "意式番茄面包汤（Pappa al pomodoro）",
+    "type": "soup",
+    "description": "1. 橄榄油炒香 garlic 与 basil。\n2. 加整颗番茄罐头煮 15 分钟。\n3. 撕入 stale bread 搅拌至 thick。\n4. 小火 5 分钟。\n5. 淋 olive oil 与 basil。",
+    "ingredients": [
+      "整颗番茄罐头 400g",
+      "旧面包 200g",
+      "大蒜 3瓣",
+      "新鲜罗勒 1把",
+      "蔬菜高汤 300ml",
+      "橄榄油 3勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式海鲜汤（Zuppa di pesce）",
+    "type": "soup",
+    "description": "1. 橄榄油炒香 onion、garlic、fennel。\n2. 加白 wine 与 fish stock。\n3. 下 mussels、clams、shrimp、white fish。\n4. 盖盖煮至 shell 打开。\n5. 配 toasted bread。",
+    "ingredients": [
+      "混合海鲜 600g",
+      "白葡萄酒 150ml",
+      "鱼高汤 500ml",
+      "洋葱 1个",
+      "茴香 1个",
+      "大蒜 4瓣",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "意式鸡面汤（Pastina in brodo）",
+    "type": "soup",
+    "description": "1. 鸡骨与蔬菜熬 broth 1.5 小时。\n2. 过滤留 clear broth。\n3. 沸腾下 tiny pastina。\n4. 煮 5–8 分钟。\n5. 撒帕玛森与 pepper。",
+    "ingredients": [
+      "鸡骨 500g",
+      "pastina 100g",
+      "胡萝卜 1根",
+      "芹菜 2根",
+      "洋葱 半个",
+      "帕玛森芝士 20g",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式扁豆汤（Zuppa di lenticchie）",
+    "type": "soup",
+    "description": "1. soffritto 炒香。\n2. 加 lentils、番茄、broth。\n3. 小火炖 45 分钟。\n4. 部分 mash 使汤浓稠。\n5. 淋 olive oil 与 rosemary。",
+    "ingredients": [
+      "绿扁豆 300g",
+      "番茄 2个",
+      "洋葱 1个",
+      "蔬菜高汤 800ml",
+      "迷迭香 1枝",
+      "橄榄油 2勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式洋葱面包汤（Zuppa de li cipolle）",
+    "type": "soup",
+    "description": "1. 洋葱切薄片，olive oil 慢炒 30 分钟至 caramelized。\n2. 加 white wine 与 broth。\n3. 煮 15 分钟。\n4. 面包片铺碗底，倒热汤。\n5. 撒 pecorino。",
+    "ingredients": [
+      "洋葱 4个",
+      "白葡萄酒 100ml",
+      "蔬菜高汤 600ml",
+      "旧面包 4片",
+      "pecorino 40g",
+      "橄榄油 3勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式意面豆汤（Pasta e ceci）",
+    "type": "soup",
+    "description": "1. 橄榄油炒香 rosemary 与 garlic。\n2. 加 chickpeas、番茄、broth。\n3. 部分 mash 使汤浓稠。\n4. 下 ditalini 煮 10 分钟。\n5. 淋 olive oil 与 pepper。",
+    "ingredients": [
+      "鹰嘴豆罐头 400g",
+      "短意面 150g",
+      "番茄 2个",
+      "蔬菜高汤 500ml",
+      "迷迭香 2枝",
+      "大蒜 3瓣",
+      "橄榄油 2勺"
+    ]
+  }
+]

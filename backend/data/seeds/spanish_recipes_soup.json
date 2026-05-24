@@ -1,0 +1,152 @@
+[
+  {
+    "name": "安达卢西亚冷汤（Gazpacho andaluz）",
+    "type": "soup",
+    "description": "1. 成熟番茄、 cucumber、 pepper 与 garlic 入 blender。\n2. 加 olive oil、 vinegar 与 salt 打至顺滑。\n3. 过筛（可选）后冷藏 2 小时。\n4. 装碗，配 diced 蔬菜与 croutons。",
+    "ingredients": [
+      "番茄 1kg",
+      "黄瓜 1根",
+      "甜椒 1个",
+      "大蒜 1瓣",
+      "橄榄油 4勺",
+      "雪莉 vinegar 2勺",
+      "面包 50g",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "科尔多瓦冷汤（Salmorejo cordobés）",
+    "type": "soup",
+    "description": "1. 番茄与 bread 入 blender 打成浓浆。\n2. 缓慢加入 olive oil 乳化至 creamy。\n3. 加盐与 vinegar，冷藏 2 小时。\n4. 装碗，撒 jamón 与 boiled egg。",
+    "ingredients": [
+      "番茄 800g",
+      "法棍 100g",
+      "橄榄油 100ml",
+      "大蒜 1瓣",
+      "雪莉 vinegar 1勺",
+      "塞拉诺火腿 50g",
+      "煮鸡蛋 2个",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "西班牙扁豆汤（Lentejas estofadas）",
+    "type": "soup",
+    "description": "1. 扁豆冲洗； chorizo 与 morcilla 切片。\n2. 锅炒香 onion、 carrot 与 garlic。\n3. 加 lentil、 bay leaf 与 broth，大火煮开。\n4. 小火炖 40 分钟，加 sausage 再炖 15 分钟。",
+    "ingredients": [
+      "绿扁豆 300g",
+      "chorizo 1根",
+      "胡萝卜 1根",
+      "洋葱 1个",
+      "番茄 1个",
+      "月桂叶 1片",
+      "橄榄油 2勺",
+      "高汤 1L"
+    ]
+  },
+  {
+    "name": "加泰罗尼亚鱼羹（Suquet de peix）",
+    "type": "soup",
+    "description": "1. 白身鱼与 shellfish 处理干净； potato 切厚片。\n2. 锅炒香 onion、 garlic 与 nyora pepper。\n3. 加 tomato、 wine 与 fish stock 煮开。\n4. 铺 fish 与 potato，小火 12 分钟，勿过度搅拌。",
+    "ingredients": [
+      "混合白身鱼 500g",
+      "青口 200g",
+      "土豆 2个",
+      "番茄 2个",
+      "洋葱 1个",
+      "白葡萄酒 100ml",
+      "鱼高汤 500ml",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "西班牙鹰嘴豆浓汤（Potaje de garbanzos）",
+    "type": "soup",
+    "description": "1. 干 garbanzo 浸泡过夜； spinach 洗净。\n2. 锅加 ham bone、 onion 与 garbanzo 炖 1.5 小时。\n3. 加入 chorizo 与 paprika，继续 20 分钟。\n4. 最后加 spinach 烫软，调味。",
+    "ingredients": [
+      "干鹰嘴豆 300g",
+      "chorizo 1根",
+      "菠菜 200g",
+      "洋葱 1个",
+      "烟熏 paprika 1勺",
+      "火腿骨 1块",
+      "橄榄油 1勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "加利西亚杂烩汤（Caldo gallego）",
+    "type": "soup",
+    "description": "1. grelo 或 greens、 potato、 bean 切好。\n2. 大锅加 ham bone 与 water 煮 broth。\n3. 加 potato 与 beans 煮 20 分钟。\n4. 加入 greens 与 chorizo，再炖 15 分钟。",
+    "ingredients": [
+      "土豆 3个",
+      "白芸豆 200g",
+      "芜菁叶 300g",
+      "chorizo 1根",
+      "火腿骨 1块",
+      "洋葱 1个",
+      "月桂叶 1片",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "西班牙番茄热汤（Sopa de tomate española）",
+    "type": "soup",
+    "description": "1. 洋葱、 garlic 橄榄油炒软，加 tomato 与 paprika。\n2. 倒入 broth 煮开， simmer 15 分钟。\n3.  blender 打顺滑或保留颗粒。\n4. 装碗，滴 olive oil 与 croutons。",
+    "ingredients": [
+      "番茄 6个",
+      "洋葱 1个",
+      "大蒜 3瓣",
+      "烟熏 paprika 1勺",
+      "蔬菜高汤 800ml",
+      "橄榄油 2勺",
+      "面包 50g",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "卡斯蒂利亚大蒜汤（Sopa de ajo castellana）",
+    "type": "soup",
+    "description": "1. 面包 切小块烤脆； garlic 切片。\n2. 橄榄油小火将 garlic 炒至 golden。\n3. 加 paprika 与 broth 煮开。\n4. 入 bread 与 poached egg，撒 parsley。",
+    "ingredients": [
+      "大蒜 8瓣",
+      "法棍 100g",
+      "鸡蛋 4个",
+      "烟熏 paprika 1勺",
+      "鸡高汤 800ml",
+      "橄榄油 3勺",
+      "欧芹 少许",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "阿斯图里亚斯苹果汤（Sopa de manzana asturiana）",
+    "type": "soup",
+    "description": "1. 洋葱 butter 炒软，加 diced apple。\n2. 倒入 broth 与 thyme， simmer 20 分钟。\n3.  blender 打 smooth，回锅加热。\n4. 装碗，淋 cream 与 walnut。",
+    "ingredients": [
+      "苹果 3个",
+      "洋葱 1个",
+      "黄油 20g",
+      "蔬菜高汤 600ml",
+      "百里香 1枝",
+      "淡奶油 2勺",
+      "核桃 30g",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "曼彻格芝士汤（Crema de queso manchego）",
+    "type": "soup",
+    "description": "1. 土豆与 onion 在 broth 中煮 soft。\n2.  blender 打 smooth，回锅。\n3. 加入 grated manchego 搅拌至 melt。\n4. 调味，配 croutons 与 paprika。",
+    "ingredients": [
+      "土豆 2个",
+      "洋葱 1个",
+      "曼彻格芝士 150g",
+      "蔬菜高汤 600ml",
+      "淡奶油 50ml",
+      "橄榄油 1勺",
+      "面包 40g",
+      "盐胡椒 适量"
+    ]
+  }
+]

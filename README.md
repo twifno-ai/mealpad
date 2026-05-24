@@ -68,6 +68,19 @@ make seed-japanese-recipes
 
 Same-name entries are skipped; safe to run more than once.
 
+### Seed Western recipes (optional)
+
+Bulk-add ~240 home-style Western recipes — French, Spanish, Italian, and American (60 each, with cooking steps in the description):
+
+```bash
+make seed-french-recipes
+make seed-spanish-recipes
+make seed-italian-recipes
+make seed-american-recipes
+```
+
+Same-name entries are upserted (description, ingredients, cuisine updated); safe to run more than once.
+
 ## Development
 
 Terminal 1:

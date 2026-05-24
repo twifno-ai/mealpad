@@ -5,7 +5,17 @@ from pydantic import BaseModel, Field
 
 RECIPE_TYPES = {"soup", "meat", "veg", "other"}
 
-CUISINE_TYPES = {"chinese", "japanese", "korean", "thai", "western", "other"}
+CUISINE_TYPES = {
+    "chinese",
+    "japanese",
+    "korean",
+    "thai",
+    "french",
+    "spanish",
+    "italian",
+    "american",
+    "other",
+}
 
 SHOPPING_CATEGORIES = [
     "produce",

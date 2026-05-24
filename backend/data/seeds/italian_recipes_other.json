@@ -1,0 +1,127 @@
+[
+  {
+    "name": "家庭版提拉米苏（Tiramisù）",
+    "type": "other",
+    "description": "1. 蛋黄与糖打发至 pale，拌入 mascarpone。\n2. 蛋白打至 stiff peaks 轻 fold 入。\n3. 浓 espresso 冷却，手指饼干快速蘸取。\n4. 一层饼干一层 cream 重复。\n5. 冷藏 4 小时，撒 cocoa powder。",
+    "ingredients": [
+      "mascarpone 500g",
+      "手指饼干 200g",
+      "浓 espresso 300ml",
+      "鸡蛋 4个",
+      "糖 80g",
+      "可可粉 2勺"
+    ]
+  },
+  {
+    "name": "意式奶冻（Panna cotta）",
+    "type": "other",
+    "description": "1. 鲜 cream 与 sugar 加热至微沸。\n2. 离火加入 soaked gelatin 搅匀。\n3. 倒入模具冷藏 4 小时。\n4. 倒扣装盘。\n5. 淋 berry coulis 或 caramel。",
+    "ingredients": [
+      "鲜奶油 500ml",
+      "糖 80g",
+      "吉利丁 3片",
+      "香草荚 1根",
+      "覆盆子酱 100ml"
+    ]
+  },
+  {
+    "name": "意式浓缩咖啡（Espresso）",
+    "type": "other",
+    "description": "1. 意式咖啡机预热 portafilter。\n2. 细磨咖啡豆 18g 压粉。\n3. 萃取 25–30 秒得 30ml 浓缩。\n4. 观察 crema 呈 hazelnut 色。\n5. 趁热小口品尝。",
+    "ingredients": [
+      "意式咖啡豆 18g",
+      "过滤水 200ml",
+      "糖 适量",
+      "奶泡 可选"
+    ]
+  },
+  {
+    "name": "佛卡夏面包（Focaccia）",
+    "type": "other",
+    "description": "1. 面粉、酵母、水、olive oil 揉至 extensible。\n2. 发酵 1 小时，铺盘用手指戳洞。\n3. 淋 olive oil 与 rosemary、coarse salt。\n4. 220°C 烤 20 分钟。\n5. 稍冷却切片。",
+    "ingredients": [
+      "高筋面粉 400g",
+      "干酵母 7g",
+      "温水 300ml",
+      "橄榄油 60ml",
+      "迷迭香 2枝",
+      "粗盐 适量"
+    ]
+  },
+  {
+    "name": "意式夏特拉（Ciabatta）",
+    "type": "other",
+    "description": "1. 高筋粉、酵母、水、salt 做 wet dough。\n2. 折叠发酵 2 小时。\n3. 轻 shaping 避免 degas。\n4. 230°C 带蒸汽烤 25 分钟。\n5. 冷却后再切。",
+    "ingredients": [
+      "高筋面粉 500g",
+      "干酵母 5g",
+      "水 400ml",
+      "盐 10g",
+      "橄榄油 1勺"
+    ]
+  },
+  {
+    "name": "意式炸饭团（Arancini）",
+    "type": "other",
+    "description": "1. risotto 冷却，拌 ragù 与 mozzarella cube。\n2. 搓球，中间包 cheese。\n3. 裹 flour、egg、breadcrumbs。\n4. 170°C 油炸至 golden。\n5. 沥油趁热吃。",
+    "ingredients": [
+      "剩 risotto 500g",
+      "马苏里拉 100g",
+      "面包屑 150g",
+      "鸡蛋 2个",
+      "面粉 适量",
+      "肉酱 100g",
+      "植物油 适量"
+    ]
+  },
+  {
+    "name": "意式烤面包片（Crostini）",
+    "type": "other",
+    "description": "1. baguette 切薄片。\n2. 220°C 烤 5 分钟至 crisp。\n3. rub garlic clove。\n4. 淋 olive oil 与 salt。\n5. 可 top 番茄或 chicken liver pâté。",
+    "ingredients": [
+      "法棍 1根",
+      "大蒜 2瓣",
+      "橄榄油 3勺",
+      "粗盐 适量",
+      "番茄 2个"
+    ]
+  },
+  {
+    "name": "意式柠檬酒（Limoncello）",
+    "type": "other",
+    "description": "1. 柠檬只取 zest，避免 white pith。\n2. 浸入 vodka 密封 7 天。\n3. 过滤后加 simple syrup。\n4. 冷藏 2 天。\n5. 冷冻小杯 serve 作 digestivo。",
+    "ingredients": [
+      "柠檬 6个",
+      "伏特加 500ml",
+      "糖 300g",
+      "水 300ml"
+    ]
+  },
+  {
+    "name": "意式杏仁脆饼（Cantucci）",
+    "type": "other",
+    "description": "1. flour、sugar、egg、almond 揉成 dough。\n2. 整形成 log，180°C 烤 25 分钟。\n3. 切片再烤 10 分钟至 crisp。\n4. 完全冷却。\n5. 蘸 Vin Santo 食用。",
+    "ingredients": [
+      "中筋面粉 300g",
+      "杏仁 150g",
+      "鸡蛋 2个",
+      "糖 150g",
+      "泡打粉 5g",
+      "Vin Santo 适量"
+    ]
+  },
+  {
+    "name": "意式潘纳托尼（Panettone）",
+    "type": "other",
+    "description": "1. 制作 rich brioche dough 含 candied fruit。\n2. 长时间发酵至 double。\n3. 入 paper mold 180°C 烤 40 分钟。\n4. 倒挂冷却防 collapse。\n5. 切片配 mascarpone cream。",
+    "ingredients": [
+      "高筋面粉 400g",
+      "鸡蛋 3个",
+      "黄油 100g",
+      "糖 80g",
+      "candied fruit 100g",
+      "干酵母 7g",
+      "牛奶 100ml"
+    ]
+  }
+]

@@ -1,0 +1,343 @@
+[
+  {
+    "name": "番茄意面（Pasta al pomodoro）",
+    "type": "meat",
+    "description": "1. 大锅烧开水加盐，下意面按包装时间煮至 al dente。\n2. 平底锅热橄榄油，下蒜末炒香，倒入整颗番茄罐头压碎。\n3. 小火煮 10 分钟，加盐、黑胡椒与少许糖调味。\n4. 沥干意面留半杯面汤，与酱汁同锅翻匀。\n5. 撒新鲜罗勒叶，淋少许橄榄油即可。",
+    "ingredients": [
+      "意面 400g",
+      "整颗番茄罐头 400g",
+      "大蒜 3瓣",
+      "橄榄油 3勺",
+      "新鲜罗勒 1把",
+      "盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "奶油培根面（Spaghetti alla carbonara）",
+    "type": "meat",
+    "description": "1. 意面入滚盐水煮至 al dente，保留一杯面汤。\n2. 平底锅中火煎脆 guanciale 或培根至出油。\n3. 碗中打散蛋黄与帕玛森芝士，加黑胡椒。\n4. 关火后倒入热意面与少量面汤，快速翻匀。\n5. 倒入蛋芝士液持续搅拌至丝滑，不可让蛋液凝固成块。",
+    "ingredients": [
+      "意面 400g",
+      "guanciale 150g",
+      "蛋黄 4个",
+      "帕玛森芝士 80g",
+      "黑胡椒 适量",
+      "盐 少许"
+    ]
+  },
+  {
+    "name": "千层面（Lasagna）",
+    "type": "meat",
+    "description": "1. 牛肉末与洋葱、胡萝卜、芹菜丁炒香，加番茄与红酒炖 40 分钟成肉酱。\n2. 另锅融化黄油，拌入面粉与牛奶做成白酱。\n3. 烤盘底部铺肉酱，依次叠千层面皮、白酱、马苏里拉。\n4. 重复三层，最上层撒帕玛森。\n5. 180°C 烤 35 分钟至表面金黄，静置 10 分钟再切。",
+    "ingredients": [
+      "千层面皮 12片",
+      "牛肉末 500g",
+      "番茄罐头 400g",
+      "马苏里拉 200g",
+      "牛奶 500ml",
+      "洋葱 1个",
+      "帕玛森芝士 50g"
+    ]
+  },
+  {
+    "name": "米兰烩饭（Risotto alla milanese）",
+    "type": "meat",
+    "description": "1. 鸡高汤小火保温；藏红花泡入少量热汤。\n2. 平底锅融化黄油，炒香洋葱至透明。\n3. 倒入 Arborio 米翻炒 2 分钟，分次加高汤边搅边收。\n4. 米快熟时加入藏红花汤，继续搅至 creamy。\n5. 关火拌入黄油与帕玛森，盖盖焖 2 分钟。",
+    "ingredients": [
+      "Arborio 米 320g",
+      "鸡高汤 1L",
+      "藏红花 1小撮",
+      "洋葱 1个",
+      "白葡萄酒 100ml",
+      "黄油 40g",
+      "帕玛森芝士 60g"
+    ]
+  },
+  {
+    "name": "玛格丽特披萨（Pizza Margherita）",
+    "type": "meat",
+    "description": "1. 高筋面粉、酵母、水、盐揉至光滑，发酵 1 小时。\n2. 面团擀成薄圆饼，抹番茄酱，摆 fresh mozzarella。\n3. 250°C 预热烤盘或石板，滑入披萨。\n4. 烤 8–10 分钟至边沿起泡上色。\n5. 出炉撒罗勒叶，淋橄榄油即可。",
+    "ingredients": [
+      "高筋面粉 300g",
+      "干酵母 5g",
+      "温水 180ml",
+      "番茄酱 150g",
+      "马苏里拉 200g",
+      "新鲜罗勒 1把",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "意式炖牛膝（Osso buco）",
+    "type": "meat",
+    "description": "1. 牛膝横切厚片拍粉，煎至两面金黄。\n2. 加入洋葱、胡萝卜、芹菜与番茄丁，倒入白葡萄酒收汁。\n3. 加牛肉高汤没过食材，小火炖 2 小时至软烂。\n4. 最后 10 分钟加入 gremolata（柠檬皮、蒜、欧芹）。\n5. 配米兰烩饭或 polenta 上桌。",
+    "ingredients": [
+      "牛膝 4片",
+      "白葡萄酒 200ml",
+      "牛肉高汤 500ml",
+      "番茄 2个",
+      "洋葱 1个",
+      "柠檬皮 1条",
+      "欧芹 1把"
+    ]
+  },
+  {
+    "name": "意式肉酱面（Spaghetti Bolognese）",
+    "type": "meat",
+    "description": "1. 牛猪肉末与洋葱、胡萝卜、芹菜丁炒香。\n2. 倒入番茄 paste 与整颗番茄，加红酒与高汤。\n3. 小火慢炖 1.5 小时至浓稠。\n4. 意面煮至 al dente，与肉酱翻匀。\n5. 撒帕玛森与欧芹即可。",
+    "ingredients": [
+      "意面 400g",
+      "牛猪肉末 400g",
+      "番茄罐头 400g",
+      "红酒 100ml",
+      "洋葱 1个",
+      "胡萝卜 1根",
+      "帕玛森芝士 适量"
+    ]
+  },
+  {
+    "name": "阿玛特里切面（Pasta all'Amatriciana）",
+    "type": "meat",
+    "description": "1. 平底锅煎脆 guanciale，留油脂在锅。\n2. 加入整颗番茄罐头压碎，小火煮 15 分钟。\n3. 加 pecorino 与 chili 片调味。\n4. 意面沥干后与 sauce 同锅翻匀。\n5. 再撒 pecorino 即可。",
+    "ingredients": [
+      "意面 400g",
+      "guanciale 150g",
+      "整颗番茄罐头 400g",
+      "pecorino 80g",
+      "干辣椒 2个",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "奶酪胡椒面（Cacio e Pepe）",
+    "type": "meat",
+    "description": "1. 大锅滚水煮意面至 al dente，保留面汤。\n2. 粗磨黑胡椒在干锅烘香。\n3. 碗中 pecorino 加少量面汤调成 paste。\n4. 热意面入 pecorino paste 快速翻搅。\n5. 必要时补面汤至丝滑挂面。",
+    "ingredients": [
+      "意面 400g",
+      "pecorino 120g",
+      "粗黑胡椒 2勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "青酱意面（Pasta al pesto）",
+    "type": "meat",
+    "description": "1. 罗勒、松子、蒜、帕玛森与橄榄油打成青酱。\n2. 意面入盐水煮至 al dente，留半杯面汤。\n3. 面与青酱、面汤在盆中翻匀。\n4. 可加煮过的小土豆与四季豆。\n5. 撒松子与帕玛森即可。",
+    "ingredients": [
+      "意面 400g",
+      "新鲜罗勒 2把",
+      "松子 40g",
+      "帕玛森芝士 60g",
+      "大蒜 2瓣",
+      "橄榄油 80ml"
+    ]
+  },
+  {
+    "name": "蛤蜊意面（Spaghetti alle vongole）",
+    "type": "meat",
+    "description": "1. 蛤蜊吐沙洗净；意面煮至 al dente。\n2. 橄榄油炒香蒜与 chili，倒入白葡萄酒。\n3. 下蛤蜊盖盖至开口，过滤留汁。\n4. 意面与蛤蜊汁同锅翻匀，放回蛤蜊。\n5. 撒欧芹与 lemon zest。",
+    "ingredients": [
+      "意面 400g",
+      "蛤蜊 800g",
+      "白葡萄酒 150ml",
+      "大蒜 4瓣",
+      "欧芹 1把",
+      "橄榄油 3勺",
+      "干辣椒 1个"
+    ]
+  },
+  {
+    "name": "墨鱼汁意面（Spaghetti al nero di seppia）",
+    "type": "meat",
+    "description": "1. 墨鱼或鱿鱼洗净切圈，保留墨囊。\n2. 橄榄油炒香蒜与 chili，下墨鱼快炒。\n3. 加入墨鱼汁与白葡萄酒，煮 5 分钟。\n4. 意面煮至 al dente 后与 sauce 翻匀。\n5. 撒欧芹即可，注意防溅。",
+    "ingredients": [
+      "意面 400g",
+      "墨鱼 500g",
+      "墨鱼汁 2包",
+      "白葡萄酒 100ml",
+      "大蒜 3瓣",
+      "欧芹 适量",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "伏特加奶油面（Penne alla vodka）",
+    "type": "meat",
+    "description": "1. 意面入滚水煮至 al dente。\n2. 橄榄油煎香洋葱与 pancetta。\n3. 加番茄酱、伏特加，火焰或小火挥发酒精。\n4. 倒入鲜奶油，小火煮 5 分钟。\n5. 拌入意面与帕玛森即可。",
+    "ingredients": [
+      "通心粉 400g",
+      "番茄酱 300g",
+      "伏特加 50ml",
+      "鲜奶油 150ml",
+      "pancetta 100g",
+      "洋葱 半个",
+      "帕玛森芝士 40g"
+    ]
+  },
+  {
+    "name": "辣味番茄面（Penne all'arrabbiata）",
+    "type": "meat",
+    "description": "1. 橄榄油爆香蒜与大量 chili 片。\n2. 倒入整颗番茄罐头压碎，小火煮 15 分钟。\n3. 加盐与欧芹碎。\n4. 通心粉煮至 al dente 后与 sauce 翻匀。\n5. 淋橄榄油即可。",
+    "ingredients": [
+      "通心粉 400g",
+      "整颗番茄罐头 400g",
+      "大蒜 4瓣",
+      "干辣椒 3个",
+      "欧芹 适量",
+      "橄榄油 3勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "佛罗伦萨牛排（Bistecca alla fiorentina）",
+    "type": "meat",
+    "description": "1. T 骨牛排室温回温，擦干撒粗盐。\n2. 炭火或铸铁锅极高温煎至 desired 熟度。\n3. 每面约 3–4 分钟，边骨处可立起加热。\n4. 静置 5 分钟让肉汁回流。\n5. 淋橄榄油与 lemon wedge 上桌。",
+    "ingredients": [
+      "T骨牛排 800g",
+      "粗盐 适量",
+      "黑胡椒 适量",
+      "橄榄油 2勺",
+      "柠檬 1个"
+    ]
+  },
+  {
+    "name": "米兰炸猪排（Cotoletta alla milanese）",
+    "type": "meat",
+    "description": "1. 带骨猪排敲薄，撒盐胡椒。\n2. 依次裹面粉、蛋液、面包糠。\n3. 黄油与橄榄油混合，中火煎至金黄。\n4. 两面各约 4 分钟。\n5. 挤 lemon 配 arugula 沙拉。",
+    "ingredients": [
+      "带骨猪排 2片",
+      "面包糠 150g",
+      "鸡蛋 2个",
+      "面粉 适量",
+      "黄油 30g",
+      "柠檬 1个",
+      "芝麻菜 1把"
+    ]
+  },
+  {
+    "name": "罗马式小牛肉（Saltimbocca alla romana）",
+    "type": "meat",
+    "description": "1. 小牛肉薄片铺 sage 与 prosciutto，牙签固定。\n2. 面粉轻拍表面。\n3. 黄油橄榄油煎 2 分钟翻面。\n4. 倒入白葡萄酒收汁。\n5. 趁热上桌。",
+    "ingredients": [
+      "小牛肉片 8片",
+      "prosciutto 8片",
+      "鼠尾草 8片",
+      "白葡萄酒 100ml",
+      "黄油 20g",
+      "面粉 少许"
+    ]
+  },
+  {
+    "name": "意式香草烤鸡（Pollo al forno）",
+    "type": "meat",
+    "description": "1. 整鸡或鸡腿抹橄榄油、盐、胡椒、迷迭香与柠檬。\n2. 烤盘铺土豆角与蒜。\n3. 200°C 烤 50 分钟至皮脆肉熟。\n4. 中途淋烤盘汁。\n5. 静置 10 分钟后切块。",
+    "ingredients": [
+      "整鸡 1只",
+      "土豆 4个",
+      "迷迭香 3枝",
+      "大蒜 1头",
+      "柠檬 1个",
+      "橄榄油 3勺",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "name": "意式香肠炖豆（Salsiccia e fagioli）",
+    "type": "meat",
+    "description": "1. 意式 sausage 切段煎至出油。\n2. 加入洋葱、胡萝卜、芹菜炒香。\n3. 倒入 cannellini 豆与番茄、高汤。\n4. 小火炖 30 分钟。\n5. 撒 rosemary 与帕玛森皮。",
+    "ingredients": [
+      "意式 sausage 400g",
+      "白芸豆罐头 400g",
+      "番茄 2个",
+      "洋葱 1个",
+      "鸡高汤 300ml",
+      "迷迭香 2枝",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "那不勒斯肉丸（Polpette napoletane）",
+    "type": "meat",
+    "description": "1. 牛肉末与面包屑、帕玛森、蛋、蒜混合。\n2. 搓成小球，煎至表面金黄。\n3. 番茄酱 小火炖 20 分钟。\n4. 肉丸回锅 simmer 15 分钟。\n5. 配意面或面包。",
+    "ingredients": [
+      "牛肉末 500g",
+      "面包屑 100g",
+      "帕玛森芝士 50g",
+      "鸡蛋 1个",
+      "番茄酱 400g",
+      "大蒜 2瓣",
+      "欧芹 适量"
+    ]
+  },
+  {
+    "name": "巴罗洛红酒炖牛肉（Brasato al Barolo）",
+    "type": "meat",
+    "description": "1. 牛肩肉整块拍粉煎至焦黄。\n2. 加入洋葱、胡萝卜、芹菜与 Barolo 红酒。\n3. 加高汤没过，小火炖 3 小时。\n4. 取出肉切片， sauce 过滤收浓。\n5. 配 polenta 上桌。",
+    "ingredients": [
+      "牛肩肉 800g",
+      "Barolo 红酒 300ml",
+      "洋葱 1个",
+      "胡萝卜 2根",
+      "牛肉高汤 400ml",
+      "月桂叶 2片",
+      "橄榄油 2勺"
+    ]
+  },
+  {
+    "name": "意式烤羊排（Agnello scottadito）",
+    "type": "meat",
+    "description": "1. 羊排抹橄榄油、迷迭香、蒜与 lemon zest。\n2. 炭火或 grill 极高温烤 3–4 分钟每面。\n3. 静置 5 分钟。\n4. 撒 flaky salt 与 pepper。\n5. 配烤柠檬。",
+    "ingredients": [
+      "羊排 8块",
+      "迷迭香 3枝",
+      "大蒜 4瓣",
+      "橄榄油 3勺",
+      "柠檬 1个",
+      "粗盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "name": "香橙烤鸭（Anatra all'arancia）",
+    "type": "meat",
+    "description": "1. 鸭胸皮划刀，盐胡椒腌 30 分钟。\n2. 皮朝下煎至酥脆，翻面 briefly。\n3. 橙汁、橙 zest、高汤、糖煮成 sauce。\n4. 鸭胸切片淋 sauce。\n5. 配 seasonal 蔬菜。",
+    "ingredients": [
+      "鸭胸 2块",
+      "鲜橙汁 200ml",
+      "橙 zest 1个",
+      "鸡高汤 100ml",
+      "糖 1勺",
+      "黄油 15g",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "name": "意式猎人鸡（Pollo alla cacciatora）",
+    "type": "meat",
+    "description": "1. 鸡腿拍粉煎至金黄。\n2. 加入洋葱、彩椒、蘑菇炒香。\n3. 倒入白葡萄酒与番茄。\n4. 小火炖 40 分钟。\n5. 撒 oregano 与 parsley。",
+    "ingredients": [
+      "鸡腿 6只",
+      "白葡萄酒 150ml",
+      "番茄 3个",
+      "彩椒 2个",
+      "蘑菇 200g",
+      "洋葱 1个",
+      "牛至 1勺"
+    ]
+  },
+  {
+    "name": "意式烤猪肋排（Costine al forno）",
+    "type": "meat",
+    "description": "1. 猪肋排抹橄榄油、盐、胡椒、迷迭香。\n2. 160°C 慢烤 2 小时至脱骨。\n3. 刷 honey glaze。\n4. 220°C 再烤 10 分钟上色。\n5. 配 polenta 或 salad。",
+    "ingredients": [
+      "猪肋排 1kg",
+      "迷迭香 3枝",
+      "大蒜 6瓣",
+      "橄榄油 3勺",
+      "蜂蜜 2勺",
+      "红酒醋 1勺",
+      "盐胡椒 适量"
+    ]
+  }
+]

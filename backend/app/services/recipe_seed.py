@@ -56,6 +56,85 @@ JAPANESE_BUNDLE = SeedBundle(
     default_cuisine="japanese",
 )
 
+_WESTERN_COUNTS = {"meat": 25, "veg": 15, "soup": 10, "other": 10}
+_WESTERN_UPDATE = frozenset({"description", "ingredients", "cuisine"})
+
+FRENCH_BUNDLE = SeedBundle(
+    name="french",
+    seed_files=(
+        "french_recipes_meat.json",
+        "french_recipes_veg.json",
+        "french_recipes_soup.json",
+        "french_recipes_other.json",
+    ),
+    file_type={
+        "french_recipes_meat.json": "meat",
+        "french_recipes_veg.json": "veg",
+        "french_recipes_soup.json": "soup",
+        "french_recipes_other.json": "other",
+    },
+    expected_counts=_WESTERN_COUNTS,
+    update_on_match=_WESTERN_UPDATE,
+    default_cuisine="french",
+)
+
+SPANISH_BUNDLE = SeedBundle(
+    name="spanish",
+    seed_files=(
+        "spanish_recipes_meat.json",
+        "spanish_recipes_veg.json",
+        "spanish_recipes_soup.json",
+        "spanish_recipes_other.json",
+    ),
+    file_type={
+        "spanish_recipes_meat.json": "meat",
+        "spanish_recipes_veg.json": "veg",
+        "spanish_recipes_soup.json": "soup",
+        "spanish_recipes_other.json": "other",
+    },
+    expected_counts=_WESTERN_COUNTS,
+    update_on_match=_WESTERN_UPDATE,
+    default_cuisine="spanish",
+)
+
+ITALIAN_BUNDLE = SeedBundle(
+    name="italian",
+    seed_files=(
+        "italian_recipes_meat.json",
+        "italian_recipes_veg.json",
+        "italian_recipes_soup.json",
+        "italian_recipes_other.json",
+    ),
+    file_type={
+        "italian_recipes_meat.json": "meat",
+        "italian_recipes_veg.json": "veg",
+        "italian_recipes_soup.json": "soup",
+        "italian_recipes_other.json": "other",
+    },
+    expected_counts=_WESTERN_COUNTS,
+    update_on_match=_WESTERN_UPDATE,
+    default_cuisine="italian",
+)
+
+AMERICAN_BUNDLE = SeedBundle(
+    name="american",
+    seed_files=(
+        "american_recipes_meat.json",
+        "american_recipes_veg.json",
+        "american_recipes_soup.json",
+        "american_recipes_other.json",
+    ),
+    file_type={
+        "american_recipes_meat.json": "meat",
+        "american_recipes_veg.json": "veg",
+        "american_recipes_soup.json": "soup",
+        "american_recipes_other.json": "other",
+    },
+    expected_counts=_WESTERN_COUNTS,
+    update_on_match=_WESTERN_UPDATE,
+    default_cuisine="american",
+)
+
 
 @dataclass
 class ImportResult:

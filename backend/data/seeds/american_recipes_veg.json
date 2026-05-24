@@ -1,0 +1,207 @@
+[
+  {
+    "type": "veg",
+    "name": "通心粉奶酪（Mac and Cheese）",
+    "description": "1. macaroni 按包装煮至 al dente，沥干。\n2. 黄油炒 flour 1 分钟， Gradually 加 warm milk 成 béchamel。\n3. 离火拌入 cheddar 与 gruyère 至顺滑。\n4. 与 pasta 混合，可 top breadcrumb 180°C 烤 15 分钟。",
+    "ingredients": [
+      "elbow macaroni 400g",
+      "切达芝士 200g",
+      "gruyère 100g",
+      "全脂牛奶 500ml",
+      "黄油 40g",
+      "中筋面粉 3勺",
+      "面包屑 半杯"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "美式玉米面包（Cornbread）",
+    "description": "1. 混合 cornmeal、 flour、 sugar、 baking powder、 salt。\n2. 加入 buttermilk、 eggs、 melted butter 拌匀。\n3. 倒入 cast iron skillet，220°C 烤 20–25 分钟。\n4. 趁热切块，可抹 honey butter。",
+    "ingredients": [
+      "cornmeal 200g",
+      "中筋面粉 100g",
+      "buttermilk 250ml",
+      "鸡蛋 2个",
+      "黄油 60g",
+      "糖 2勺",
+      "baking powder 2勺"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "凯撒沙拉（Caesar Salad）",
+    "description": "1. romaine 洗净沥干，撕成适口大小。\n2. 调 anchovy、 garlic、 lemon、 egg yolk、 olive oil 成 dressing。\n3. 面包丁 180°C 烤 8 分钟至脆。\n4. 生菜拌 dressing，撒 parmesan 与 croutons。",
+    "ingredients": [
+      "romaine 2颗",
+      "parmesan 50g",
+      "面包丁 1杯",
+      "anchovy 4条",
+      "大蒜 1瓣",
+      "柠檬汁 2勺",
+      "橄榄油 4勺"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "烤抱子甘蓝（Roasted Brussels Sprouts）",
+    "description": "1. 抱子甘蓝对半切，拌 olive oil、 salt、 pepper。\n2. 220°C 烤 20 分钟至边缘焦脆。\n3. 出锅淋 balsamic glaze。\n4. 撒 toasted pecans 即可。",
+    "ingredients": [
+      "抱子甘蓝 500g",
+      "橄榄油 3勺",
+      "balsamic 2勺",
+      "pecans 50g",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "美式土豆泥（Mashed Potatoes）",
+    "description": "1. Yukon gold 土豆去皮切块，盐水煮 15 分钟至 soft。\n2. 沥干后压泥，加 warm butter 与 warm milk。\n3. 拌至 creamy，调 salt white pepper。\n4. 可 top chives 与 extra butter。",
+    "ingredients": [
+      "土豆 800g",
+      "黄油 80g",
+      "全脂牛奶 150ml",
+      "chives 2勺",
+      "盐 适量",
+      "白胡椒 少许"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "黄油甜玉米（Butter Corn）",
+    "description": "1. 新鲜 corn kernels 或整穗 corn 煮熟。\n2. 锅中融化 butter，加入 corn 翻炒 2 分钟。\n3. 加盐、 sugar pinch、 black pepper。\n4. 撒 parsley 即可上桌。",
+    "ingredients": [
+      "甜玉米 4根",
+      "黄油 50g",
+      "parsley 2勺",
+      "糖 半勺",
+      "盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "凉拌卷心菜（Coleslaw）",
+    "description": "1. cabbage 与 carrot 切细丝， onion 薄切。\n2. 混合 mayo、 apple cider vinegar、 sugar、 celery seed。\n3. 蔬菜与 dressing 拌匀，冷藏 30 分钟。\n4. 上桌前再拌一次，调 salt pepper。",
+    "ingredients": [
+      "卷心菜 半颗",
+      "胡萝卜 2根",
+      "onion 半个",
+      "蛋黄酱 4勺",
+      "apple cider vinegar 2勺",
+      "celery seed 1勺",
+      "糖 1勺"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "杏仁青豆（Green Beans Almondine）",
+    "description": "1. green beans 焯水 3 分钟， ice bath 保色。\n2. 平底锅 butter 炒香 sliced almonds。\n3. 加入 beans 与 garlic 翻炒 2 分钟。\n4. 淋 lemon juice，撒 salt pepper。",
+    "ingredients": [
+      "青豆 400g",
+      "杏仁片 50g",
+      "黄油 30g",
+      "大蒜 2瓣",
+      "柠檬汁 1勺",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "烤红薯（Baked Sweet Potato）",
+    "description": "1. 红薯洗净戳孔，200°C 烤 45–60 分钟至 soft。\n2. 对半切开， fluff 内部。\n3. 加 butter、brown sugar 或 cinnamon。\n4. 可 top marshmallows 再烤 3 分钟。",
+    "ingredients": [
+      "红薯 4个",
+      "黄油 40g",
+      "brown sugar 2勺",
+      "cinnamon 半勺",
+      "marshmallows 适量",
+      "盐 少许"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "美式田园沙拉（Garden Salad）",
+    "description": "1. mixed greens、 tomato、cucumber、 carrot 切好。\n2. 调 olive oil、 red wine vinegar、 Dijon、 honey dressing。\n3. 蔬菜装盘，淋 dressing 拌匀。\n4. 撒 crumbled feta 或 ranch 可选。",
+    "ingredients": [
+      "混合生菜 200g",
+      "番茄 2个",
+      "黄瓜 1根",
+      "胡萝卜 1根",
+      "red wine vinegar 2勺",
+      "橄榄油 3勺",
+      "Dijon 1勺"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "烤芦笋（Grilled Asparagus）",
+    "description": "1. asparagus 去硬梗，拌 olive oil、 salt、 pepper。\n2. grill 或 broiler 4–5 分钟至 tender-crisp。\n3. 出锅挤 lemon、撒 parmesan。\n4. 立即上桌。",
+    "ingredients": [
+      "芦笋 500g",
+      "橄榄油 2勺",
+      "parmesan 30g",
+      "柠檬 半个",
+      "盐 适量",
+      "黑胡椒 适量"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "美式焗土豆（Loaded Baked Potato）",
+    "description": "1. russet 土豆戳孔，200°C 烤 1 小时。\n2. 对半切，挖松内部。\n3. 加 sour cream、 shredded cheddar、bacon bits、 chives。\n4. 再烤 5 分钟至 cheese 融化。",
+    "ingredients": [
+      "russet 土豆 4个",
+      "sour cream 4勺",
+      "切达芝士 100g",
+      "培根碎 50g",
+      "chives 2勺",
+      "黄油 2勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "奶油菠菜（Creamed Spinach）",
+    "description": "1. spinach 焯水挤干， chop 粗。\n2. 黄油炒 garlic 与 shallot 1 分钟。\n3. 加 cream、 nutmeg、 simmer 3 分钟。\n4. 拌入 spinach，加 parmesan 至浓稠。",
+    "ingredients": [
+      "菠菜 500g",
+      "淡奶油 150ml",
+      "黄油 30g",
+      "shallot 1个",
+      "大蒜 2瓣",
+      "parmesan 30g",
+      "nutmeg 少许"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "炭烤玉米（Grilled Corn on the Cob）",
+    "description": "1. corn 留 husks 浸泡 15 分钟，或去 husks 刷 butter。\n2. medium-high grill 转烤 12–15 分钟。\n3. 刷 chipotle-lime butter。\n4. 撒 cotija 或 parmesan、 cilantro。",
+    "ingredients": [
+      "甜玉米 4根",
+      "黄油 60g",
+      "lime juice 2勺",
+      "chipotle 1勺",
+      "cotija 50g",
+      "cilantro 2勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "type": "veg",
+    "name": "芝士焗西葫芦（Zucchini Casserole）",
+    "description": "1. zucchini 切片， salt 静置 10 分钟沥水。\n2. 与 sour cream、 eggs、 cheddar、 onion 混合。\n3. 倒入 baking dish， top breadcrumb 与 butter。\n4. 180°C 烤 35 分钟至 set 且 golden。",
+    "ingredients": [
+      "西葫芦 600g",
+      "sour cream 150ml",
+      "鸡蛋 2个",
+      "切达芝士 150g",
+      "onion 1个",
+      "面包屑 半杯",
+      "黄油 2勺"
+    ]
+  }
+]

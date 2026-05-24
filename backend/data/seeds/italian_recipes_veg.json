@@ -1,0 +1,207 @@
+[
+  {
+    "name": "卡普雷塞沙拉（Insalata Caprese）",
+    "type": "veg",
+    "description": "1. 番茄与 fresh mozzarella 切厚片。\n2. 交替摆盘，撒 basil 叶。\n3. 淋 extra virgin 橄榄油。\n4. 撒 flaky salt 与 pepper。\n5. 静置 5 分钟再上桌。",
+    "ingredients": [
+      "番茄 3个",
+      "马苏里拉 250g",
+      "新鲜罗勒 1把",
+      "橄榄油 3勺",
+      "粗盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "意式烤茄子（Melanzane al forno）",
+    "type": "veg",
+    "description": "1. 茄子切圆片，盐腌 20 分钟挤干水分。\n2. 刷橄榄油 200°C 烤 15 分钟。\n3. 铺 tomato sauce 与 mozzarella。\n4. 再烤 10 分钟至芝士融化。\n5. 撒 basil 即可。",
+    "ingredients": [
+      "茄子 2根",
+      "番茄酱 200g",
+      "马苏里拉 150g",
+      "帕玛森芝士 30g",
+      "橄榄油 3勺",
+      "罗勒 适量"
+    ]
+  },
+  {
+    "name": "帕尔玛茄子（Melanzane alla Parmigiana）",
+    "type": "veg",
+    "description": "1. 茄子切厚片，拍粉煎至金黄。\n2. 烤盘铺 tomato sauce，叠茄子、mozzarella、帕玛森。\n3. 重复两层。\n4. 180°C 烤 30 分钟。\n5. 静置 10 分钟再切。",
+    "ingredients": [
+      "茄子 3根",
+      "番茄酱 400g",
+      "马苏里拉 200g",
+      "帕玛森芝士 80g",
+      "面粉 适量",
+      "橄榄油 4勺",
+      "罗勒 适量"
+    ]
+  },
+  {
+    "name": "意式烤彩椒（Peperonata）",
+    "type": "veg",
+    "description": "1. 彩椒切条，洋葱切丝。\n2. 橄榄油慢炒 20 分钟至软。\n3. 加番茄丁与 capers。\n4. 小火炖 15 分钟。\n5. 可作 side 或 bruschetta topping。",
+    "ingredients": [
+      "彩椒 4个",
+      "洋葱 1个",
+      "番茄 2个",
+      "酸豆 2勺",
+      "橄榄油 4勺",
+      "盐 适量",
+      "欧芹 少许"
+    ]
+  },
+  {
+    "name": "意式炖朝鲜蓟（Carciofi alla romana）",
+    "type": "veg",
+    "description": "1. 朝鲜蓟去外层叶，泡 lemon 水防氧化。\n2. 塞 mint、蒜、面包屑入中心。\n3. 直立放入深锅，加 olive oil 与 white wine。\n4. 盖盖小火炖 30 分钟。\n5. 淋锅汁上桌。",
+    "ingredients": [
+      "朝鲜蓟 4个",
+      "薄荷 1把",
+      "大蒜 4瓣",
+      "白葡萄酒 100ml",
+      "面包屑 50g",
+      "橄榄油 4勺",
+      "柠檬 1个"
+    ]
+  },
+  {
+    "name": "蘑菇烩饭（Risotto ai funghi）",
+    "type": "veg",
+    "description": "1. 混合蘑菇切片，分两批：一批干煎出香，一批备用。\n2. 洋葱黄油炒香，加米翻炒。\n3. 分次加 vegetable broth 边搅边收。\n4. 米快熟时加入蘑菇。\n5. 关火拌帕玛森与 butter。",
+    "ingredients": [
+      "Arborio 米 320g",
+      "混合蘑菇 400g",
+      "蔬菜高汤 1L",
+      "洋葱 1个",
+      "白葡萄酒 100ml",
+      "黄油 40g",
+      "帕玛森芝士 60g"
+    ]
+  },
+  {
+    "name": "四季豆意面（Pasta e fagioli）",
+    "type": "veg",
+    "description": "1. 橄榄油炒香蒜与 rosemary。\n2. 加 cannellini 豆与番茄、broth。\n3. 倒入短意面同煮 10 分钟。\n4. 至浓稠 soup-pasta 质地。\n5. 淋 olive oil 与 pepper。",
+    "ingredients": [
+      "短意面 200g",
+      "白芸豆罐头 400g",
+      "番茄 2个",
+      "蔬菜高汤 500ml",
+      "迷迭香 2枝",
+      "大蒜 3瓣",
+      "橄榄油 3勺"
+    ]
+  },
+  {
+    "name": "意式番茄 bruschetta（Bruschetta al pomodoro）",
+    "type": "veg",
+    "description": "1. 法棍切片烤至酥脆。\n2. 番茄切丁与 garlic、basil、olive oil 拌。\n3. 静置 10 分钟入味。\n4. 堆在 toast 上。\n5. 撒 salt 即可。",
+    "ingredients": [
+      "法棍 1根",
+      "番茄 4个",
+      "大蒜 2瓣",
+      "新鲜罗勒 1把",
+      "橄榄油 4勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式烤蔬菜（Verdure grigliate）",
+    "type": "veg",
+    "description": "1. 西葫芦、茄子、彩椒切厚片。\n2. 刷 olive oil、salt、pepper。\n3. grill 或 220°C 烤 15 分钟。\n4. 翻面再烤 10 分钟。\n5. 淋 balsamic 与 basil。",
+    "ingredients": [
+      "西葫芦 2根",
+      "茄子 1根",
+      "彩椒 2个",
+      "橄榄油 4勺",
+      "意大利香醋 2勺",
+      "罗勒 适量",
+      "盐胡椒 适量"
+    ]
+  },
+  {
+    "name": "意式炖小洋蓟（Carciofi trifolati）",
+    "type": "veg",
+    "description": "1. 小洋蓟切四瓣泡 lemon 水。\n2. 橄榄油与 garlic 炒香。\n3. 下洋蓟翻炒，加 white wine。\n4. 盖盖炖 20 分钟至 tender。\n5. 撒 parsley 与 pepper。",
+    "ingredients": [
+      "小洋蓟 500g",
+      "大蒜 4瓣",
+      "白葡萄酒 100ml",
+      "欧芹 1把",
+      "柠檬 1个",
+      "橄榄油 3勺",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "意式烤土豆（Patate al forno）",
+    "type": "veg",
+    "description": "1. 土豆切角，与 rosemary、garlic、olive oil 拌匀。\n2. 200°C 烤 35 分钟。\n3. 中途翻动一次。\n4. 撒 flaky salt。\n5. 配 main 或 alone。",
+    "ingredients": [
+      "土豆 6个",
+      "迷迭香 3枝",
+      "大蒜 4瓣",
+      "橄榄油 4勺",
+      "粗盐 适量",
+      "黑胡椒 少许"
+    ]
+  },
+  {
+    "name": "意式菠菜面（Pasta con spinaci）",
+    "type": "veg",
+    "description": "1. 意面煮至 al dente。\n2. 橄榄油炒香 garlic，下 spinach  wilt。\n3. 加 ricotta 与 nutmeg 拌匀。\n4. 拌入热意面。\n5. 撒帕玛森即可。",
+    "ingredients": [
+      "意面 400g",
+      "菠菜 300g",
+      "ricotta 150g",
+      "大蒜 3瓣",
+      "nutmeg 少许",
+      "橄榄油 2勺",
+      "帕玛森芝士 40g"
+    ]
+  },
+  {
+    "name": "意式炖扁豆（Lenticchie stufate）",
+    "type": "veg",
+    "description": "1. 扁豆浸泡 2 小时。\n2. soffritto（洋葱、芹菜、胡萝卜）炒香。\n3. 加扁豆、番茄、broth 炖 40 分钟。\n4. 至 soft 仍保持形状。\n5. 淋 olive oil 上桌。",
+    "ingredients": [
+      "绿扁豆 300g",
+      "番茄 2个",
+      "洋葱 1个",
+      "芹菜 2根",
+      "蔬菜高汤 600ml",
+      "橄榄油 3勺",
+      "月桂叶 1片"
+    ]
+  },
+  {
+    "name": "意式烤番茄（Pomodori al forno）",
+    "type": "veg",
+    "description": "1. 番茄对半，挖去部分籽。\n2. 填 bread crumbs、garlic、basil、olive oil。\n3. 180°C 烤 25 分钟。\n4. 至表面金黄。\n5. 作 side 或 antipasto。",
+    "ingredients": [
+      "大番茄 6个",
+      "面包屑 80g",
+      "大蒜 3瓣",
+      "新鲜罗勒 1把",
+      "橄榄油 4勺",
+      "帕玛森芝士 30g"
+    ]
+  },
+  {
+    "name": "意式西葫芦面（Spaghetti alla Nerano）",
+    "type": "veg",
+    "description": "1. 西葫芦切薄圈，面粉轻拍后煎至金黄。\n2. 意面煮至 al dente，留面汤。\n3. 西葫芦与面、basil、provola 翻匀。\n4. 加面汤至 creamy。\n5. 撒 pepper 即可。",
+    "ingredients": [
+      "意面 400g",
+      "西葫芦 4根",
+      "provola 100g",
+      "新鲜罗勒 1把",
+      "面粉 少许",
+      "橄榄油 4勺",
+      "黑胡椒 适量"
+    ]
+  }
+]

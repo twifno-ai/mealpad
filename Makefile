@@ -1,4 +1,4 @@
-.PHONY: dev-backend dev-frontend build serve test setup-backend seed-recipes seed-japanese-recipes
+.PHONY: dev-backend dev-frontend build serve test setup-backend seed-recipes seed-japanese-recipes seed-french-recipes seed-spanish-recipes seed-italian-recipes seed-american-recipes
 
 VENV := backend/.venv
 PYTHON := $(VENV)/bin/python
@@ -30,3 +30,15 @@ seed-recipes: setup-backend
 
 seed-japanese-recipes: setup-backend
 	cd backend && .venv/bin/python scripts/import_japanese_recipes.py
+
+seed-french-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_french_recipes.py
+
+seed-spanish-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_spanish_recipes.py
+
+seed-italian-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_italian_recipes.py
+
+seed-american-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_american_recipes.py

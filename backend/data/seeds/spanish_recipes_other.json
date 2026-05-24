@@ -1,0 +1,141 @@
+[
+  {
+    "name": "西班牙土豆蛋饼（Tortilla española）",
+    "type": "other",
+    "description": "1. 土豆切薄片，橄榄油小火慢炒至 soft； onion 同炒。\n2. 鸡蛋打散，与 potato 混合， salt 调味。\n3. 小锅少油，倒入 mixture，中火定型。\n4. 用盘翻面再煎 3 分钟， center 略 soft。",
+    "ingredients": [
+      "土豆 500g",
+      "鸡蛋 6个",
+      "洋葱 1个",
+      "橄榄油 100ml",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "西班牙油条配巧克力（Churros con chocolate）",
+    "type": "other",
+    "description": "1.  flour、 water、 salt 与 oil 调成 choux 状 batter。\n2. 挤入 180℃ 油中炸至 golden。\n3.  cinnamon sugar 滚匀。\n4. 热 chocolate 融化 dip 食用。",
+    "ingredients": [
+      "中筋面粉 200g",
+      "水 250ml",
+      "橄榄油 适量",
+      "糖 2勺",
+      "肉桂粉 1/2勺",
+      "黑巧克力 100g",
+      "牛奶 100ml",
+      "盐 少许"
+    ]
+  },
+  {
+    "name": "西班牙杏仁曲奇（Polvorones）",
+    "type": "other",
+    "description": "1. 烤 almond 与 flour 分别烤香。\n2.  butter 与 sugar 打 soft，加 cinnamon。\n3. 拌入 almond flour 与 sesame oil 成 crumbly dough。\n4. 整形成圆饼，150℃ 烤 15 分钟，撒糖粉。",
+    "ingredients": [
+      "中筋面粉 200g",
+      "杏仁 100g",
+      "猪油 120g",
+      "糖粉 80g",
+      "肉桂粉 1/2勺",
+      "芝麻香油 1勺",
+      "糖粉（装饰） 适量"
+    ]
+  },
+  {
+    "name": "西班牙米布丁（Arroz con leche）",
+    "type": "other",
+    "description": "1.  rice 与 milk、 cinnamon stick 同锅小火煮。\n2.  stir 频繁，约 35 分钟至 creamy。\n3. 加 sugar 与 lemon zest。\n4. 冷藏，撒 cinnamon 即可。",
+    "ingredients": [
+      "短粒米 150g",
+      "全脂牛奶 800ml",
+      "糖 80g",
+      "肉桂棒 1根",
+      "柠檬皮 少许",
+      "盐 少许"
+    ]
+  },
+  {
+    "name": "西班牙塔帕斯拼盘（Tabla de tapas）",
+    "type": "other",
+    "description": "1. 准备 jamón、 cheese、 olives、 anchovy 与 bread。\n2.  chorizo 与 pepper 切片摆盘。\n3.  alioli 与 bravas 酱分装小碟。\n4. 按色彩与质感组合成 sharing board。",
+    "ingredients": [
+      "塞拉诺火腿 80g",
+      "曼彻格芝士 80g",
+      "黑橄榄 50g",
+      "凤尾鱼 30g",
+      "chorizo 60g",
+      "法棍 半根",
+      "蛋黄酱 2勺",
+      "大蒜 1瓣"
+    ]
+  },
+  {
+    "name": "西班牙蒜香面包（Pan de ajo）",
+    "type": "other",
+    "description": "1. 法棍斜切不切断； butter 与 minced garlic 混合。\n2. 刷入缝隙，撒 parsley。\n3. 180℃ 烤 12 分钟至 crisp。\n4. 趁热整根上桌。",
+    "ingredients": [
+      "法棍 1根",
+      "黄油 60g",
+      "大蒜 4瓣",
+      "欧芹 2勺",
+      "盐 少许",
+      "帕玛森芝士 30g"
+    ]
+  },
+  {
+    "name": "西班牙火腿 croquetas（Croquetas de jamón）",
+    "type": "other",
+    "description": "1.  butter 炒 flour 成 roux，加 milk 成 thick béchamel。\n2. 拌入 diced jamón 与 nutmeg，冷藏 2 小时。\n3. 搓球， breadcrumb 裹三层。\n4. 180℃ 油炸至 golden brown。",
+    "ingredients": [
+      "黄油 40g",
+      "中筋面粉 60g",
+      "牛奶 400ml",
+      "塞拉诺火腿 120g",
+      "面包屑 100g",
+      "鸡蛋 2个",
+      "肉豆蔻 少许",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "加利西亚 empanada（Empanada gallega）",
+    "type": "other",
+    "description": "1.  dough： flour、 oil、 water、 salt 揉 smooth。\n2.  filling： tuna、 pepper、 onion 与 tomato 炒 soft。\n3. 擀皮，包入 filling， crimp 边缘。\n4. 200℃ 烤 35 分钟至 golden。",
+    "ingredients": [
+      "中筋面粉 400g",
+      "橄榄油 80ml",
+      "金枪鱼罐头 200g",
+      "甜椒 2个",
+      "洋葱 1个",
+      "番茄 2个",
+      "鸡蛋 1个（刷面）",
+      "盐 适量"
+    ]
+  },
+  {
+    "name": "西班牙可丽饼（Filloas gallegas）",
+    "type": "other",
+    "description": "1.  flour、 milk、 eggs 与 pinch salt 打 smooth batter。\n2.  rest 30 分钟。\n3.  nonstick pan 薄油，摊极薄 crepe。\n4. 叠放，配 honey 或 jamón。",
+    "ingredients": [
+      "中筋面粉 200g",
+      "牛奶 400ml",
+      "鸡蛋 2个",
+      "橄榄油 1勺",
+      "蜂蜜 适量",
+      "盐 少许"
+    ]
+  },
+  {
+    "name": "西班牙杏仁蛋糕（Tarta de Santiago）",
+    "type": "other",
+    "description": "1.  almond flour、 sugar 与 eggs 打至 pale。\n2. 加 lemon zest 与 cinnamon，倒入模具。\n3. 170℃ 烤 35 分钟。\n4. 冷却，筛 icing sugar 印 Santiago 十字。",
+    "ingredients": [
+      "杏仁粉 250g",
+      "鸡蛋 4个",
+      "糖 200g",
+      "柠檬皮 1个",
+      "肉桂粉 1/4勺",
+      "糖粉 适量",
+      "黄油（抹模） 少许"
+    ]
+  }
+]
