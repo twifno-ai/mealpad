@@ -177,6 +177,7 @@ secrets.yaml
 .worktrees/
 frontend/node_modules/
 frontend/dist/
+frontend/tsconfig.tsbuildinfo
 backend/data/
 backend/.env
 backend/.venv/
