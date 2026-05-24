@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { type CookedDishLog, type MealPlanEntry } from "../api";
-import { recipeTypeLabel, slotLabel, zh } from "../locale/zh";
+import { recipeTypeLabel, cuisineLabel, slotLabel, zh } from "../locale/zh";
 
 interface Props {
   date: string;
@@ -142,7 +142,9 @@ export default function MealSlotModal({
                 <li key={entry.id} className="meal-dish-row">
                   <div className="meal-dish-info">
                     <span className="list-row-title">{entry.recipe.name}</span>
-                    <span className="list-row-sub">{recipeTypeLabel(entry.recipe.type)}</span>
+                    <span className="list-row-sub">
+                      {cuisineLabel(entry.recipe.cuisine)} · {recipeTypeLabel(entry.recipe.type)}
+                    </span>
                     {cooked && (
                       <div className="cooked-row-meta">
                         <span className="badge badge-done">✓ {zh.cooked.planned}</span>

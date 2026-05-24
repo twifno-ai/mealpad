@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { formatDayHeader } from "./format";
-import { categoryLabel, recipeTypeLabel, slotLabel, zh } from "./zh";
+import { categoryLabel, cuisineLabel, recipeTypeLabel, slotLabel, zh } from "./zh";
 
 describe("recipeTypeLabel", () => {
   it("maps known types", () => {
@@ -10,6 +10,14 @@ describe("recipeTypeLabel", () => {
 
   it("falls back to raw value", () => {
     expect(recipeTypeLabel("unknown")).toBe("unknown");
+  });
+});
+
+describe("cuisineLabel", () => {
+  it("maps known cuisines and unset", () => {
+    expect(cuisineLabel("chinese")).toBe("中餐");
+    expect(cuisineLabel("japanese")).toBe("日餐");
+    expect(cuisineLabel(null)).toBe("未分类");
   });
 });
 

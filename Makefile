@@ -1,4 +1,4 @@
-.PHONY: dev-backend dev-frontend build serve test setup-backend
+.PHONY: dev-backend dev-frontend build serve test setup-backend seed-recipes seed-japanese-recipes
 
 VENV := backend/.venv
 PYTHON := $(VENV)/bin/python
@@ -24,3 +24,9 @@ build:
 
 serve: setup-backend
 	cd backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+seed-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_classic_recipes.py
+
+seed-japanese-recipes: setup-backend
+	cd backend && .venv/bin/python scripts/import_japanese_recipes.py

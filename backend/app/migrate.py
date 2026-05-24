@@ -1,9 +1,40 @@
 """SQLite migrations for existing mealpad.db files."""
 
+import json
+from pathlib import Path
+
 from sqlalchemy import inspect, text
 
 from . import models
 from .db import engine
+
+_SEEDS_DIR = Path(__file__).resolve().parent.parent / "data" / "seeds"
+
+
+def _seed_names(pattern: str) -> set[str]:
+    names: set[str] = set()
+    for path in sorted(_SEEDS_DIR.glob(pattern)):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, list):
+            for record in data:
+                if isinstance(record, dict) and record.get("name"):
+                    names.add(record["name"])
+    return names
+
+
+def _backfill_recipe_cuisine(conn) -> None:
+    chinese = _seed_names("classic_recipes_*.json")
+    japanese = _seed_names("japanese_recipes_*.json")
+    for name in chinese:
+        conn.execute(
+            text("UPDATE recipe SET cuisine = 'chinese' WHERE name = :name AND cuisine IS NULL"),
+            {"name": name},
+        )
+    for name in japanese:
+        conn.execute(
+            text("UPDATE recipe SET cuisine = 'japanese' WHERE name = :name AND cuisine IS NULL"),
+            {"name": name},
+        )
 
 
 def _rebuild_meal_plan_entry(conn) -> None:
@@ -38,6 +69,15 @@ def _rebuild_meal_plan_entry(conn) -> None:
 
 def migrate_db() -> None:
     inspector = inspect(engine)
+    if inspector.has_table("recipe"):
+        columns = {col["name"] for col in inspector.get_columns("recipe")}
+        if "cuisine" not in columns:
+            with engine.begin() as conn:
+                conn.execute(text("ALTER TABLE recipe ADD COLUMN cuisine TEXT"))
+                conn.execute(text("CREATE INDEX IF NOT EXISTS ix_recipe_cuisine ON recipe (cuisine)"))
+        with engine.begin() as conn:
+            _backfill_recipe_cuisine(conn)
+
     if not inspector.has_table("mealplanentry"):
         return
 

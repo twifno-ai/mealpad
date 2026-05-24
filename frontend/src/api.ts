@@ -6,11 +6,23 @@ export type RecipeType = "soup" | "meat" | "veg" | "other";
 
 export const RECIPE_TYPES: RecipeType[] = ["soup", "meat", "veg", "other"];
 
+export type CuisineType = "chinese" | "japanese" | "korean" | "thai" | "western" | "other";
+
+export const CUISINE_TYPES: CuisineType[] = [
+  "chinese",
+  "japanese",
+  "korean",
+  "thai",
+  "western",
+  "other",
+];
+
 export interface Recipe {
   id: number;
   name: string;
   description: string;
   type: RecipeType;
+  cuisine: CuisineType | null;
   ingredients: string[];
   created_at: string;
   cover_url: string | null;
@@ -20,6 +32,7 @@ export interface RecipeInput {
   name: string;
   description: string;
   type: RecipeType;
+  cuisine?: CuisineType | null;
   ingredients: string[];
 }
 
@@ -27,6 +40,7 @@ export interface RecipeSummary {
   id: number;
   name: string;
   type: string;
+  cuisine?: string | null;
   cover_url?: string | null;
 }
 
@@ -90,8 +104,13 @@ async function reqForm<T>(path: string, form: FormData, method = "POST"): Promis
 }
 
 export const api = {
-  listRecipes: (type?: RecipeType) =>
-    req<Recipe[]>(`/api/recipes${type ? `?type=${type}` : ""}`),
+  listRecipes: (type?: RecipeType, cuisine?: CuisineType | "") => {
+    const params = new URLSearchParams();
+    if (type) params.set("type", type);
+    if (cuisine !== undefined) params.set("cuisine", cuisine);
+    const q = params.toString();
+    return req<Recipe[]>(`/api/recipes${q ? `?${q}` : ""}`);
+  },
   getRecipe: (id: number) => req<Recipe>(`/api/recipes/${id}`),
   createRecipe: (body: RecipeInput) =>
     req<Recipe>("/api/recipes", { method: "POST", body: JSON.stringify(body) }),

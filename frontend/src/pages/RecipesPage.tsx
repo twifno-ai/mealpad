@@ -1,11 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, RECIPE_TYPES, type Recipe, type RecipeType } from "../api";
-import { recipeTypeLabel, zh } from "../locale/zh";
+import {
+  api,
+  CUISINE_TYPES,
+  RECIPE_TYPES,
+  type CuisineType,
+  type Recipe,
+  type RecipeType,
+} from "../api";
+import { cuisineLabel, recipeTypeLabel, zh } from "../locale/zh";
+
+type CuisineFilter = CuisineType | "" | "unset";
 
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [filter, setFilter] = useState<RecipeType | "">("");
+  const [typeFilter, setTypeFilter] = useState<RecipeType | "">("");
+  const [cuisineFilter, setCuisineFilter] = useState<CuisineFilter>("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -13,14 +23,20 @@ export default function RecipesPage() {
     setLoading(true);
     setError("");
     try {
-      setRecipes(await api.listRecipes(filter || undefined));
+      const cuisineParam =
+        cuisineFilter === ""
+          ? undefined
+          : cuisineFilter === "unset"
+            ? ""
+            : cuisineFilter;
+      setRecipes(await api.listRecipes(typeFilter || undefined, cuisineParam));
     } catch (e) {
       console.error(e);
       setError(zh.error.loadFailed);
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [typeFilter, cuisineFilter]);
 
   useEffect(() => {
     load();
@@ -54,14 +70,28 @@ export default function RecipesPage() {
       <div className="toolbar">
         <select
           className="input"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as RecipeType | "")}
+          value={typeFilter}
+          onChange={(e) => setTypeFilter(e.target.value as RecipeType | "")}
           aria-label={zh.recipes.filterByType}
         >
           <option value="">{zh.recipes.allTypes}</option>
           {RECIPE_TYPES.map((t) => (
             <option key={t} value={t}>
               {recipeTypeLabel(t)}
+            </option>
+          ))}
+        </select>
+        <select
+          className="input"
+          value={cuisineFilter}
+          onChange={(e) => setCuisineFilter(e.target.value as CuisineFilter)}
+          aria-label={zh.recipes.filterByCuisine}
+        >
+          <option value="">{zh.recipes.allCuisines}</option>
+          <option value="unset">{zh.recipes.unclassifiedCuisine}</option>
+          {CUISINE_TYPES.map((c) => (
+            <option key={c} value={c}>
+              {cuisineLabel(c)}
             </option>
           ))}
         </select>
@@ -87,6 +117,7 @@ export default function RecipesPage() {
                   <span className="list-row-text">
                     <span className="list-row-title">{recipe.name}</span>
                     <span className="list-row-sub">
+                      {cuisineLabel(recipe.cuisine)} ·{" "}
                       {zh.recipes.ingredientsCount(recipe.ingredients.length)}
                     </span>
                   </span>

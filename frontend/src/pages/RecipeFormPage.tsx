@@ -1,12 +1,13 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { api, RECIPE_TYPES, type RecipeInput, type RecipeType } from "../api";
-import { recipeTypeLabel, zh } from "../locale/zh";
+import { api, CUISINE_TYPES, RECIPE_TYPES, type RecipeInput, type RecipeType, type CuisineType } from "../api";
+import { cuisineLabel, recipeTypeLabel, zh } from "../locale/zh";
 
 const emptyForm: RecipeInput = {
   name: "",
   description: "",
   type: "soup",
+  cuisine: null,
   ingredients: [],
 };
 
@@ -30,6 +31,7 @@ export default function RecipeFormPage() {
           name: recipe.name,
           description: recipe.description,
           type: recipe.type,
+          cuisine: recipe.cuisine,
           ingredients: recipe.ingredients,
         });
         setIngredientsText(recipe.ingredients.join("\n"));
@@ -138,6 +140,27 @@ export default function RecipeFormPage() {
             {RECIPE_TYPES.map((t) => (
               <option key={t} value={t}>
                 {recipeTypeLabel(t)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="field">
+          <span>{zh.recipeForm.cuisine}</span>
+          <select
+            className="input"
+            value={form.cuisine ?? ""}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                cuisine: (e.target.value || null) as CuisineType | null,
+              })
+            }
+          >
+            <option value="">{zh.recipeForm.unclassifiedCuisine}</option>
+            {CUISINE_TYPES.map((c) => (
+              <option key={c} value={c}>
+                {cuisineLabel(c)}
               </option>
             ))}
           </select>

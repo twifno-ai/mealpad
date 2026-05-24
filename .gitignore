@@ -178,6 +178,8 @@ secrets.yaml
 frontend/node_modules/
 frontend/dist/
 frontend/tsconfig.tsbuildinfo
-backend/data/
+backend/data/*
+!backend/data/seeds/
+!backend/data/seeds/**
 backend/.env
 backend/.venv/

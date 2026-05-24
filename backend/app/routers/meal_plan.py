@@ -29,6 +29,7 @@ def _entry_read(session: Session, entry: MealPlanEntry, recipe: Recipe) -> MealP
             id=recipe.id,
             name=recipe.name,
             type=recipe.type,
+            cuisine=recipe.cuisine,
             cover_url=cover_url_for_recipe(session, recipe.id),
         ),
         created_at=entry.created_at,

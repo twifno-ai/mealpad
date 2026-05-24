@@ -48,6 +48,26 @@ OPENAI_MODEL=gpt-5.5
 
 At least one API key is required for AI fill and shopping-list generation. The app starts without keys; AI actions return a Chinese error in the UI.
 
+### Seed classic recipes (optional)
+
+Bulk-add or refresh ~240 home-style Chinese recipes (with cooking steps in the description):
+
+```bash
+make seed-recipes
+```
+
+New recipes are inserted; existing recipes with the **same name** get their description and ingredients updated from the seed files.
+
+### Seed Japanese recipes (optional)
+
+Bulk-add ~120 home-style Japanese recipes (with cooking steps in the description):
+
+```bash
+make seed-japanese-recipes
+```
+
+Same-name entries are skipped; safe to run more than once.
+
 ## Development
 
 Terminal 1:

@@ -10,6 +10,7 @@ class Recipe(SQLModel, table=True):
     name: str = Field(index=True)
     description: str = ""
     type: str = Field(index=True)
+    cuisine: str | None = Field(default=None, index=True)
     ingredients: list[str] = Field(sa_column=Column(JSON))
     created_at: datetime = Field(default_factory=datetime.utcnow)
 

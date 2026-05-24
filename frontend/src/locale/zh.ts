@@ -20,12 +20,17 @@ export const zh = {
     ingredientsCount: (n: number) => `${n} 项食材`,
     deleteConfirm: (name: string) => `确定删除「${name}」？`,
     filterByType: "按类型筛选",
+    filterByCuisine: "按菜系筛选",
+    allCuisines: "全部菜系",
+    unclassifiedCuisine: "未分类",
   },
   recipeForm: {
     newTitle: "新建食谱",
     editTitle: "编辑食谱",
     name: "名称",
     type: "类型",
+    cuisine: "菜系",
+    unclassifiedCuisine: "未分类",
     description: "描述",
     ingredients: "食材（每行一项）",
     cover: "食谱封面",
@@ -123,6 +128,15 @@ const RECIPE_TYPE_LABELS: Record<string, string> = {
   other: "其他",
 };
 
+const CUISINE_LABELS: Record<string, string> = {
+  chinese: "中餐",
+  japanese: "日餐",
+  korean: "韩餐",
+  thai: "泰餐",
+  western: "西餐",
+  other: "其他",
+};
+
 const SLOT_LABELS: Record<string, string> = {
   lunch: "午餐",
   dinner: "晚餐",
@@ -140,6 +154,11 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 export function recipeTypeLabel(type: string): string {
   return RECIPE_TYPE_LABELS[type] ?? type;
+}
+
+export function cuisineLabel(cuisine: string | null | undefined): string {
+  if (!cuisine) return zh.recipes.unclassifiedCuisine;
+  return CUISINE_LABELS[cuisine] ?? cuisine;
 }
 
 export function slotLabel(slot: string): string {

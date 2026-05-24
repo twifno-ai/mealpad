@@ -5,6 +5,8 @@ from pydantic import BaseModel, Field
 
 RECIPE_TYPES = {"soup", "meat", "veg", "other"}
 
+CUISINE_TYPES = {"chinese", "japanese", "korean", "thai", "western", "other"}
+
 SHOPPING_CATEGORIES = [
     "produce",
     "meat",
@@ -20,6 +22,7 @@ class RecipeBase(BaseModel):
     name: str = Field(min_length=1)
     description: str = ""
     type: str
+    cuisine: str | None = None
     ingredients: list[str]
 
 
@@ -41,6 +44,7 @@ class RecipeSummary(BaseModel):
     id: int
     name: str
     type: str
+    cuisine: str | None = None
     cover_url: str | None = None
 
 

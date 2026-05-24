@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, type Recipe } from "../api";
-import { recipeTypeLabel, zh } from "../locale/zh";
+import { recipeTypeLabel, cuisineLabel, zh } from "../locale/zh";
 
 interface Props {
   title?: string;
@@ -76,7 +76,9 @@ export default function RecipePicker({
                 onClick={() => onSelect(recipe.id)}
               >
                 <span className="list-row-title">{recipe.name}</span>
-                <span className="list-row-sub">{recipeTypeLabel(recipe.type)}</span>
+                <span className="list-row-sub">
+                  {cuisineLabel(recipe.cuisine)} · {recipeTypeLabel(recipe.type)}
+                </span>
               </button>
             </li>
           ))}
