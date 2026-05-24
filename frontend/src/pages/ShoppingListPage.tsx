@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getErrorMessage } from "../httpErrors";
 import { addDays, api, formatIsoDate, mondayOfWeek, type ShoppingList } from "../api";
 import { categoryLabel, zh } from "../locale/zh";
 
@@ -71,7 +72,7 @@ export default function ShoppingListPage() {
       setList(await api.generateShoppingList(startIso, endIso));
     } catch (e) {
       console.error(e);
-      setError(zh.shopping.regenerateFailed);
+      setError(getErrorMessage(e, zh.shopping.regenerateFailed));
     } finally {
       setRegenerating(false);
     }

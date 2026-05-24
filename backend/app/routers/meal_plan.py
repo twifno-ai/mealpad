@@ -120,6 +120,9 @@ def generate_meal_plan(body: DateRange, session: Session = Depends(get_session))
         return get_meal_plan(body.start, body.end, session)
 
     recipes = session.exec(select(Recipe)).all()
+    if not recipes:
+        raise HTTPException(status_code=422, detail="请先添加至少一个食谱，再进行 AI 填充")
+
     recipe_dicts = [{"id": r.id, "name": r.name, "type": r.type} for r in recipes]
     valid_ids = {r.id for r in recipes}
 
@@ -127,6 +130,8 @@ def generate_meal_plan(body: DateRange, session: Session = Depends(get_session))
         assignments = ai_service.generate_plan(empty_slots, recipe_dicts)
     except AIServiceError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    applied = 0
     for assignment in assignments:
         try:
             assign_date = Date.fromisoformat(assignment["date"])
@@ -143,6 +148,13 @@ def generate_meal_plan(body: DateRange, session: Session = Depends(get_session))
         if recipe_id not in valid_ids:
             continue
         session.add(MealPlanEntry(date=assign_date, slot=slot, recipe_id=recipe_id))
+        applied += 1
+
+    if applied == 0:
+        raise HTTPException(
+            status_code=502,
+            detail="AI 未返回有效的膳食安排，请稍后重试或手动选择食谱",
+        )
 
     session.commit()
     return get_meal_plan(body.start, body.end, session)

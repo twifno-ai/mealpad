@@ -21,9 +21,9 @@ describe("formatHttpError", () => {
     expect(formatHttpError(422, body)).toBe("输入有误：名称不能为空");
   });
 
-  it("maps known string details", () => {
-    expect(formatHttpError(404, '{"detail":"Recipe not found"}')).toBe(
-      "未找到：食谱不存在",
-    );
+  it("formats AI service errors", () => {
+    expect(
+      formatHttpError(502, '{"detail":"OpenAI 账户额度已用尽，请检查计费/充值"}'),
+    ).toBe("AI 服务错误：OpenAI 账户额度已用尽，请检查计费/充值");
   });
 });

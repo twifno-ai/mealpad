@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import RecipePicker from "../components/RecipePicker";
+import { getErrorMessage } from "../httpErrors";
 import {
   addDays,
   api,
@@ -97,7 +98,7 @@ export default function MealPlanPage() {
       await load();
     } catch (e) {
       console.error(e);
-      setError(zh.mealPlan.aiFillFailed);
+      setError(getErrorMessage(e, zh.mealPlan.aiFillFailed));
     } finally {
       setGenerating(false);
     }
@@ -114,7 +115,7 @@ export default function MealPlanPage() {
       navigate(`/plan/${startIso}/shopping`);
     } catch (e) {
       console.error(e);
-      setError(zh.mealPlan.generateListFailed);
+      setError(getErrorMessage(e, zh.mealPlan.generateListFailed));
     }
   }
 

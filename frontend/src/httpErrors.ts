@@ -4,6 +4,7 @@ const STATUS_MESSAGES: Record<number, string> = {
   405: "接口不可用",
   422: "输入有误",
   500: "服务器错误",
+  502: "AI 服务错误",
 };
 
 const DETAIL_MESSAGES: Record<string, string> = {
@@ -65,6 +66,14 @@ export function formatHttpError(status: number, body: string): string {
     return `${prefix}：${body.trim().slice(0, 200)}`;
   }
   return prefix;
+}
+
+/** Prefer ApiError.message; fall back to a generic label. */
+export function getErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof Error && error.message.trim()) {
+    return error.message;
+  }
+  return fallback;
 }
 
 export class ApiError extends Error {

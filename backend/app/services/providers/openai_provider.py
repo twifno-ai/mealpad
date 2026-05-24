@@ -5,6 +5,7 @@ from openai import OpenAI
 
 from ...config import settings
 from ..llm_config import AIServiceError
+from ..llm_errors import format_llm_api_error
 from .base import (
     ASSIGN_SYSTEM,
     ASSIGN_TOOL,
@@ -51,7 +52,7 @@ def generate_plan(
             tool_choice={"type": "function", "function": {"name": "assign_meals"}},
         )
     except Exception as exc:
-        raise AIServiceError(f"OpenAI API 调用失败：{exc}") from exc
+        raise AIServiceError(format_llm_api_error("openai", exc)) from exc
 
     return _parse_tool_arguments(resp, "assign_meals", "assignments")
 
@@ -72,6 +73,6 @@ def merge_ingredients(ingredient_lines: list[str]) -> list[dict]:
             tool_choice={"type": "function", "function": {"name": "build_shopping_list"}},
         )
     except Exception as exc:
-        raise AIServiceError(f"OpenAI API 调用失败：{exc}") from exc
+        raise AIServiceError(format_llm_api_error("openai", exc)) from exc
 
     return _parse_tool_arguments(resp, "build_shopping_list", "items")

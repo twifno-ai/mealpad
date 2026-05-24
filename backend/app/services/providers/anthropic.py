@@ -4,6 +4,7 @@ from anthropic import Anthropic
 
 from ...config import settings
 from ..llm_config import AIServiceError
+from ..llm_errors import format_llm_api_error
 from .base import (
     ASSIGN_SYSTEM,
     ASSIGN_TOOL,
@@ -38,7 +39,7 @@ def generate_plan(
             messages=[{"role": "user", "content": plan_user_message(empty_slots, recipes)}],
         )
     except Exception as exc:
-        raise AIServiceError(f"Anthropic API 调用失败：{exc}") from exc
+        raise AIServiceError(format_llm_api_error("anthropic", exc)) from exc
 
     for block in resp.content:
         if block.type == "tool_use" and block.name == "assign_meals":
@@ -62,7 +63,7 @@ def merge_ingredients(ingredient_lines: list[str]) -> list[dict]:
             messages=[{"role": "user", "content": merge_user_message(ingredient_lines)}],
         )
     except Exception as exc:
-        raise AIServiceError(f"Anthropic API 调用失败：{exc}") from exc
+        raise AIServiceError(format_llm_api_error("anthropic", exc)) from exc
 
     for block in resp.content:
         if block.type == "tool_use" and block.name == "build_shopping_list":
