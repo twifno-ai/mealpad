@@ -9,7 +9,7 @@ Family-oriented meal planning, recipes, and shopping lists for your home LAN. UI
 - **AI fill** — Fills **empty meals** with 3 dishes each (荤 + 素 + 汤); requires meat/veg/soup recipes in the library
 - **AI regenerate plan** — Rebuilds the whole week (3 dishes per meal); deletes that week's shopping list
 - **Shopping list** — AI-merged ingredients by category, check off while shopping, regenerate list
-- **PWA** — Add to home screen from the phone browser
+- **PWA** — Add to home screen; **four-tab app shell** (膳食计划 / 食谱 / 饮食记录 / 购物清单), connection troubleshooting when server is unreachable
 - **Cooking log** — Mark meals as actually cooked, optional photo per dish, add off-plan dishes
 - **Recipe covers** — Upload a cover image per recipe
 - **Journal** — Weekly view of what you actually cooked (with photos)
@@ -75,7 +75,8 @@ make serve
    - macOS: `ipconfig getifaddr en0`
    - Linux: `ip addr`
 2. On the phone, open **`http://<lan-ip>:8000`** (use `http`, not `https`).
-3. Optional: Safari / Chrome → **Add to Home Screen** for full-screen PWA.
+3. Safari / Chrome → **Add to Home Screen** — opens full-screen with bottom tabs.
+4. If connection fails after opening the icon, use **重试** on the error screen or ⚙ **设置** to check the server address.
 
 **Troubleshooting**
 
