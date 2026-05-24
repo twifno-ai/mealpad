@@ -27,6 +27,7 @@ Anthropic key lives in `backend/.env` (see `backend/.env.example`). The DB file 
 
 - **TDD for backend.** Write the failing test, see it fail, implement, see it pass, commit. See `PLAN.md` for per-milestone test lists.
 - **One commit per milestone.** Milestones in `PLAN.md` are sized to be demoable on their own.
+- **Commit and push together.** Every commit must be pushed to the remote before the task is considered done. After committing, run `git push` (or `git push -u origin <branch>` for a new branch). Do not leave local-only commits unless the user explicitly says not to push.
 - **Mobile-first frontend.** Min 44px tap targets. Test at 375×667 (iPhone SE) before claiming a UI task done.
 - **Free-text ingredients.** Recipes store ingredients as a JSON array of strings. The shopping list merge is Claude's job — do not introduce a normalized ingredient table.
 - **Meal plan is keyed by date, not by a weekly container.** There is no `MealPlan` entity. `MealPlanEntry` rows have `(date, slot, recipe_id)` with a unique constraint on `(date, slot)`. Empty slot = no row. To clear a slot, `DELETE` the entry. The "weekly view" is a UI rendering of a date-range query.
@@ -45,6 +46,7 @@ When implementing a milestone from `PLAN.md`:
 2. Follow TDD for backend work — tests first.
 3. Run the milestone's Verify steps before committing.
 4. Use the exact commit message listed at the end of the milestone.
+5. Push the commit to the remote immediately after it succeeds.
 
 When adding to the AI service (`backend/app/services/ai.py`):
 - Use `claude-sonnet-4-6` by default.
