@@ -1,6 +1,6 @@
 def _seed_meal_plan(client):
     r1 = client.post(
-        "/api/recipes/",
+        "/api/recipes",
         json={
             "name": "A",
             "type": "soup",
@@ -9,7 +9,7 @@ def _seed_meal_plan(client):
         },
     ).json()
     r2 = client.post(
-        "/api/recipes/",
+        "/api/recipes",
         json={
             "name": "B",
             "type": "meat",
@@ -38,7 +38,7 @@ def test_generate_persists_items(client, monkeypatch):
     monkeypatch.setattr("app.routers.shopping_lists.merge_ingredients", mock_merge)
 
     response = client.post(
-        "/api/shopping-lists/",
+        "/api/shopping-lists",
         json={"start": "2026-05-12", "end": "2026-05-13"},
     )
     assert response.status_code == 201
@@ -56,7 +56,7 @@ def test_regenerate_resets_checks(client, monkeypatch):
     monkeypatch.setattr("app.routers.shopping_lists.merge_ingredients", mock_merge)
 
     first = client.post(
-        "/api/shopping-lists/",
+        "/api/shopping-lists",
         json={"start": "2026-05-12", "end": "2026-05-13"},
     ).json()
     list_id = first["id"]
@@ -64,7 +64,7 @@ def test_regenerate_resets_checks(client, monkeypatch):
     client.patch(f"/api/shopping-list-items/{item_id}", json={"checked": True})
 
     second = client.post(
-        "/api/shopping-lists/",
+        "/api/shopping-lists",
         json={"start": "2026-05-12", "end": "2026-05-13"},
     ).json()
     assert second["id"] == list_id
@@ -81,9 +81,9 @@ def test_get_groups_by_category(client, monkeypatch):
         ]
 
     monkeypatch.setattr("app.routers.shopping_lists.merge_ingredients", mock_merge)
-    client.post("/api/shopping-lists/", json={"start": "2026-05-12", "end": "2026-05-13"})
+    client.post("/api/shopping-lists", json={"start": "2026-05-12", "end": "2026-05-13"})
 
-    data = client.get("/api/shopping-lists/?start=2026-05-12&end=2026-05-13").json()
+    data = client.get("/api/shopping-lists?start=2026-05-12&end=2026-05-13").json()
     assert len(data["items_by_category"]["produce"]) == 1
     assert len(data["items_by_category"]["meat"]) == 1
 
@@ -96,7 +96,7 @@ def test_patch_toggle(client, monkeypatch):
 
     monkeypatch.setattr("app.routers.shopping_lists.merge_ingredients", mock_merge)
     created = client.post(
-        "/api/shopping-lists/",
+        "/api/shopping-lists",
         json={"start": "2026-05-12", "end": "2026-05-13"},
     ).json()
     item_id = created["items_by_category"]["produce"][0]["id"]
@@ -104,12 +104,12 @@ def test_patch_toggle(client, monkeypatch):
     patched = client.patch(f"/api/shopping-list-items/{item_id}", json={"checked": True}).json()
     assert patched["checked"] is True
 
-    fetched = client.get("/api/shopping-lists/?start=2026-05-12&end=2026-05-13").json()
+    fetched = client.get("/api/shopping-lists?start=2026-05-12&end=2026-05-13").json()
     assert fetched["items_by_category"]["produce"][0]["checked"] is True
 
 
 def test_get_missing_returns_404(client):
-    response = client.get("/api/shopping-lists/?start=2026-05-12&end=2026-05-18")
+    response = client.get("/api/shopping-lists?start=2026-05-12&end=2026-05-18")
     assert response.status_code == 404
 
 
@@ -123,7 +123,7 @@ def test_generate_empty_plan_no_mock_call(client, monkeypatch):
     monkeypatch.setattr("app.routers.shopping_lists.merge_ingredients", mock_merge)
 
     response = client.post(
-        "/api/shopping-lists/",
+        "/api/shopping-lists",
         json={"start": "2026-05-12", "end": "2026-05-18"},
     )
     assert response.status_code == 201

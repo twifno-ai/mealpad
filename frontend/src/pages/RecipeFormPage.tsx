@@ -33,7 +33,7 @@ export default function RecipeFormPage() {
         setIngredientsText(recipe.ingredients.join("\n"));
       } catch (e) {
         console.error(e);
-        setError(zh.error.loadFailed);
+        setError(e instanceof Error ? e.message : zh.error.loadFailed);
       } finally {
         setLoading(false);
       }
@@ -59,7 +59,7 @@ export default function RecipeFormPage() {
       navigate("/recipes");
     } catch (err) {
       console.error(err);
-      setError(zh.error.saveFailed);
+      setError(err instanceof Error ? err.message : zh.error.saveFailed);
     }
   }
 

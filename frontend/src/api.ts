@@ -1,3 +1,7 @@
+import { ApiError } from "./httpErrors";
+
+export { ApiError, formatHttpError } from "./httpErrors";
+
 export type RecipeType =
   | "soup"
   | "meat"
@@ -69,7 +73,8 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
   });
   if (!res.ok) {
-    throw new Error(`${res.status} ${await res.text()}`);
+    const body = await res.text();
+    throw new ApiError(res.status, body);
   }
   return res.status === 204 ? (undefined as T) : res.json();
 }
@@ -89,9 +94,7 @@ export const api = {
     req<void>(`/api/recipes/${id}`, { method: "DELETE" }),
 
   getMealPlan: (start: string, end: string) =>
-    req<MealPlanEntry[]>(
-      `/api/meal-plan/?start=${start}&end=${end}`,
-    ),
+    req<MealPlanEntry[]>(`/api/meal-plan?start=${start}&end=${end}`),
   upsertMealPlanEntry: (date: string, slot: string, recipeId: number) =>
     req<MealPlanEntry>(`/api/meal-plan/${date}/${slot}`, {
       method: "PUT",
@@ -106,11 +109,9 @@ export const api = {
     }),
 
   getShoppingList: (start: string, end: string) =>
-    req<ShoppingList>(
-      `/api/shopping-lists/?start=${start}&end=${end}`,
-    ),
+    req<ShoppingList>(`/api/shopping-lists?start=${start}&end=${end}`),
   generateShoppingList: (start: string, end: string) =>
-    req<ShoppingList>("/api/shopping-lists/", {
+    req<ShoppingList>("/api/shopping-lists", {
       method: "POST",
       body: JSON.stringify({ start, end }),
     }),

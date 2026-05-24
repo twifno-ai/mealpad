@@ -3,13 +3,13 @@ from datetime import date
 
 def _create_recipe(client, name="Recipe"):
     return client.post(
-        "/api/recipes/",
+        "/api/recipes",
         json={"name": name, "type": "soup", "description": "", "ingredients": []},
     ).json()
 
 
 def test_empty_range_returns_empty_list(client):
-    response = client.get("/api/meal-plan/?start=2026-05-12&end=2026-05-18")
+    response = client.get("/api/meal-plan?start=2026-05-12&end=2026-05-18")
     assert response.status_code == 200
     assert response.json() == []
 
@@ -24,7 +24,7 @@ def test_put_then_get(client):
     entry = put.json()
     assert entry["recipe"]["name"] == "Recipe"
 
-    listed = client.get("/api/meal-plan/?start=2026-05-12&end=2026-05-18").json()
+    listed = client.get("/api/meal-plan?start=2026-05-12&end=2026-05-18").json()
     assert len(listed) == 1
 
 
@@ -34,7 +34,7 @@ def test_put_replaces_recipe(client):
     client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": r1["id"]})
     client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": r2["id"]})
 
-    listed = client.get("/api/meal-plan/?start=2026-05-12&end=2026-05-12").json()
+    listed = client.get("/api/meal-plan?start=2026-05-12&end=2026-05-12").json()
     assert len(listed) == 1
     assert listed[0]["recipe"]["name"] == "B"
 
@@ -51,7 +51,7 @@ def test_delete_entry(client):
     recipe = _create_recipe(client)
     client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": recipe["id"]})
     assert client.delete("/api/meal-plan/2026-05-12/lunch").status_code == 204
-    assert client.get("/api/meal-plan/?start=2026-05-12&end=2026-05-12").json() == []
+    assert client.get("/api/meal-plan?start=2026-05-12&end=2026-05-12").json() == []
     assert client.delete("/api/meal-plan/2026-05-12/lunch").status_code == 204
 
 
@@ -60,5 +60,5 @@ def test_range_crosses_weeks(client):
     client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": recipe["id"]})
     client.put("/api/meal-plan/2026-05-19/dinner", json={"recipe_id": recipe["id"]})
 
-    listed = client.get("/api/meal-plan/?start=2026-05-12&end=2026-05-19").json()
+    listed = client.get("/api/meal-plan?start=2026-05-12&end=2026-05-19").json()
     assert len(listed) == 2

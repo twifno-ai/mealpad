@@ -8,7 +8,7 @@ from ..schemas import RECIPE_TYPES, RecipeCreate, RecipeRead, RecipeUpdate
 router = APIRouter()
 
 
-@router.get("/", response_model=list[RecipeRead])
+@router.get("", response_model=list[RecipeRead])
 def list_recipes(
     session: Session = Depends(get_session),
     type: str | None = Query(default=None),
@@ -19,7 +19,7 @@ def list_recipes(
     return session.exec(statement).all()
 
 
-@router.post("/", response_model=RecipeRead, status_code=201)
+@router.post("", response_model=RecipeRead, status_code=201)
 def create_recipe(body: RecipeCreate, session: Session = Depends(get_session)):
     if body.type not in RECIPE_TYPES:
         raise HTTPException(status_code=422, detail="Invalid recipe type")

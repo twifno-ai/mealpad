@@ -45,7 +45,7 @@ def _read_list(shopping_list: ShoppingList, session: Session) -> ShoppingListRea
     )
 
 
-@router.get("/", response_model=ShoppingListRead)
+@router.get("", response_model=ShoppingListRead)
 def get_shopping_list(
     start: Date,
     end: Date,
@@ -61,7 +61,7 @@ def get_shopping_list(
     return _read_list(shopping_list, session)
 
 
-@router.post("/", response_model=ShoppingListRead, status_code=201)
+@router.post("", response_model=ShoppingListRead, status_code=201)
 def generate_shopping_list(body: DateRange, session: Session = Depends(get_session)):
     entries = session.exec(
         select(MealPlanEntry)

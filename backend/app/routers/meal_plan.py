@@ -24,7 +24,7 @@ def _entry_read(entry: MealPlanEntry, recipe: Recipe) -> MealPlanEntryRead:
     )
 
 
-@router.get("/", response_model=list[MealPlanEntryRead])
+@router.get("", response_model=list[MealPlanEntryRead])
 def get_meal_plan(
     start: Date,
     end: Date,

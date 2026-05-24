@@ -5,7 +5,7 @@ def _create_recipes(client, count=5):
     ids = []
     for i in range(count):
         recipe = client.post(
-            "/api/recipes/",
+            "/api/recipes",
             json={
                 "name": f"Recipe {i}",
                 "type": "soup",
