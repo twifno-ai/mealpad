@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
 from ..db import get_session
-from ..models import MealPlanEntry, Recipe
+from ..models import MealPlanEntry, Recipe, ShoppingList
 from ..schemas import DateRange, EntryUpsert, MealPlanEntryRead, RecipeSummary
 from ..services import ai as ai_service
 from ..services.llm_config import AIServiceError
@@ -105,6 +105,51 @@ def _iter_slots(start: Date, end: Date) -> list[tuple[Date, str]]:
     return slots
 
 
+def _filter_assignments(
+    assignments: list,
+    allowed_slots: set[tuple[Date, str]],
+    valid_ids: set[int],
+    start: Date,
+    end: Date,
+) -> list[tuple[Date, str, int]]:
+    accepted: list[tuple[Date, str, int]] = []
+    for assignment in assignments:
+        try:
+            assign_date = Date.fromisoformat(assignment["date"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        slot = assignment.get("slot")
+        recipe_id = assignment.get("recipe_id")
+        if slot not in VALID_SLOTS:
+            continue
+        if (assign_date, slot) not in allowed_slots:
+            continue
+        if assign_date < start or assign_date > end:
+            continue
+        if recipe_id not in valid_ids:
+            continue
+        accepted.append((assign_date, slot, recipe_id))
+    return accepted
+
+
+def _delete_plan_and_shopping_list(session: Session, start: Date, end: Date) -> None:
+    entries = session.exec(
+        select(MealPlanEntry)
+        .where(MealPlanEntry.date >= start)
+        .where(MealPlanEntry.date <= end)
+    ).all()
+    for entry in entries:
+        session.delete(entry)
+
+    shopping_list = session.exec(
+        select(ShoppingList)
+        .where(ShoppingList.start_date == start)
+        .where(ShoppingList.end_date == end)
+    ).first()
+    if shopping_list:
+        session.delete(shopping_list)
+
+
 @router.post("/generate", response_model=list[MealPlanEntryRead])
 def generate_meal_plan(body: DateRange, session: Session = Depends(get_session)):
     all_slots = set(_iter_slots(body.start, body.end))
@@ -131,30 +176,51 @@ def generate_meal_plan(body: DateRange, session: Session = Depends(get_session))
     except AIServiceError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
-    applied = 0
-    for assignment in assignments:
-        try:
-            assign_date = Date.fromisoformat(assignment["date"])
-        except (KeyError, ValueError, TypeError):
-            continue
-        slot = assignment.get("slot")
-        recipe_id = assignment.get("recipe_id")
-        if slot not in VALID_SLOTS:
-            continue
-        if (assign_date, slot) not in empty_slots:
-            continue
-        if assign_date < body.start or assign_date > body.end:
-            continue
-        if recipe_id not in valid_ids:
-            continue
-        session.add(MealPlanEntry(date=assign_date, slot=slot, recipe_id=recipe_id))
-        applied += 1
-
-    if applied == 0:
+    accepted = _filter_assignments(
+        assignments, set(empty_slots), valid_ids, body.start, body.end
+    )
+    if not accepted:
         raise HTTPException(
             status_code=502,
             detail="AI 未返回有效的膳食安排，请稍后重试或手动选择食谱",
         )
+
+    for assign_date, slot, recipe_id in accepted:
+        session.add(MealPlanEntry(date=assign_date, slot=slot, recipe_id=recipe_id))
+
+    session.commit()
+    return get_meal_plan(body.start, body.end, session)
+
+
+@router.post("/regenerate", response_model=list[MealPlanEntryRead])
+def regenerate_meal_plan(body: DateRange, session: Session = Depends(get_session)):
+    all_slots = _iter_slots(body.start, body.end)
+    all_slots_set = set(all_slots)
+
+    recipes = session.exec(select(Recipe)).all()
+    if not recipes:
+        raise HTTPException(status_code=422, detail="请先添加至少一个食谱，再进行 AI 填充")
+
+    recipe_dicts = [{"id": r.id, "name": r.name, "type": r.type} for r in recipes]
+    valid_ids = {r.id for r in recipes}
+
+    try:
+        assignments = ai_service.generate_plan(all_slots, recipe_dicts)
+    except AIServiceError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    accepted = _filter_assignments(
+        assignments, all_slots_set, valid_ids, body.start, body.end
+    )
+    if not accepted:
+        raise HTTPException(
+            status_code=502,
+            detail="AI 未返回有效的膳食安排，请稍后重试或手动选择食谱",
+        )
+
+    _delete_plan_and_shopping_list(session, body.start, body.end)
+    for assign_date, slot, recipe_id in accepted:
+        session.add(MealPlanEntry(date=assign_date, slot=slot, recipe_id=recipe_id))
 
     session.commit()
     return get_meal_plan(body.start, body.end, session)

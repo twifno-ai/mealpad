@@ -33,6 +33,7 @@ export default function MealPlanPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [regenerating, setRegenerating] = useState(false);
   const [picker, setPicker] = useState<{ date: string; slot: string } | null>(null);
   const [hasList, setHasList] = useState<boolean | null>(null);
 
@@ -104,6 +105,22 @@ export default function MealPlanPage() {
     }
   }
 
+  async function handleRegenerate() {
+    if (!confirm(zh.mealPlan.regenerateConfirm)) return;
+    setRegenerating(true);
+    setError("");
+    try {
+      await api.regenerateMealPlan(startIso, endIso);
+      setHasList(false);
+      await load();
+    } catch (e) {
+      console.error(e);
+      setError(getErrorMessage(e, zh.mealPlan.regenerateFailed));
+    } finally {
+      setRegenerating(false);
+    }
+  }
+
   async function handleShoppingAction() {
     if (hasList) {
       navigate(`/plan/${startIso}/shopping`);
@@ -168,9 +185,19 @@ export default function MealPlanPage() {
             type="button"
             className="btn btn-secondary"
             onClick={handleGenerate}
-            disabled={generating}
+            disabled={generating || regenerating}
           >
             {generating ? zh.mealPlan.filling : zh.mealPlan.autoFill}
+          </button>
+        )}
+        {entries.length > 0 && (
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleRegenerate}
+            disabled={generating || regenerating}
+          >
+            {regenerating ? zh.mealPlan.regenerating : zh.mealPlan.regenerate}
           </button>
         )}
       </div>

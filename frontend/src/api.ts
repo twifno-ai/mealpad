@@ -107,6 +107,11 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ start, end }),
     }),
+  regenerateMealPlan: (start: string, end: string) =>
+    req<MealPlanEntry[]>("/api/meal-plan/regenerate", {
+      method: "POST",
+      body: JSON.stringify({ start, end }),
+    }),
 
   getShoppingList: (start: string, end: string) =>
     req<ShoppingList>(`/api/shopping-lists?start=${start}&end=${end}`),

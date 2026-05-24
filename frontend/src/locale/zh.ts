@@ -40,6 +40,11 @@ export const zh = {
     loadFailed: "加载膳食计划失败",
     aiFillFailed: "AI 填充失败",
     generateListFailed: "生成购物清单失败",
+    regenerate: "重新生成计划",
+    regenerating: "重新生成中…",
+    regenerateConfirm:
+      "重新生成本周膳食计划？所有餐次将被 AI 重新安排，该周购物清单将被删除。",
+    regenerateFailed: "重新生成计划失败",
   },
   picker: {
     title: "选择食谱",
