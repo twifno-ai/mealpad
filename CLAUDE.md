@@ -29,6 +29,7 @@ AI keys live in `backend/.env` (see `backend/.env.example`): `ANTHROPIC_API_KEY`
 - **One commit per milestone.** Milestones in `docs/PLAN.md` are sized to be demoable on their own.
 - **Auto-commit every change.** After completing a task or logical unit of work, commit immediately — do not ask the user for permission first. Group related edits into one focused commit; do not leave completed work uncommitted.
 - **Commit and push together.** Every commit must be pushed to the remote before the task is considered done. After committing, run `git push` (or `git push -u origin <branch>` for a new branch). Do not leave local-only commits unless the user explicitly says not to push.
+- **Git identity (this repo).** Always commit as `twifno-ai <twifnoai@gmail.com>` (local `user.name` / `user.email` in `.git/config`). Push to `origin` (`git@github.com:twifno-ai/mealpad.git`). Do not use the machine hostname email.
 - **Mobile-first frontend.** Min 44px tap targets. Test at 375×667 (iPhone SE) before claiming a UI task done.
 - **Free-text ingredients.** Recipes store ingredients as a JSON array of strings. The shopping list merge is Claude's job — do not introduce a normalized ingredient table.
 - **Meal plan is keyed by date, not by a weekly container.** There is no `MealPlan` entity. `MealPlanEntry` rows have `(date, slot, recipe_id)` with a unique constraint on `(date, slot)`. Empty slot = no row. To clear a slot, `DELETE` the entry. The "weekly view" is a UI rendering of a date-range query.
