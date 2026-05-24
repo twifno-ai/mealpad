@@ -2,7 +2,7 @@
 
 Family-oriented meal planning + recipe + shopping-list tool. Single FastAPI server on the household LAN serves both a JSON API and a React PWA from the same origin.
 
-See `SPEC.md` for the goal and `PLAN.md` for the milestone-by-milestone build plan.
+See `docs/SPEC.md` for the goal and `docs/PLAN.md` for the milestone-by-milestone build plan.
 
 ## Stack
 
@@ -25,8 +25,8 @@ AI keys live in `backend/.env` (see `backend/.env.example`): `ANTHROPIC_API_KEY`
 
 ## Conventions
 
-- **TDD for backend.** Write the failing test, see it fail, implement, see it pass, commit. See `PLAN.md` for per-milestone test lists.
-- **One commit per milestone.** Milestones in `PLAN.md` are sized to be demoable on their own.
+- **TDD for backend.** Write the failing test, see it fail, implement, see it pass, commit. See `docs/PLAN.md` for per-milestone test lists.
+- **One commit per milestone.** Milestones in `docs/PLAN.md` are sized to be demoable on their own.
 - **Auto-commit every change.** After completing a task or logical unit of work, commit immediately — do not ask the user for permission first. Group related edits into one focused commit; do not leave completed work uncommitted.
 - **Commit and push together.** Every commit must be pushed to the remote before the task is considered done. After committing, run `git push` (or `git push -u origin <branch>` for a new branch). Do not leave local-only commits unless the user explicitly says not to push.
 - **Mobile-first frontend.** Min 44px tap targets. Test at 375×667 (iPhone SE) before claiming a UI task done.
@@ -42,7 +42,7 @@ No auth, no recipe-import-from-URL, no photos, no nutrition, no calendar export,
 
 ## Working with this repo
 
-When implementing a milestone from `PLAN.md`:
+When implementing a milestone from `docs/PLAN.md`:
 1. Read the milestone's Files / Tests / Verify sections.
 2. Follow TDD for backend work — tests first.
 3. Run the milestone's Verify steps before committing.

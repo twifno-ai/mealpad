@@ -96,7 +96,7 @@ Replace `frontend/public/icon-192.png` and `icon-512.png`, then `make build`.
 |---|---|
 | [docs/SPEC.md](docs/SPEC.md) | Product spec |
 | [docs/PLAN.md](docs/PLAN.md) | Architecture & implementation plan |
-| [docs/CLAUDE.md](docs/CLAUDE.md) | Agent/convention guide |
+| [CLAUDE.md](CLAUDE.md) | Agent/convention guide |
 
 ## Tests
 

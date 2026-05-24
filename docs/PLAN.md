@@ -64,10 +64,10 @@ mealpad/
 ├── docs/
 │   ├── SPEC.md
 │   ├── PLAN.md
-│   ├── CLAUDE.md
 │   └── superpowers/                  # post-v1 design specs & plans
 ├── Makefile
-└── README.md
+├── README.md
+└── CLAUDE.md
 ```
 
 ## Data Model

@@ -53,5 +53,5 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 |---|---|
 | [PLAN.md](PLAN.md) | Original milestone plan + current architecture reference |
 | [README.md](../README.md) | Setup, LAN access, tests |
-| [CLAUDE.md](CLAUDE.md) | Agent/convention guide |
+| [CLAUDE.md](../CLAUDE.md) | Agent/convention guide |
 | [superpowers/specs/](superpowers/specs/) | Design specs for post-v1 features |
