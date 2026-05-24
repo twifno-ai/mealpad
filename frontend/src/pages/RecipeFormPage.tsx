@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api, RECIPE_TYPES, type RecipeInput, type RecipeType } from "../api";
+import { recipeTypeLabel, zh } from "../locale/zh";
 
 const emptyForm: RecipeInput = {
   name: "",
@@ -31,7 +32,8 @@ export default function RecipeFormPage() {
         });
         setIngredientsText(recipe.ingredients.join("\n"));
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Failed to load");
+        console.error(e);
+        setError(zh.error.loadFailed);
       } finally {
         setLoading(false);
       }
@@ -56,14 +58,15 @@ export default function RecipeFormPage() {
       }
       navigate("/recipes");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed");
+      console.error(err);
+      setError(zh.error.saveFailed);
     }
   }
 
   if (loading) {
     return (
       <div className="page">
-        <p className="muted">Loading…</p>
+        <p className="muted">{zh.loading}</p>
       </div>
     );
   }
@@ -71,9 +74,9 @@ export default function RecipeFormPage() {
   return (
     <div className="page">
       <header className="page-header">
-        <h1>{isEdit ? "Edit recipe" : "New recipe"}</h1>
+        <h1>{isEdit ? zh.recipeForm.editTitle : zh.recipeForm.newTitle}</h1>
         <Link to="/recipes" className="btn btn-secondary">
-          Cancel
+          {zh.cancel}
         </Link>
       </header>
 
@@ -81,7 +84,7 @@ export default function RecipeFormPage() {
 
       <form className="form" onSubmit={handleSubmit}>
         <label className="field">
-          <span>Name</span>
+          <span>{zh.recipeForm.name}</span>
           <input
             className="input"
             required
@@ -91,7 +94,7 @@ export default function RecipeFormPage() {
         </label>
 
         <label className="field">
-          <span>Type</span>
+          <span>{zh.recipeForm.type}</span>
           <select
             className="input"
             value={form.type}
@@ -101,14 +104,14 @@ export default function RecipeFormPage() {
           >
             {RECIPE_TYPES.map((t) => (
               <option key={t} value={t}>
-                {t}
+                {recipeTypeLabel(t)}
               </option>
             ))}
           </select>
         </label>
 
         <label className="field">
-          <span>Description</span>
+          <span>{zh.recipeForm.description}</span>
           <textarea
             className="input"
             rows={3}
@@ -118,7 +121,7 @@ export default function RecipeFormPage() {
         </label>
 
         <label className="field">
-          <span>Ingredients (one per line)</span>
+          <span>{zh.recipeForm.ingredients}</span>
           <textarea
             className="input"
             rows={6}
@@ -128,7 +131,7 @@ export default function RecipeFormPage() {
         </label>
 
         <button type="submit" className="btn btn-primary btn-block">
-          Save
+          {zh.save}
         </button>
       </form>
     </div>
