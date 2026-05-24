@@ -8,9 +8,10 @@ import {
   mondayOfWeek,
   type MealPlanEntry,
 } from "../api";
+import { formatDayHeader } from "../locale/format";
+import { slotLabel, zh } from "../locale/zh";
 
 const SLOTS = ["lunch", "dinner"] as const;
-const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function MealPlanPage() {
   const { weekStart: weekStartParam } = useParams();
@@ -41,7 +42,8 @@ export default function MealPlanPage() {
       const data = await api.getMealPlan(startIso, endIso);
       setEntries(data);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to load plan");
+      console.error(e);
+      setError(zh.mealPlan.loadFailed);
     } finally {
       setLoading(false);
     }
@@ -94,7 +96,8 @@ export default function MealPlanPage() {
       await api.generateMealPlan(startIso, endIso);
       await load();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "AI fill failed");
+      console.error(e);
+      setError(zh.mealPlan.aiFillFailed);
     } finally {
       setGenerating(false);
     }
@@ -110,7 +113,8 @@ export default function MealPlanPage() {
       await api.generateShoppingList(startIso, endIso);
       navigate(`/plan/${startIso}/shopping`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to generate list");
+      console.error(e);
+      setError(zh.mealPlan.generateListFailed);
     }
   }
 
@@ -131,9 +135,9 @@ export default function MealPlanPage() {
   return (
     <div className="page">
       <header className="page-header">
-        <h1>Meal plan</h1>
+        <h1>{zh.mealPlan.title}</h1>
         <Link to="/recipes" className="btn btn-secondary">
-          Recipes
+          {zh.mealPlan.recipes}
         </Link>
       </header>
 
@@ -156,7 +160,7 @@ export default function MealPlanPage() {
           onClick={handleShoppingAction}
           disabled={hasList === null}
         >
-          {hasList ? "View shopping list" : "Generate shopping list"}
+          {hasList ? zh.mealPlan.viewList : zh.mealPlan.generateList}
         </button>
         {emptySlots > 0 && (
           <button
@@ -165,22 +169,20 @@ export default function MealPlanPage() {
             onClick={handleGenerate}
             disabled={generating}
           >
-            {generating ? "Filling…" : "Auto-fill empty slots with AI"}
+            {generating ? zh.mealPlan.filling : zh.mealPlan.autoFill}
           </button>
         )}
       </div>
 
       {error && <p className="error">{error}</p>}
-      {loading && <p className="muted">Loading…</p>}
+      {loading && <p className="muted">{zh.loading}</p>}
 
       {!loading &&
-        days.map((day, index) => {
+        days.map((day) => {
           const iso = formatIsoDate(day);
           return (
             <section key={iso} className="day-card">
-              <h2 className="day-title">
-                {DAY_NAMES[index]} <span className="day-date">{iso}</span>
-              </h2>
+              <h2 className="day-title">{formatDayHeader(day)}</h2>
               {SLOTS.map((slot) => {
                 const entry = entryMap.get(`${iso}:${slot}`);
                 return (
@@ -190,9 +192,9 @@ export default function MealPlanPage() {
                     className="slot-row"
                     onClick={() => setPicker({ date: iso, slot })}
                   >
-                    <span className="slot-label">{slot}</span>
+                    <span className="slot-label">{slotLabel(slot)}</span>
                     <span className="slot-value">
-                      {entry ? entry.recipe.name : "+ add"}
+                      {entry ? entry.recipe.name : zh.mealPlan.addSlot}
                     </span>
                   </button>
                 );

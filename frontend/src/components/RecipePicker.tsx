@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, type Recipe } from "../api";
+import { recipeTypeLabel, zh } from "../locale/zh";
 
 interface Props {
   onSelect: (recipeId: number) => void;
@@ -13,7 +14,13 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api.listRecipes().then(setRecipes).catch((e) => setError(e.message));
+    api
+      .listRecipes()
+      .then(setRecipes)
+      .catch((e) => {
+        console.error(e);
+        setError(zh.error.loadFailed);
+      });
   }, []);
 
   const filtered = recipes.filter((r) =>
@@ -27,18 +34,18 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label="Pick a recipe"
+        aria-label={zh.picker.title}
       >
         <header className="modal-header">
-          <h2>Choose recipe</h2>
+          <h2>{zh.picker.title}</h2>
           <button type="button" className="btn btn-secondary" onClick={onClose}>
-            Close
+            {zh.close}
           </button>
         </header>
 
         <input
           className="input"
-          placeholder="Search recipes…"
+          placeholder={zh.picker.search}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           autoFocus
@@ -47,7 +54,7 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
         {error && <p className="error">{error}</p>}
 
         <button type="button" className="btn btn-danger btn-block" onClick={onClear}>
-          Clear slot
+          {zh.picker.clearSlot}
         </button>
 
         <ul className="list picker-list">
@@ -59,7 +66,7 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
                 onClick={() => onSelect(recipe.id)}
               >
                 <span className="list-row-title">{recipe.name}</span>
-                <span className="list-row-sub">{recipe.type}</span>
+                <span className="list-row-sub">{recipeTypeLabel(recipe.type)}</span>
               </button>
             </li>
           ))}
