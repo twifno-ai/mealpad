@@ -4,12 +4,15 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+from .config import settings
 from .db import init_db
 from .routers import meal_plan, recipes, shopping_lists
+from .services import uploads as upload_service
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    upload_service.upload_root()
     init_db()
     yield
 
@@ -30,6 +33,10 @@ app.include_router(
 def health():
     return {"ok": True}
 
+
+_upload_dir = settings.resolved_upload_root()
+_upload_dir.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=_upload_dir), name="uploads")
 
 dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
 if dist.exists():

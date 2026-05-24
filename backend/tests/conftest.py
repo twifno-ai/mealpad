@@ -23,6 +23,16 @@ def session_fixture():
         yield session
 
 
+@pytest.fixture(name="upload_root")
+def upload_root_fixture(tmp_path, monkeypatch):
+    root = tmp_path / "uploads"
+    root.mkdir()
+    from app.config import settings
+
+    monkeypatch.setattr(settings, "upload_root", str(root))
+    return root
+
+
 @pytest.fixture(name="client")
 def client_fixture():
     with TestClient(app) as client:

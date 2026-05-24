@@ -40,3 +40,29 @@ class ShoppingListItem(SQLModel, table=True):
     text: str
     category: str = ""
     checked: bool = False
+
+
+class CookedDishLog(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    date: Date = Field(index=True)
+    slot: str
+    recipe_id: int | None = Field(default=None, foreign_key="recipe.id", ondelete="SET NULL")
+    recipe_name: str
+    kind: str
+    meal_plan_entry_id: int | None = Field(
+        default=None,
+        foreign_key="mealplanentry.id",
+        ondelete="SET NULL",
+        unique=True,
+    )
+    photo_path: str | None = None
+    logged_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class RecipeImage(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    recipe_id: int = Field(foreign_key="recipe.id", ondelete="CASCADE", index=True)
+    file_path: str
+    sort_order: int = 0
+    is_cover: bool = False
+    created_at: datetime = Field(default_factory=datetime.utcnow)

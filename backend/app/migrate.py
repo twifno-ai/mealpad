@@ -2,6 +2,7 @@
 
 from sqlalchemy import inspect, text
 
+from . import models
 from .db import engine
 
 
@@ -55,8 +56,16 @@ def migrate_db() -> None:
         return
 
     normalized = create_sql.replace("\n", " ")
-    if "UNIQUE (date, slot, recipe_id)" in normalized:
-        return
+    if "UNIQUE (date, slot, recipe_id)" not in normalized:
+        with engine.begin() as conn:
+            _rebuild_meal_plan_entry(conn)
 
-    with engine.begin() as conn:
-        _rebuild_meal_plan_entry(conn)
+    _ensure_v2_tables()
+
+
+def _ensure_v2_tables() -> None:
+    inspector = inspect(engine)
+    if not inspector.has_table("cookeddishlog"):
+        models.CookedDishLog.__table__.create(engine)
+    if not inspector.has_table("recipeimage"):
+        models.RecipeImage.__table__.create(engine)
