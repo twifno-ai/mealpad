@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { addDays, api, formatIsoDate, mondayOfWeek, type ShoppingList } from "../api";
+import { categoryLabel, zh } from "../locale/zh";
 
 const CATEGORY_ORDER = [
   "produce",
@@ -36,7 +37,8 @@ export default function ShoppingListPage() {
     try {
       setList(await api.getShoppingList(startIso, endIso));
     } catch (e) {
-      setError(e instanceof Error ? e.message : "No shopping list yet");
+      console.error(e);
+      setError(zh.shopping.empty);
       setList(null);
     } finally {
       setLoading(false);
@@ -62,13 +64,14 @@ export default function ShoppingListPage() {
   }
 
   async function handleRegenerate() {
-    if (!confirm("Regenerate list? All check marks will reset.")) return;
+    if (!confirm(zh.shopping.regenerateConfirm)) return;
     setRegenerating(true);
     setError("");
     try {
       setList(await api.generateShoppingList(startIso, endIso));
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Regenerate failed");
+      console.error(e);
+      setError(zh.shopping.regenerateFailed);
     } finally {
       setRegenerating(false);
     }
@@ -77,9 +80,9 @@ export default function ShoppingListPage() {
   return (
     <div className="page">
       <header className="page-header">
-        <h1>Shopping list</h1>
+        <h1>{zh.shopping.title}</h1>
         <Link to={`/plan/${startIso}`} className="btn btn-secondary">
-          Back to plan
+          {zh.shopping.backToPlan}
         </Link>
       </header>
 
@@ -88,7 +91,7 @@ export default function ShoppingListPage() {
       </p>
 
       {error && !list && <p className="error">{error}</p>}
-      {loading && <p className="muted">Loading…</p>}
+      {loading && <p className="muted">{zh.loading}</p>}
 
       {list &&
         CATEGORY_ORDER.map((category) => {
@@ -96,7 +99,7 @@ export default function ShoppingListPage() {
           if (items.length === 0) return null;
           return (
             <section key={category} className="card-section">
-              <h2 className="section-title">{category}</h2>
+              <h2 className="section-title">{categoryLabel(category)}</h2>
               <ul className="list">
                 {items.map((item) => (
                   <li key={item.id}>
@@ -124,7 +127,7 @@ export default function ShoppingListPage() {
           onClick={handleRegenerate}
           disabled={regenerating}
         >
-          {regenerating ? "Regenerating…" : "Regenerate list"}
+          {regenerating ? zh.shopping.regenerating : zh.shopping.regenerate}
         </button>
       )}
     </div>
