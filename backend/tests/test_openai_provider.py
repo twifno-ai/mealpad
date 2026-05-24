@@ -88,3 +88,13 @@ def test_openai_merge_ingredients_parses_tool_call(monkeypatch):
 def test_openai_generate_plan_empty_input():
     assert openai_provider.generate_plan([], [{"id": 1, "name": "x", "type": "soup"}]) == []
     assert openai_provider.generate_plan([(date(2026, 5, 12), "lunch")], []) == []
+
+
+def test_output_limit_kwargs_gpt5():
+    assert openai_provider._output_limit_kwargs("gpt-5.5", 2048) == {
+        "max_completion_tokens": 2048
+    }
+
+
+def test_output_limit_kwargs_legacy():
+    assert openai_provider._output_limit_kwargs("gpt-4o-mini", 2048) == {"max_tokens": 2048}

@@ -22,6 +22,13 @@ def _client() -> OpenAI:
     return OpenAI(api_key=settings.openai_api_key)
 
 
+def _output_limit_kwargs(model: str, limit: int) -> dict[str, int]:
+    """GPT-5+ and reasoning models require max_completion_tokens."""
+    if model.startswith("gpt-5") or model.startswith(("o1", "o3", "o4")):
+        return {"max_completion_tokens": limit}
+    return {"max_tokens": limit}
+
+
 def _parse_tool_arguments(resp, tool_name: str, result_key: str) -> list:
     message = resp.choices[0].message
     if not message.tool_calls:
@@ -43,7 +50,7 @@ def generate_plan(
     try:
         resp = _client().chat.completions.create(
             model=settings.openai_model,
-            max_tokens=2048,
+            **_output_limit_kwargs(settings.openai_model, 2048),
             messages=[
                 {"role": "system", "content": ASSIGN_SYSTEM},
                 {"role": "user", "content": plan_user_message(empty_slots, recipes)},
@@ -64,7 +71,7 @@ def merge_ingredients(ingredient_lines: list[str]) -> list[dict]:
     try:
         resp = _client().chat.completions.create(
             model=settings.openai_model,
-            max_tokens=4096,
+            **_output_limit_kwargs(settings.openai_model, 4096),
             messages=[
                 {"role": "system", "content": MERGE_SYSTEM},
                 {"role": "user", "content": merge_user_message(ingredient_lines)},
