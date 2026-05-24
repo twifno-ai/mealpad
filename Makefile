@@ -1,13 +1,20 @@
-.PHONY: dev-backend dev-frontend build serve test
+.PHONY: dev-backend dev-frontend build serve test setup-backend
 
-PYTHON := backend/.venv/bin/python
-UVICORN := backend/.venv/bin/uvicorn
+VENV := backend/.venv
+PYTHON := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
 
-dev-backend:
-	cd backend && $(UVICORN) app.main:app --reload --port 8000
+setup-backend: $(VENV)/bin/uvicorn
 
-test:
-	cd backend && MEALPAD_TESTING=1 $(PYTHON) -m pytest -v
+$(VENV)/bin/uvicorn:
+	python3 -m venv $(VENV)
+	$(PIP) install -e "backend/.[dev]"
+
+dev-backend: setup-backend
+	cd backend && .venv/bin/uvicorn app.main:app --reload --port 8000
+
+test: setup-backend
+	cd backend && MEALPAD_TESTING=1 .venv/bin/python -m pytest -v
 
 dev-frontend:
 	cd frontend && npm run dev
@@ -15,5 +22,5 @@ dev-frontend:
 build:
 	cd frontend && npm run build
 
-serve:
-	cd backend && $(UVICORN) app.main:app --host 0.0.0.0 --port 8000
+serve: setup-backend
+	cd backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
