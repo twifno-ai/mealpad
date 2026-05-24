@@ -52,6 +52,7 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 | Doc | Purpose |
 |---|---|
 | [PLAN.md](PLAN.md) | Original milestone plan + current architecture reference |
+| [PLAN-v2.md](PLAN-v2.md) | v2 milestones (cooking log + images) |
 | [README.md](../README.md) | Setup, LAN access, tests |
 | [CLAUDE.md](../CLAUDE.md) | Agent/convention guide |
 | [superpowers/specs/](superpowers/specs/) | Design specs for post-v1 features |
