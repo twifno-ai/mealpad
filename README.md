@@ -90,6 +90,14 @@ All app state lives in `backend/data/mealpad.db` — copy that file to back up. 
 
 Replace `frontend/public/icon-192.png` and `icon-512.png`, then `make build`.
 
+## Documentation
+
+| Doc | Purpose |
+|---|---|
+| [docs/SPEC.md](docs/SPEC.md) | Product spec |
+| [docs/PLAN.md](docs/PLAN.md) | Architecture & implementation plan |
+| [docs/CLAUDE.md](docs/CLAUDE.md) | Agent/convention guide |
+
 ## Tests
 
 ```bash
@@ -107,4 +115,4 @@ cd frontend && npm test && npm run build
 | AI plan | `POST /api/meal-plan/generate` (fill empty meals), `POST /api/meal-plan/regenerate` (full week) |
 | Shopping | `GET/POST /api/shopping-lists?start&end`, `PATCH /api/shopping-list-items/{id}` |
 
-See [SPEC.md](SPEC.md) and [PLAN.md](PLAN.md) for full behavior.
+See [SPEC.md](docs/SPEC.md) and [PLAN.md](docs/PLAN.md) for full behavior.

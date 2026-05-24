@@ -61,12 +61,13 @@ mealpad/
 │       └── components/
 │           ├── RecipePicker.tsx
 │           └── MealSlotModal.tsx     # per-meal dish list
-├── docs/superpowers/specs/           # post-v1 design specs
+├── docs/
+│   ├── SPEC.md
+│   ├── PLAN.md
+│   ├── CLAUDE.md
+│   └── superpowers/                  # post-v1 design specs & plans
 ├── Makefile
-├── README.md
-├── CLAUDE.md
-├── PLAN.md
-└── SPEC.md
+└── README.md
 ```
 
 ## Data Model
