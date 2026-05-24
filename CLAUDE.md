@@ -8,7 +8,7 @@ See `SPEC.md` for the goal and `PLAN.md` for the milestone-by-milestone build pl
 
 - **Backend:** Python 3.11+, FastAPI, SQLModel, SQLite. Lives in `backend/`.
 - **Frontend:** React + Vite + TypeScript, PWA. Lives in `frontend/`.
-- **AI:** Anthropic Claude (`anthropic` SDK) — tool use for structured JSON, prompt caching on system prompts. Server-side only; API key in `backend/.env`.
+- **AI:** Claude (Anthropic) or ChatGPT (OpenAI) — tool use for structured JSON; provider via `AI_PROVIDER` in `backend/.env` (auto-detect: Anthropic first). Server-side only; keys never reach the browser.
 - **Auth:** none. Trusted local-network deployment.
 
 ## Commands
@@ -21,7 +21,7 @@ make serve             # run prod server: uvicorn --host 0.0.0.0 --port 8000
 cd backend && pytest   # backend tests
 ```
 
-Anthropic key lives in `backend/.env` (see `backend/.env.example`). The DB file is `backend/data/mealpad.db`, gitignored.
+AI keys live in `backend/.env` (see `backend/.env.example`): `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, optional `AI_PROVIDER` (`anthropic` | `openai` | empty for auto-detect). The DB file is `backend/data/mealpad.db`, gitignored.
 
 ## Conventions
 
@@ -33,7 +33,7 @@ Anthropic key lives in `backend/.env` (see `backend/.env.example`). The DB file 
 - **Free-text ingredients.** Recipes store ingredients as a JSON array of strings. The shopping list merge is Claude's job — do not introduce a normalized ingredient table.
 - **Meal plan is keyed by date, not by a weekly container.** There is no `MealPlan` entity. `MealPlanEntry` rows have `(date, slot, recipe_id)` with a unique constraint on `(date, slot)`. Empty slot = no row. To clear a slot, `DELETE` the entry. The "weekly view" is a UI rendering of a date-range query.
 - **Shopping lists are keyed by `(start_date, end_date)`.** Regenerating for the same range updates the existing row in place (same id, items wiped, checks reset).
-- **AI calls are server-side only.** The browser never sees the Anthropic key. Always use tool use + `tool_choice` for guaranteed JSON. Validate Claude's output (recipe IDs exist, slots are still empty, dates are in range) before applying.
+- **AI calls are server-side only.** The browser never sees API keys. Always use tool use + forced tool choice for guaranteed JSON. Validate model output (recipe IDs exist, slots are still empty, dates are in range) before applying. Misconfigured provider returns HTTP 502 with a Chinese `detail`.
 - **Don't overwrite manual choices.** AI fill only touches `(date, slot)` pairs that have no entry at the moment of application.
 
 ## Out of scope for v1
@@ -52,8 +52,8 @@ When implementing a milestone from `PLAN.md`:
 
 For any other code or doc change (bugfix, refactor, config): verify if applicable, commit with a clear message, push — all without asking.
 
-When adding to the AI service (`backend/app/services/ai.py`):
-- Use `claude-sonnet-4-6` by default.
-- Always declare a tool with a strict `input_schema` and set `tool_choice` to force its use.
-- Mark long, stable system prompts with `cache_control: {"type": "ephemeral"}`.
-- Validate every field of `block.input` before trusting it — never apply Claude's output directly to the DB without checking referential integrity.
+When adding to the AI service (`backend/app/services/ai.py` and `providers/`):
+- Default models: `claude-sonnet-4-6` (Anthropic), `gpt-5.5` (OpenAI); override via `ANTHROPIC_MODEL` / `OPENAI_MODEL`.
+- Always declare a tool with a strict schema and force tool use for guaranteed JSON.
+- Anthropic: mark long system prompts with `cache_control: {"type": "ephemeral"}`.
+- Validate every field of model output before trusting it — never apply directly to the DB without checking referential integrity.

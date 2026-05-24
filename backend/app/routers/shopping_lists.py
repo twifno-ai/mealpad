@@ -13,6 +13,7 @@ from ..schemas import (
     ShoppingListRead,
 )
 from ..services.ai import merge_ingredients
+from ..services.llm_config import AIServiceError
 
 router = APIRouter()
 
@@ -75,7 +76,10 @@ def generate_shopping_list(body: DateRange, session: Session = Depends(get_sessi
         if recipe:
             ingredient_lines.extend(recipe.ingredients)
 
-    merged = merge_ingredients(ingredient_lines) if ingredient_lines else []
+    try:
+        merged = merge_ingredients(ingredient_lines) if ingredient_lines else []
+    except AIServiceError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
     shopping_list = session.exec(
         select(ShoppingList)

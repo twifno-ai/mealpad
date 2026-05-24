@@ -7,6 +7,8 @@ from sqlmodel import Session, select
 from ..db import get_session
 from ..models import MealPlanEntry, Recipe
 from ..schemas import DateRange, EntryUpsert, MealPlanEntryRead, RecipeSummary
+from ..services import ai as ai_service
+from ..services.llm_config import AIServiceError
 
 router = APIRouter()
 
@@ -105,8 +107,6 @@ def _iter_slots(start: Date, end: Date) -> list[tuple[Date, str]]:
 
 @router.post("/generate", response_model=list[MealPlanEntryRead])
 def generate_meal_plan(body: DateRange, session: Session = Depends(get_session)):
-    from ..services.ai import generate_plan
-
     all_slots = set(_iter_slots(body.start, body.end))
     existing = session.exec(
         select(MealPlanEntry)
@@ -123,7 +123,10 @@ def generate_meal_plan(body: DateRange, session: Session = Depends(get_session))
     recipe_dicts = [{"id": r.id, "name": r.name, "type": r.type} for r in recipes]
     valid_ids = {r.id for r in recipes}
 
-    assignments = generate_plan(empty_slots, recipe_dicts)
+    try:
+        assignments = ai_service.generate_plan(empty_slots, recipe_dicts)
+    except AIServiceError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
     for assignment in assignments:
         try:
             assign_date = Date.fromisoformat(assignment["date"])

@@ -6,13 +6,13 @@ Family-oriented meal planning, recipes, and shopping lists for your home LAN.
 
 - Python 3.11+
 - Node 20+
-- An [Anthropic](https://console.anthropic.com/) API key
+- An [Anthropic](https://console.anthropic.com/) and/or [OpenAI](https://platform.openai.com/) API key (see `backend/.env.example`)
 
 ## Setup
 
 ```bash
 cp backend/.env.example backend/.env
-# Edit backend/.env and set ANTHROPIC_API_KEY
+# Edit backend/.env — set ANTHROPIC_API_KEY and/or OPENAI_API_KEY (optional AI_PROVIDER)
 
 cd backend
 python3 -m venv .venv
