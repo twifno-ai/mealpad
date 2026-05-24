@@ -11,6 +11,8 @@ v1（M1–M9 + 多道菜 / 双 AI / 中文 UI / regenerate）已交付。v2 在 
 
 **设计 spec（权威细节）：** [superpowers/specs/2026-05-23-v2-cooking-log-design.md](superpowers/specs/2026-05-23-v2-cooking-log-design.md)
 
+**逐步实施计划（Task 级）：** [superpowers/plans/2026-05-23-v2-cooking-log.md](superpowers/plans/2026-05-23-v2-cooking-log.md)
+
 **前置：** 阅读 spec 中「已确认决策」「数据模型」「API」三节。
 
 ## v2 设计决策（锁定）
