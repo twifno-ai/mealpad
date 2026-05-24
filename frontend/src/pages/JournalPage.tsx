@@ -63,9 +63,6 @@ export default function JournalPage() {
     <div className="page">
       <header className="page-header">
         <h1>{zh.journal.title}</h1>
-        <Link to={`/plan/${startIso}`} className="btn btn-secondary">
-          {zh.journal.backToPlan}
-        </Link>
       </header>
 
       <div className="toolbar week-nav">

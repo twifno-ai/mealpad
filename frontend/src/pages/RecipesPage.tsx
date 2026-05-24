@@ -65,9 +65,6 @@ export default function RecipesPage() {
             </option>
           ))}
         </select>
-        <Link to="/plan" className="btn btn-secondary">
-          {zh.recipes.mealPlan}
-        </Link>
       </div>
 
       {error && <p className="error">{error}</p>}

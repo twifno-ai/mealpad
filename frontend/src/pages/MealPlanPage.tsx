@@ -175,13 +175,13 @@ export default function MealPlanPage() {
 
   async function handleShoppingAction() {
     if (hasList) {
-      navigate(`/plan/${startIso}/shopping`);
+      navigate(`/shopping/${startIso}`);
       return;
     }
     setError("");
     try {
       await api.generateShoppingList(startIso, endIso);
-      navigate(`/plan/${startIso}/shopping`);
+      navigate(`/shopping/${startIso}`);
     } catch (e) {
       console.error(e);
       setError(getErrorMessage(e, zh.mealPlan.generateListFailed));
@@ -228,11 +228,8 @@ export default function MealPlanPage() {
       <header className="page-header">
         <h1>{zh.mealPlan.title}</h1>
         <div className="header-actions">
-          <Link to={`/journal/${startIso}`} className="btn btn-secondary">
-            {zh.journal.title}
-          </Link>
-          <Link to="/recipes" className="btn btn-secondary">
-            {zh.mealPlan.recipes}
+          <Link to="/settings" className="btn btn-secondary btn-icon" aria-label={zh.settings.title}>
+            ⚙
           </Link>
         </div>
       </header>

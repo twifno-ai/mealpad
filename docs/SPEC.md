@@ -4,7 +4,7 @@ Family-oriented meal planning and recipe management for the home LAN: save recip
 
 ## Core capabilities (v1 + post-v1)
 
-1. **Mobile PWA** — React app served from the same FastAPI origin; installable on phones/tablets on the local network.
+1. **Mobile PWA** — React app served from the same FastAPI origin; installable on phones/tablets on the local network. **v3:** bottom tab navigation (plan / recipes / journal / shopping), connection health screen, settings page.
 2. **Recipes** — Manual entry: name, description, type (`soup`, `meat`, `veg`, `other`), free-text ingredients (one string per line).
 3. **Meal plan** — Per-date lunch/dinner; each meal can hold **multiple dishes** (several recipes per slot). Manual add/replace/remove per dish; clear whole meal.
 4. **AI meal planning** — Fill empty meals (3 dishes each: meat + veg + soup) or **regenerate** an entire week (replaces all dishes; deletes that week's shopping list). Does not overwrite meals that already have at least one dish when using fill-only.

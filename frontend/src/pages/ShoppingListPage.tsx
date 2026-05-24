@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getErrorMessage } from "../httpErrors";
 import { addDays, api, formatIsoDate, mondayOfWeek, type ShoppingList } from "../api";
 import { categoryLabel, zh } from "../locale/zh";
@@ -15,6 +15,7 @@ const CATEGORY_ORDER = [
 ];
 
 export default function ShoppingListPage() {
+  const navigate = useNavigate();
   const { weekStart: weekStartParam } = useParams();
   const weekStart = useMemo(() => {
     if (weekStartParam) {
@@ -64,6 +65,10 @@ export default function ShoppingListPage() {
     });
   }
 
+  function goWeek(offset: number) {
+    navigate(`/shopping/${formatIsoDate(addDays(weekStart, offset * 7))}`);
+  }
+
   async function handleRegenerate() {
     if (!confirm(zh.shopping.regenerateConfirm)) return;
     setRegenerating(true);
@@ -82,16 +87,26 @@ export default function ShoppingListPage() {
     <div className="page">
       <header className="page-header">
         <h1>{zh.shopping.title}</h1>
-        <Link to={`/plan/${startIso}`} className="btn btn-secondary">
-          {zh.shopping.backToPlan}
-        </Link>
       </header>
 
-      <p className="muted week-label">
-        {startIso} – {endIso}
-      </p>
+      <div className="toolbar week-nav">
+        <button type="button" className="btn btn-secondary" onClick={() => goWeek(-1)}>
+          ◀
+        </button>
+        <span className="week-label">
+          {startIso} – {endIso}
+        </span>
+        <button type="button" className="btn btn-secondary" onClick={() => goWeek(1)}>
+          ▶
+        </button>
+      </div>
 
-      {error && !list && <p className="error">{error}</p>}
+      {error && !list && !loading && (
+        <p className="muted">
+          {zh.shopping.empty}{" "}
+          <Link to={`/plan/${startIso}`}>{zh.shopping.goToPlan}</Link>
+        </p>
+      )}
       {loading && <p className="muted">{zh.loading}</p>}
 
       {list &&

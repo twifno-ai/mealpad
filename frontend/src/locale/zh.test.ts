@@ -35,6 +35,17 @@ describe("v2 zh keys", () => {
   });
 });
 
+describe("v3 connection and tabs", () => {
+  it("has connection strings", () => {
+    expect(zh.connection.title).toBeTruthy();
+    expect(zh.connection.retry).toBeTruthy();
+  });
+  it("has tab labels", () => {
+    expect(zh.tabs.plan).toBe("膳食计划");
+    expect(zh.tabs.shopping).toBe("购物清单");
+  });
+});
+
 describe("formatDayHeader", () => {
   it("formats ISO date with Chinese weekday", () => {
     const d = new Date("2026-05-18T12:00:00");

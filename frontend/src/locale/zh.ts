@@ -80,11 +80,39 @@ export const zh = {
   shopping: {
     title: "购物清单",
     backToPlan: "返回膳食计划",
+    goToPlan: "前往膳食计划",
     empty: "还没有购物清单",
     regenerateConfirm: "重新生成清单？所有勾选状态将重置。",
     regenerateFailed: "重新生成失败",
     regenerating: "重新生成中…",
     regenerate: "重新生成清单",
+  },
+  tabs: {
+    plan: "膳食计划",
+    recipes: "食谱",
+    journal: "饮食记录",
+    shopping: "购物清单",
+  },
+  connection: {
+    title: "无法连接 Mealpad 服务器",
+    hint: "请确认手机与运行 Mealpad 的电脑在同一 Wi‑Fi。",
+    checkServe: "在电脑上运行 make serve",
+    checkIp: "若 Mac IP 变了，请用 Safari 打开新地址并重新「添加到主屏幕」",
+    retry: "重试",
+    copyAddress: "复制当前地址",
+    helpTitle: "连接帮助",
+    helpBody:
+      "1. 电脑与手机同一 Wi‑Fi\n2. 终端执行 make build && make serve\n3. macOS 查 IP：ipconfig getifaddr en0\n4. Safari 打开 http://<IP>:8000 并添加到主屏幕",
+    copied: "已复制",
+    offline: "当前无网络",
+  },
+  settings: {
+    title: "设置",
+    serverAddress: "服务器地址",
+    checkConnection: "检查连接",
+    connected: "连接正常",
+    failed: "无法连接",
+    backupHint: "备份请拷贝电脑上的 backend/data/ 目录。",
   },
 } as const;
 
