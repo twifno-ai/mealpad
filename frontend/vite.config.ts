@@ -8,9 +8,9 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Mealpad",
+        name: "Mealpad · 家庭膳食计划",
         short_name: "Mealpad",
-        description: "Family meal planning",
+        description: "家庭食谱、膳食计划与购物清单",
         theme_color: "#2e7d32",
         background_color: "#ffffff",
         display: "standalone",
