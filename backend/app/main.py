@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .config import settings
 from .db import init_db
-from .routers import meal_plan, recipes, shopping_lists
+from .routers import cooked_dishes, meal_plan, recipes, shopping_lists
 from .services import uploads as upload_service
 
 
@@ -20,6 +20,7 @@ async def lifespan(_app: FastAPI):
 app = FastAPI(title="mealpad", lifespan=lifespan)
 
 app.include_router(recipes.router, prefix="/api/recipes", tags=["recipes"])
+app.include_router(cooked_dishes.router, prefix="/api/cooked-dishes", tags=["cooked-dishes"])
 app.include_router(meal_plan.router, prefix="/api/meal-plan", tags=["meal-plan"])
 app.include_router(shopping_lists.router, prefix="/api/shopping-lists", tags=["shopping-lists"])
 app.include_router(

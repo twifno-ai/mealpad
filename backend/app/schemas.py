@@ -78,3 +78,15 @@ class ShoppingListRead(BaseModel):
 
 class ItemUpdate(BaseModel):
     checked: bool
+
+
+class CookedDishLogRead(BaseModel):
+    id: int
+    date: Date
+    slot: str
+    recipe_id: int | None
+    recipe_name: str
+    kind: str
+    meal_plan_entry_id: int | None
+    photo_url: str | None
+    logged_at: datetime
