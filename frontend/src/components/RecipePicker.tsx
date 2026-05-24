@@ -3,12 +3,20 @@ import { api, type Recipe } from "../api";
 import { recipeTypeLabel, zh } from "../locale/zh";
 
 interface Props {
+  title?: string;
+  showClear?: boolean;
   onSelect: (recipeId: number) => void;
-  onClear: () => void;
+  onClear?: () => void;
   onClose: () => void;
 }
 
-export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
+export default function RecipePicker({
+  title,
+  showClear = true,
+  onSelect,
+  onClear,
+  onClose,
+}: Props) {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
@@ -37,7 +45,7 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
         aria-label={zh.picker.title}
       >
         <header className="modal-header">
-          <h2>{zh.picker.title}</h2>
+          <h2>{title ?? zh.picker.title}</h2>
           <button type="button" className="btn btn-secondary" onClick={onClose}>
             {zh.close}
           </button>
@@ -53,9 +61,11 @@ export default function RecipePicker({ onSelect, onClear, onClose }: Props) {
 
         {error && <p className="error">{error}</p>}
 
-        <button type="button" className="btn btn-danger btn-block" onClick={onClear}>
-          {zh.picker.clearSlot}
-        </button>
+        {showClear && onClear && (
+          <button type="button" className="btn btn-danger btn-block" onClick={onClear}>
+            {zh.picker.clearSlot}
+          </button>
+        )}
 
         <ul className="list picker-list">
           {filtered.map((recipe) => (

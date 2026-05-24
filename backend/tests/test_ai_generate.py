@@ -1,30 +1,11 @@
-from datetime import date
+from meal_plan_helpers import create_typed_recipes, meal_assignment, mock_generate_meals
 
 
-def _create_recipes(client, count=5):
-    ids = []
-    for i in range(count):
-        recipe = client.post(
-            "/api/recipes",
-            json={
-                "name": f"Recipe {i}",
-                "type": "soup",
-                "description": "",
-                "ingredients": [f"item {i}"],
-            },
-        ).json()
-        ids.append(recipe["id"])
-    return ids
+def test_generate_fills_empty_meals(client, monkeypatch):
+    typed = create_typed_recipes(client)
 
-
-def test_generate_fills_empty_slots(client, monkeypatch):
-    _create_recipes(client, 5)
-
-    def mock_generate(empty_slots, recipes):
-        return [
-            {"date": d.isoformat(), "slot": s, "recipe_id": recipes[i % len(recipes)]["id"]}
-            for i, (d, s) in enumerate(empty_slots)
-        ]
+    def mock_generate(empty_meals, recipes):
+        return mock_generate_meals(empty_meals, typed)
 
     monkeypatch.setattr("app.services.ai.generate_plan", mock_generate)
 
@@ -33,21 +14,19 @@ def test_generate_fills_empty_slots(client, monkeypatch):
         json={"start": "2026-05-12", "end": "2026-05-13"},
     )
     assert response.status_code == 200
-    assert len(response.json()) == 4
+    assert len(response.json()) == 12
 
 
-def test_generate_ignores_filled_slot(client, monkeypatch):
-    recipe_ids = _create_recipes(client, 5)
-    client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": recipe_ids[0]})
+def test_generate_ignores_filled_meal(client, monkeypatch):
+    typed = create_typed_recipes(client)
+    client.post(
+        "/api/meal-plan/2026-05-12/lunch/items",
+        json={"recipe_id": typed["soup"]["id"]},
+    )
 
-    def mock_generate(empty_slots, recipes):
-        assignments = [
-            {"date": d.isoformat(), "slot": s, "recipe_id": recipes[0]["id"]}
-            for d, s in empty_slots
-        ]
-        assignments.append(
-            {"date": "2026-05-12", "slot": "lunch", "recipe_id": recipes[1]["id"]}
-        )
+    def mock_generate(empty_meals, recipes):
+        assignments = mock_generate_meals(empty_meals, typed)
+        assignments.append(meal_assignment("2026-05-12", "lunch", typed))
         return assignments
 
     monkeypatch.setattr("app.services.ai.generate_plan", mock_generate)
@@ -57,17 +36,43 @@ def test_generate_ignores_filled_slot(client, monkeypatch):
         json={"start": "2026-05-12", "end": "2026-05-12"},
     )
     entries = response.json()
-    lunch = next(e for e in entries if e["slot"] == "lunch")
-    assert lunch["recipe_id"] == recipe_ids[0]
+    lunch = [e for e in entries if e["slot"] == "lunch"]
+    assert len(lunch) == 1
+    assert lunch[0]["recipe_id"] == typed["soup"]["id"]
 
 
-def test_generate_ignores_invalid_recipe_id(client, monkeypatch):
-    _create_recipes(client, 2)
+def test_generate_missing_recipe_type_returns_422(client):
+    client.post(
+        "/api/recipes",
+        json={
+            "name": "Only soup",
+            "type": "soup",
+            "description": "",
+            "ingredients": ["water"],
+        },
+    )
+    response = client.post(
+        "/api/meal-plan/generate",
+        json={"start": "2026-05-12", "end": "2026-05-12"},
+    )
+    assert response.status_code == 422
+    assert "荤菜" in response.json()["detail"]
 
-    def mock_generate(empty_slots, recipes):
+
+def test_generate_invalid_ai_output_returns_502(client, monkeypatch):
+    create_typed_recipes(client)
+
+    def mock_generate(empty_meals, recipes):
         return [
-            {"date": "2026-05-12", "slot": "lunch", "recipe_id": 99999},
-            {"date": "2026-05-12", "slot": "dinner", "recipe_id": recipes[0]["id"]},
+            {
+                "date": "2026-05-12",
+                "slot": "lunch",
+                "dishes": [
+                    {"recipe_id": 99999, "type": "meat"},
+                    {"recipe_id": 99998, "type": "veg"},
+                    {"recipe_id": 99997, "type": "soup"},
+                ],
+            }
         ]
 
     monkeypatch.setattr("app.services.ai.generate_plan", mock_generate)
@@ -76,39 +81,27 @@ def test_generate_ignores_invalid_recipe_id(client, monkeypatch):
         "/api/meal-plan/generate",
         json={"start": "2026-05-12", "end": "2026-05-12"},
     )
-    assert len(response.json()) == 1
+    assert response.status_code == 502
 
 
-def test_generate_ignores_out_of_range_date(client, monkeypatch):
-    _create_recipes(client, 2)
-
-    def mock_generate(empty_slots, recipes):
-        return [
-            {"date": "2026-05-20", "slot": "lunch", "recipe_id": recipes[0]["id"]},
-            {"date": "2026-05-12", "slot": "lunch", "recipe_id": recipes[0]["id"]},
-        ]
-
-    monkeypatch.setattr("app.services.ai.generate_plan", mock_generate)
-
-    response = client.post(
-        "/api/meal-plan/generate",
-        json={"start": "2026-05-12", "end": "2026-05-12"},
-    )
-    assert len(response.json()) == 1
-
-
-def test_generate_skips_api_when_no_empty_slots(client, monkeypatch):
-    recipe_ids = _create_recipes(client, 2)
+def test_generate_skips_api_when_no_empty_meals(client, monkeypatch):
+    typed = create_typed_recipes(client)
     called = {"value": False}
 
-    def mock_generate(empty_slots, recipes):
+    def mock_generate(empty_meals, recipes):
         called["value"] = True
         return []
 
     monkeypatch.setattr("app.services.ai.generate_plan", mock_generate)
 
-    client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": recipe_ids[0]})
-    client.put("/api/meal-plan/2026-05-12/dinner", json={"recipe_id": recipe_ids[1]})
+    client.post(
+        "/api/meal-plan/2026-05-12/lunch/items",
+        json={"recipe_id": typed["soup"]["id"]},
+    )
+    client.post(
+        "/api/meal-plan/2026-05-12/dinner/items",
+        json={"recipe_id": typed["meat"]["id"]},
+    )
 
     response = client.post(
         "/api/meal-plan/generate",

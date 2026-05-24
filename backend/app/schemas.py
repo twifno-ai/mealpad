@@ -47,6 +47,7 @@ class MealPlanEntryRead(BaseModel):
     date: Date
     slot: str
     recipe_id: int
+    sort_order: int
     recipe: RecipeSummary
     created_at: datetime
 

@@ -1,22 +1,12 @@
 from datetime import date
 
 from app.services.llm_config import AIServiceError
+from meal_plan_helpers import create_typed_recipes
 
 
 def _create_recipes(client, count=2):
-    ids = []
-    for i in range(count):
-        recipe = client.post(
-            "/api/recipes",
-            json={
-                "name": f"Recipe {i}",
-                "type": "soup",
-                "description": "",
-                "ingredients": [f"item {i}"],
-            },
-        ).json()
-        ids.append(recipe["id"])
-    return ids
+    typed = create_typed_recipes(client)
+    return [typed["soup"], typed["meat"], typed["veg"]][:count]
 
 
 def test_generate_returns_502_when_ai_unconfigured(client, monkeypatch):
@@ -36,8 +26,11 @@ def test_generate_returns_502_when_ai_unconfigured(client, monkeypatch):
 
 
 def test_shopping_list_returns_502_when_ai_unconfigured(client, monkeypatch):
-    recipe_ids = _create_recipes(client, 1)
-    client.put(f"/api/meal-plan/{date(2026, 5, 12).isoformat()}/lunch", json={"recipe_id": recipe_ids[0]})
+    recipe_ids = _create_recipes(client, 3)
+    client.post(
+        "/api/meal-plan/2026-05-12/lunch/items",
+        json={"recipe_id": recipe_ids[0]["id"]},
+    )
 
     def raise_unconfigured(*args, **kwargs):
         raise AIServiceError("未配置 OpenAI API Key，请在 backend/.env 中设置 OPENAI_API_KEY")

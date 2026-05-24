@@ -15,12 +15,13 @@ class Recipe(SQLModel, table=True):
 
 
 class MealPlanEntry(SQLModel, table=True):
-    __table_args__ = (UniqueConstraint("date", "slot"),)
+    __table_args__ = (UniqueConstraint("date", "slot", "recipe_id"),)
 
     id: int | None = Field(default=None, primary_key=True)
     date: Date = Field(index=True)
     slot: str
     recipe_id: int = Field(foreign_key="recipe.id", ondelete="CASCADE")
+    sort_order: int = 0
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 

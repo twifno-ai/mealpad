@@ -48,6 +48,7 @@ export interface MealPlanEntry {
   date: string;
   slot: "lunch" | "dinner";
   recipe_id: number;
+  sort_order: number;
   recipe: RecipeSummary;
   created_at: string;
 }
@@ -95,12 +96,19 @@ export const api = {
 
   getMealPlan: (start: string, end: string) =>
     req<MealPlanEntry[]>(`/api/meal-plan?start=${start}&end=${end}`),
-  upsertMealPlanEntry: (date: string, slot: string, recipeId: number) =>
-    req<MealPlanEntry>(`/api/meal-plan/${date}/${slot}`, {
+  addMealPlanItem: (date: string, slot: string, recipeId: number) =>
+    req<MealPlanEntry>(`/api/meal-plan/${date}/${slot}/items`, {
+      method: "POST",
+      body: JSON.stringify({ recipe_id: recipeId }),
+    }),
+  updateMealPlanItem: (entryId: number, recipeId: number) =>
+    req<MealPlanEntry>(`/api/meal-plan/items/${entryId}`, {
       method: "PUT",
       body: JSON.stringify({ recipe_id: recipeId }),
     }),
-  deleteMealPlanEntry: (date: string, slot: string) =>
+  deleteMealPlanItem: (entryId: number) =>
+    req<void>(`/api/meal-plan/items/${entryId}`, { method: "DELETE" }),
+  deleteMealPlanSlot: (date: string, slot: string) =>
     req<void>(`/api/meal-plan/${date}/${slot}`, { method: "DELETE" }),
   generateMealPlan: (start: string, end: string) =>
     req<MealPlanEntry[]>("/api/meal-plan/generate", {

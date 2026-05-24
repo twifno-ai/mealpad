@@ -1,15 +1,27 @@
 from datetime import date as Date
 from typing import TypedDict
 
-class Assignment(TypedDict):
+REQUIRED_MEAL_TYPES = ("meat", "veg", "soup")
+TYPE_SORT_ORDER = {"meat": 0, "veg": 1, "soup": 2}
+
+
+class DishAssignment(TypedDict):
+    recipe_id: int
+    type: str
+
+
+class MealAssignment(TypedDict):
     date: str
     slot: str
-    recipe_id: int
+    dishes: list[DishAssignment]
 
+
+# Backward alias for exports
+Assignment = MealAssignment
 
 ASSIGN_TOOL = {
     "name": "assign_meals",
-    "description": "Assign one recipe_id to each empty slot, optimizing for variety.",
+    "description": "Assign three recipes (meat, veg, soup) to each empty meal slot.",
     "input_schema": {
         "type": "object",
         "properties": {
@@ -20,9 +32,24 @@ ASSIGN_TOOL = {
                     "properties": {
                         "date": {"type": "string", "description": "YYYY-MM-DD"},
                         "slot": {"type": "string", "enum": ["lunch", "dinner"]},
-                        "recipe_id": {"type": "integer"},
+                        "dishes": {
+                            "type": "array",
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "recipe_id": {"type": "integer"},
+                                    "type": {
+                                        "type": "string",
+                                        "enum": ["meat", "veg", "soup"],
+                                    },
+                                },
+                                "required": ["recipe_id", "type"],
+                            },
+                        },
                     },
-                    "required": ["date", "slot", "recipe_id"],
+                    "required": ["date", "slot", "dishes"],
                 },
             }
         },
@@ -31,13 +58,13 @@ ASSIGN_TOOL = {
 }
 
 ASSIGN_SYSTEM = (
-    "You plan family meals. Given a list of empty (date, slot) pairs and "
-    "available recipes, return one assignment per empty slot. Rules: "
-    "(1) only use recipe_id values from the provided recipes; "
+    "You plan family meals. Given empty (date, slot) meal slots and available recipes, "
+    "assign exactly three recipes per slot: one meat, one veg, and one soup. Rules: "
+    "(1) each dish recipe_id must come from the provided recipes and match the declared type; "
     "(2) avoid repeating the same recipe within 2 days; "
-    "(3) vary recipe types across consecutive meals; "
+    "(3) vary choices across consecutive meals; "
     "(4) limit reuse of any recipe within a 7-day window. "
-    "Always call the assign_meals tool with one assignment per empty slot."
+    "Always call assign_meals with one assignment per empty slot, each with exactly 3 dishes."
 )
 
 MERGE_TOOL = {
@@ -87,7 +114,7 @@ MERGE_SYSTEM = (
 
 def plan_user_message(empty_slots: list[tuple[Date, str]], recipes: list[dict]) -> str:
     return (
-        f"Empty slots: {[(d.isoformat(), s) for d, s in empty_slots]}\n\n"
+        f"Empty meal slots: {[(d.isoformat(), s) for d, s in empty_slots]}\n\n"
         f"Available recipes (id, name, type): "
         f"{[(r['id'], r['name'], r['type']) for r in recipes]}"
     )

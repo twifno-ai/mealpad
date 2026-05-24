@@ -49,7 +49,28 @@ def test_meal_plan_entries_by_date_range(session: Session):
     assert result[1].slot == "lunch"
 
 
-def test_meal_plan_duplicate_date_slot_raises(session: Session):
+def test_meal_plan_same_slot_multiple_recipes(session: Session):
+    r1 = Recipe(name="A", type="soup", ingredients=["x"])
+    r2 = Recipe(name="B", type="meat", ingredients=["y"])
+    session.add(r1)
+    session.add(r2)
+    session.commit()
+    session.refresh(r1)
+    session.refresh(r2)
+
+    session.add(
+        MealPlanEntry(date=date(2026, 5, 12), slot="lunch", recipe_id=r1.id, sort_order=0)
+    )
+    session.add(
+        MealPlanEntry(date=date(2026, 5, 12), slot="lunch", recipe_id=r2.id, sort_order=1)
+    )
+    session.commit()
+
+    result = session.exec(select(MealPlanEntry)).all()
+    assert len(result) == 2
+
+
+def test_meal_plan_duplicate_date_slot_recipe_raises(session: Session):
     recipe = Recipe(name="A", type="soup", ingredients=["x"])
     session.add(recipe)
     session.commit()

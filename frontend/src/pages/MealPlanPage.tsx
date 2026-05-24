@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import MealSlotModal from "../components/MealSlotModal";
 import RecipePicker from "../components/RecipePicker";
 import { getErrorMessage } from "../httpErrors";
 import {
@@ -13,6 +14,27 @@ import { formatDayHeader } from "../locale/format";
 import { slotLabel, zh } from "../locale/zh";
 
 const SLOTS = ["lunch", "dinner"] as const;
+
+type PickerState = {
+  date: string;
+  slot: string;
+  mode: "add" | "replace";
+  entryId?: number;
+};
+
+type MealModalState = {
+  date: string;
+  slot: string;
+};
+
+function mealKey(date: string, slot: string) {
+  return `${date}:${slot}`;
+}
+
+function formatMealSummary(entries: MealPlanEntry[]) {
+  if (entries.length === 0) return zh.mealPlan.addSlot;
+  return entries.map((e) => e.recipe.name).join(" · ");
+}
 
 export default function MealPlanPage() {
   const { weekStart: weekStartParam } = useParams();
@@ -34,7 +56,8 @@ export default function MealPlanPage() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
-  const [picker, setPicker] = useState<{ date: string; slot: string } | null>(null);
+  const [mealModal, setMealModal] = useState<MealModalState | null>(null);
+  const [picker, setPicker] = useState<PickerState | null>(null);
   const [hasList, setHasList] = useState<boolean | null>(null);
 
   const load = useCallback(async () => {
@@ -62,10 +85,16 @@ export default function MealPlanPage() {
       .catch(() => setHasList(false));
   }, [startIso, endIso]);
 
-  const entryMap = useMemo(() => {
-    const map = new Map<string, MealPlanEntry>();
-    for (const e of entries) {
-      map.set(`${e.date}:${e.slot}`, e);
+  const entriesByMeal = useMemo(() => {
+    const map = new Map<string, MealPlanEntry[]>();
+    for (const entry of entries) {
+      const key = mealKey(entry.date, entry.slot);
+      const list = map.get(key) ?? [];
+      list.push(entry);
+      map.set(key, list);
+    }
+    for (const list of map.values()) {
+      list.sort((a, b) => a.sort_order - b.sort_order || a.id - b.id);
     }
     return map;
   }, [entries]);
@@ -75,16 +104,21 @@ export default function MealPlanPage() {
     [weekStart],
   );
 
-  const emptySlots = useMemo(() => {
+  const emptyMeals = useMemo(() => {
     let count = 0;
     for (const day of days) {
       const iso = formatIsoDate(day);
       for (const slot of SLOTS) {
-        if (!entryMap.has(`${iso}:${slot}`)) count += 1;
+        if ((entriesByMeal.get(mealKey(iso, slot))?.length ?? 0) === 0) count += 1;
       }
     }
     return count;
-  }, [days, entryMap]);
+  }, [days, entriesByMeal]);
+
+  const modalEntries = useMemo(() => {
+    if (!mealModal) return [];
+    return entriesByMeal.get(mealKey(mealModal.date, mealModal.slot)) ?? [];
+  }, [mealModal, entriesByMeal]);
 
   function goWeek(offset: number) {
     const next = addDays(weekStart, offset * 7);
@@ -136,17 +170,26 @@ export default function MealPlanPage() {
     }
   }
 
-  async function assignRecipe(recipeId: number) {
+  async function handleRecipeSelected(recipeId: number) {
     if (!picker) return;
-    await api.upsertMealPlanEntry(picker.date, picker.slot, recipeId);
+    if (picker.mode === "add") {
+      await api.addMealPlanItem(picker.date, picker.slot, recipeId);
+    } else if (picker.entryId != null) {
+      await api.updateMealPlanItem(picker.entryId, recipeId);
+    }
     setPicker(null);
     await load();
   }
 
-  async function clearSlot() {
-    if (!picker) return;
-    await api.deleteMealPlanEntry(picker.date, picker.slot);
-    setPicker(null);
+  async function handleRemoveDish(entryId: number) {
+    await api.deleteMealPlanItem(entryId);
+    await load();
+  }
+
+  async function handleClearMeal() {
+    if (!mealModal) return;
+    await api.deleteMealPlanSlot(mealModal.date, mealModal.slot);
+    setMealModal(null);
     await load();
   }
 
@@ -180,7 +223,7 @@ export default function MealPlanPage() {
         >
           {hasList ? zh.mealPlan.viewList : zh.mealPlan.generateList}
         </button>
-        {emptySlots > 0 && (
+        {emptyMeals > 0 && (
           <button
             type="button"
             className="btn btn-secondary"
@@ -212,18 +255,16 @@ export default function MealPlanPage() {
             <section key={iso} className="day-card">
               <h2 className="day-title">{formatDayHeader(day)}</h2>
               {SLOTS.map((slot) => {
-                const entry = entryMap.get(`${iso}:${slot}`);
+                const mealEntries = entriesByMeal.get(mealKey(iso, slot)) ?? [];
                 return (
                   <button
                     key={slot}
                     type="button"
                     className="slot-row"
-                    onClick={() => setPicker({ date: iso, slot })}
+                    onClick={() => setMealModal({ date: iso, slot })}
                   >
                     <span className="slot-label">{slotLabel(slot)}</span>
-                    <span className="slot-value">
-                      {entry ? entry.recipe.name : zh.mealPlan.addSlot}
-                    </span>
+                    <span className="slot-value">{formatMealSummary(mealEntries)}</span>
                   </button>
                 );
               })}
@@ -231,10 +272,33 @@ export default function MealPlanPage() {
           );
         })}
 
+      {mealModal && (
+        <MealSlotModal
+          date={mealModal.date}
+          slot={mealModal.slot}
+          entries={modalEntries}
+          onAdd={() => {
+            setPicker({ date: mealModal.date, slot: mealModal.slot, mode: "add" });
+          }}
+          onReplace={(entryId) => {
+            setPicker({
+              date: mealModal.date,
+              slot: mealModal.slot,
+              mode: "replace",
+              entryId,
+            });
+          }}
+          onRemove={handleRemoveDish}
+          onClearMeal={handleClearMeal}
+          onClose={() => setMealModal(null)}
+        />
+      )}
+
       {picker && (
         <RecipePicker
-          onSelect={assignRecipe}
-          onClear={clearSlot}
+          title={picker.mode === "add" ? zh.mealPlan.addDish : zh.mealPlan.replaceDish}
+          showClear={false}
+          onSelect={handleRecipeSelected}
           onClose={() => setPicker(null)}
         />
       )}

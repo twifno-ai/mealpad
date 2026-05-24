@@ -212,6 +212,35 @@ textarea.input {
 
 .slot-value {
   flex: 1;
+  line-height: 1.35;
+}
+
+.meal-dish-list {
+  margin: 0.75rem 0;
+}
+
+.meal-dish-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.meal-dish-row:last-child {
+  border-bottom: none;
+}
+
+.meal-dish-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.meal-dish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .modal-backdrop {

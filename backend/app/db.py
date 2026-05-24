@@ -33,6 +33,10 @@ def init_db() -> None:
     if not os.environ.get("MEALPAD_TESTING"):
         Path(settings.db_path).parent.mkdir(parents=True, exist_ok=True)
     SQLModel.metadata.create_all(engine)
+    if not os.environ.get("MEALPAD_TESTING"):
+        from .migrate import migrate_db
+
+        migrate_db()
 
 
 def get_session():

@@ -64,13 +64,25 @@ def recipes():
 def test_openai_generate_plan_parses_tool_call(monkeypatch, empty_slots, recipes):
     response = FakeCompletion(
         "assign_meals",
-        {"assignments": [{"date": "2026-05-12", "slot": "lunch", "recipe_id": 1}]},
+        {
+            "assignments": [
+                {
+                    "date": "2026-05-12",
+                    "slot": "lunch",
+                    "dishes": [
+                        {"recipe_id": 1, "type": "meat"},
+                        {"recipe_id": 2, "type": "veg"},
+                        {"recipe_id": 1, "type": "soup"},
+                    ],
+                }
+            ]
+        },
     )
     monkeypatch.setattr(openai_provider, "_client", lambda: FakeOpenAI(response))
 
     result = openai_provider.generate_plan(empty_slots, recipes)
     assert len(result) == 1
-    assert result[0]["recipe_id"] == 1
+    assert len(result[0]["dishes"]) == 3
 
 
 def test_openai_merge_ingredients_parses_tool_call(monkeypatch):

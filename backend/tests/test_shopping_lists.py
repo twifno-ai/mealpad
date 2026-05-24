@@ -1,26 +1,21 @@
+from meal_plan_helpers import create_typed_recipes
+
+
 def _seed_meal_plan(client):
-    r1 = client.post(
-        "/api/recipes",
-        json={
-            "name": "A",
-            "type": "soup",
-            "description": "",
-            "ingredients": ["2 cloves garlic", "1 onion"],
-        },
-    ).json()
-    r2 = client.post(
-        "/api/recipes",
-        json={
-            "name": "B",
-            "type": "meat",
-            "description": "",
-            "ingredients": ["3 cloves garlic", "salt"],
-        },
-    ).json()
-    client.put("/api/meal-plan/2026-05-12/lunch", json={"recipe_id": r1["id"]})
-    client.put("/api/meal-plan/2026-05-12/dinner", json={"recipe_id": r2["id"]})
-    client.put("/api/meal-plan/2026-05-13/lunch", json={"recipe_id": r1["id"]})
-    return r1, r2
+    typed = create_typed_recipes(client)
+    client.post(
+        "/api/meal-plan/2026-05-12/lunch/items",
+        json={"recipe_id": typed["soup"]["id"]},
+    )
+    client.post(
+        "/api/meal-plan/2026-05-12/dinner/items",
+        json={"recipe_id": typed["meat"]["id"]},
+    )
+    client.post(
+        "/api/meal-plan/2026-05-13/lunch/items",
+        json={"recipe_id": typed["soup"]["id"]},
+    )
+    return typed
 
 
 def test_generate_persists_items(client, monkeypatch):
@@ -44,7 +39,7 @@ def test_generate_persists_items(client, monkeypatch):
     assert response.status_code == 201
     data = response.json()
     assert "garlic" in data["items_by_category"]["produce"][0]["text"]
-    assert len(lines_seen) == 6
+    assert len(lines_seen) == 3
 
 
 def test_regenerate_resets_checks(client, monkeypatch):
