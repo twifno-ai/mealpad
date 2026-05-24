@@ -2,7 +2,7 @@
 
 ## Context
 
-SPEC.md describes a family-oriented meal planning tool: store recipes, plan meals by week, AI-generate plans from saved recipes, auto-generate shopping lists. The repo currently contains only `SPEC.md` and a Python-flavored `.gitignore`. This plan covers the full build from scratch and is the single source of truth for v1 scope.
+SPEC.md describes a family-oriented meal planning tool: store recipes, plan meals by week, AI-generate plans from saved recipes, auto-generate shopping lists. **Milestones M1–M9 are complete.** Post-v1 enhancements (Chinese UI, dual AI provider, meal regenerate, multi-dish meals) are also shipped — see [Current state](#current-state-as-built) below.
 
 The goal of v1 is to remove repetitive weekday "what's for dinner" decisions and prevent the family from arriving at the store missing one ingredient — nothing more. We are not building a recipe social network, nutrition tracker, or grocery delivery integration.
 
@@ -11,17 +11,18 @@ The goal of v1 is to remove repetitive weekday "what's for dinner" decisions and
 | Area | Choice |
 |---|---|
 | Backend | Python 3.11+, FastAPI, SQLModel, SQLite |
-| Frontend | React + Vite + TypeScript, served as a PWA |
-| AI | Anthropic Claude via `anthropic` SDK, tool use for structured JSON |
+| Frontend | React + Vite + TypeScript, PWA, **Simplified Chinese UI** |
+| AI | **Anthropic Claude or OpenAI** (`anthropic` / `openai` SDKs), tool use; provider via `.env` |
 | Auth | None — trusted local-network deployment |
-| Meal slots | Lunch + Dinner per day, each optional. Stored per-date (no week container). |
-| Ingredients | Free-text per recipe; Claude merges across recipes for shopping list |
+| Meal slots | Lunch + Dinner per day. **Multiple recipes per meal** (dishes). Stored per-date (no week container). |
+| AI meals | Fill/regenerate assign **3 dishes** per meal: `meat` + `veg` + `soup` |
+| Ingredients | Free-text per recipe; AI merges across recipes for shopping list |
 | Recipe entry | Manual form only |
-| Shopping list | Stateful per meal-plan week, items can be checked off |
+| Shopping list | Stateful per `(start_date, end_date)`, items can be checked off |
 
 ## Architecture
 
-A single FastAPI process serves both the JSON API (`/api/...`) and the built React PWA (`/`) from the same origin — no CORS in production. The Anthropic SDK is server-side only; the API key never reaches the browser. SQLite lives at `backend/data/mealpad.db` (gitignored). Deployment is `uvicorn app.main:app --host 0.0.0.0 --port 8000` on a household machine; family members visit `http://<host>:8000` from any device on the LAN.
+A single FastAPI process serves both the JSON API (`/api/...`) and the built React PWA (`/`) from the same origin — no CORS in production. AI SDKs are server-side only; API keys never reach the browser. SQLite lives at `backend/data/mealpad.db` (gitignored). **`app/migrate.py`** runs lightweight SQLite migrations on startup. Deployment is `uvicorn app.main:app --host 0.0.0.0 --port 8000` on a household machine; family members visit `http://<host>:8000` from any device on the **same LAN subnet**.
 
 ### File layout
 
@@ -29,54 +30,43 @@ A single FastAPI process serves both the JSON API (`/api/...`) and the built Rea
 mealpad/
 ├── backend/
 │   ├── pyproject.toml
-│   ├── .env.example                  # ANTHROPIC_API_KEY=
+│   ├── .env.example
 │   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py                   # FastAPI app, lifespan, SPA mount
-│   │   ├── config.py                 # pydantic-settings
-│   │   ├── db.py                     # engine, get_session, init_db
-│   │   ├── models.py                 # SQLModel tables
-│   │   ├── schemas.py                # Pydantic request/response models
+│   │   ├── main.py
+│   │   ├── config.py                 # AI provider + model settings
+│   │   ├── db.py
+│   │   ├── migrate.py                # SQLite schema upgrades
+│   │   ├── models.py
+│   │   ├── schemas.py
 │   │   ├── routers/
 │   │   │   ├── recipes.py
-│   │   │   ├── meal_plan.py
+│   │   │   ├── meal_plan.py          # dishes CRUD + generate + regenerate
 │   │   │   └── shopping_lists.py
 │   │   └── services/
-│   │       └── ai.py                 # Anthropic wrapper
+│   │       ├── ai.py                 # provider dispatch
+│   │       ├── llm_config.py
+│   │       ├── llm_errors.py
+│   │       └── providers/
+│   │           ├── base.py           # shared tool schemas + prompts
+│   │           ├── anthropic.py
+│   │           └── openai_provider.py
 │   ├── tests/
-│   │   ├── conftest.py               # in-memory SQLite fixture
-│   │   ├── test_models.py
-│   │   ├── test_recipes.py
-│   │   ├── test_meal_plan.py
-│   │   ├── test_ai_generate.py
-│   │   └── test_shopping_lists.py
 │   └── data/                         # gitignored runtime DB
 ├── frontend/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── vite.config.ts                # PWA plugin + /api dev proxy
-│   ├── index.html
-│   ├── public/
-│   │   ├── icon-192.png
-│   │   └── icon-512.png
 │   └── src/
-│       ├── main.tsx
-│       ├── App.tsx                   # router
-│       ├── api.ts                    # typed fetch helpers + types
-│       ├── styles.css
+│       ├── api.ts
+│       ├── httpErrors.ts             # Chinese HTTP error formatting
+│       ├── locale/zh.ts              # UI strings
 │       ├── pages/
-│       │   ├── RecipesPage.tsx
-│       │   ├── RecipeFormPage.tsx
-│       │   ├── MealPlanPage.tsx
-│       │   └── ShoppingListPage.tsx
 │       └── components/
-│           └── RecipePicker.tsx
-├── Makefile                          # dev / build / serve
+│           ├── RecipePicker.tsx
+│           └── MealSlotModal.tsx     # per-meal dish list
+├── docs/superpowers/specs/           # post-v1 design specs
+├── Makefile
 ├── README.md
 ├── CLAUDE.md
 ├── PLAN.md
-├── SPEC.md
-└── .gitignore
+└── SPEC.md
 ```
 
 ## Data Model
@@ -95,12 +85,13 @@ class Recipe(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class MealPlanEntry(SQLModel, table=True):
-    """One assigned meal. No entry = empty slot. No weekly container."""
-    __table_args__ = (UniqueConstraint("date", "slot"),)
+    """One dish in a meal. Multiple rows per (date, slot) allowed."""
+    __table_args__ = (UniqueConstraint("date", "slot", "recipe_id"),)
     id: int | None = Field(default=None, primary_key=True)
     date: date = Field(index=True)
     slot: str                                              # "lunch" | "dinner"
-    recipe_id: int = Field(foreign_key="recipe.id")        # non-null: deleting an entry clears the slot
+    recipe_id: int = Field(foreign_key="recipe.id", ondelete="CASCADE")
+    sort_order: int = 0                                    # display order within the meal
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class ShoppingList(SQLModel, table=True):
@@ -120,10 +111,11 @@ class ShoppingListItem(SQLModel, table=True):
 ```
 
 Notes:
-- **No "plan" entity.** Meal plans are derived: "the plan for week W" is just the set of `MealPlanEntry` rows whose `date` falls inside W. This means: no "create a plan" step, planning extends naturally beyond week boundaries, and a date can hold a meal whether the user thinks in weeks or not.
-- **Empty slots are absence of a row.** No need to pre-create 14 placeholders per week. The frontend renders an empty cell for any `(date, slot)` that has no entry. To clear a slot, `DELETE` the entry.
-- **`recipe_id` is non-null on entries.** An entry exists only when a recipe is assigned. Foreign key uses `ON DELETE CASCADE` so deleting a recipe removes its meal-plan rows (the slot becomes empty in the UI, no foreign-key fixups needed).
-- **Shopping list is keyed by date range**, not by a plan id. Re-generating the list for the same `(start, end)` updates the existing list in place (preserves the ID; resets check state). The frontend defaults the range to the currently-viewed week.
+- **No "plan" entity.** Meal plans are derived: "the plan for week W" is just the set of `MealPlanEntry` rows whose `date` falls inside W.
+- **Empty meal = no rows** for `(date, slot)`. The frontend renders "+ 添加" for empty meals.
+- **Multiple dishes per meal.** Same `(date, slot)` can have many entries; `(date, slot, recipe_id)` is unique.
+- **`recipe_id` is non-null on entries.** Foreign key uses `ON DELETE CASCADE`.
+- **Shopping list is keyed by date range**, not by a plan id. Re-generating updates in place (resets checks). **Regenerating the meal plan** for a range deletes the shopping list for that range.
 - `ingredients` is a JSON array column — keeps free-text lines without a separate table.
 
 ## API Surface
@@ -132,67 +124,69 @@ Notes:
 GET    /api/health
 
 GET    /api/recipes?type=<type>
-POST   /api/recipes                                    body: RecipeCreate
+POST   /api/recipes
 GET    /api/recipes/{id}
-PUT    /api/recipes/{id}                               body: RecipeUpdate
+PUT    /api/recipes/{id}
 DELETE /api/recipes/{id}
 
-GET    /api/meal-plan?start=YYYY-MM-DD&end=YYYY-MM-DD  returns entries in inclusive date range (with recipe summaries)
-PUT    /api/meal-plan/{date}/{slot}                    body: {recipe_id}; upserts the entry, returns it
-DELETE /api/meal-plan/{date}/{slot}                    clears the slot (deletes the entry if present); 204
-POST   /api/meal-plan/generate                         body: {start, end}; AI fills empty (date, slot) pairs in range
+GET    /api/meal-plan?start=YYYY-MM-DD&end=YYYY-MM-DD   entries in range (one row per dish)
+POST   /api/meal-plan/{date}/{slot}/items              body: {recipe_id}; add dish; 201
+PUT    /api/meal-plan/items/{entry_id}                 body: {recipe_id}; replace dish
+DELETE /api/meal-plan/items/{entry_id}                 remove one dish; 204
+DELETE /api/meal-plan/{date}/{slot}                    clear all dishes in meal; 204
+POST   /api/meal-plan/generate                         body: {start, end}; AI fills empty meals (3 dishes each)
+POST   /api/meal-plan/regenerate                      body: {start, end}; AI rebuilds all meals; deletes shopping list
 
-GET    /api/shopping-lists?start=YYYY-MM-DD&end=YYYY-MM-DD   returns the list for that range or 404
-POST   /api/shopping-lists                                   body: {start, end}; AI regenerates list for range, resets checks
-PATCH  /api/shopping-list-items/{id}                         body: {checked: bool}
+GET    /api/shopping-lists?start=YYYY-MM-DD&end=YYYY-MM-DD
+POST   /api/shopping-lists                             body: {start, end}; AI merge; resets checks
+PATCH  /api/shopping-list-items/{id}                   body: {checked: bool}
 ```
+
+Collection routes use **no trailing slash** (e.g. `POST /api/recipes`, not `/api/recipes/`).
 
 All non-`/api/*` paths fall through to the SPA `index.html` so React Router owns the client routes.
 
-`/api/meal-plan/{date}/{slot}` uses `{date}` in `YYYY-MM-DD` and `{slot}` in `{"lunch","dinner"}`. `PUT` is upsert semantics — no separate create/update routes.
+## AI Integration (`app/services/`)
 
-## AI Integration (`app/services/ai.py`)
+Two AI operations — meal assignment and shopping-list merge — share a **provider layer**:
 
-Two Claude calls, both using **tool use** for guaranteed JSON shape, both using **prompt caching** on the system prompt.
+- `llm_config.py` — resolve `AI_PROVIDER` or auto-detect (Anthropic first)
+- `providers/anthropic.py` — Claude via `anthropic` SDK
+- `providers/openai_provider.py` — ChatGPT via `openai` SDK (`max_completion_tokens` on GPT-5+)
+- `providers/base.py` — shared tool schemas and system prompts
+- `llm_errors.py` — map SDK errors to Chinese messages
 
-Model: `claude-sonnet-4-6` (balance of cost/quality for this task; can be bumped to opus in config later).
+Both calls use **tool use** for guaranteed JSON. Anthropic uses **prompt caching** on system prompts. Misconfiguration → HTTP 502 with Chinese `detail`.
 
-### `generate_plan(empty_slots, available_recipes) -> list[Assignment]`
+Default models: `claude-sonnet-4-6` (Anthropic), `gpt-5.5` (OpenAI); overridable in `.env`.
 
-Backs `POST /api/meal-plan/generate`. Server computes the list of empty `(date, slot)` tuples in the requested range and passes them with all saved recipes. Claude picks one `recipe_id` per empty slot. Real dates (rather than day-of-week indices) let Claude reason about weekday rhythms like "lighter lunch on Monday" if the user wants — but this is bonus, not required.
+### `generate_plan(empty_meals, available_recipes) -> list[MealAssignment]`
 
-Tool schema:
+Backs `POST /api/meal-plan/generate` and `POST /api/meal-plan/regenerate`. Server passes empty or all `(date, slot)` pairs plus recipes. Model returns **one assignment per meal**, each with **three dishes** (`meat`, `veg`, `soup`). Server validates types and recipe IDs before writing rows.
+
+Tool schema (simplified):
 
 ```json
 {
-  "name": "assign_meals",
-  "description": "Assign one recipe_id to each empty slot, optimizing for variety.",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "assignments": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "date": {"type": "string", "description": "YYYY-MM-DD"},
-            "slot": {"type": "string", "enum": ["lunch", "dinner"]},
-            "recipe_id": {"type": "integer"}
-          },
-          "required": ["date", "slot", "recipe_id"]
-        }
-      }
-    },
-    "required": ["assignments"]
-  }
+  "assignments": [{
+    "date": "2026-05-12",
+    "slot": "lunch",
+    "dishes": [
+      {"recipe_id": 1, "type": "meat"},
+      {"recipe_id": 2, "type": "veg"},
+      {"recipe_id": 3, "type": "soup"}
+    ]
+  }]
 }
 ```
 
-System prompt guidance: don't repeat the same recipe within 2 days; vary `type` across consecutive meals; only use `recipe_id` values from the provided list. After Claude responds, server validates every returned `recipe_id` exists and every `(date, slot)` is in the empty-slot set — drop anything invalid rather than failing the whole request.
+**Generate** only writes to meals with **zero** existing dishes. **Regenerate** calls AI first, then deletes all entries + shopping list in range, then writes new dishes.
+
+System prompt guidance: don't repeat the same recipe within 2 days; vary choices across consecutive meals; only use `recipe_id` values from the provided list. Server validates every dish before writing.
 
 ### `merge_ingredients(ingredient_lines) -> list[{text, category}]`
 
-Backs `POST /api/meal-plans/{id}/shopping-list`. Server collects all ingredient lines from all assigned recipes for the week (with duplicates — Claude needs to see "2 cloves garlic" appear three times to total them).
+Backs `POST /api/shopping-lists`. Server collects all ingredient lines from all meal-plan entries in the date range (duplicates included so the model can sum quantities).
 
 Tool schema:
 
@@ -219,6 +213,21 @@ Tool schema:
   }
 }
 ```
+
+## Current state (as built)
+
+Beyond M1–M9, these enhancements are **shipped**:
+
+| Feature | Spec | Summary |
+|---|---|---|
+| Simplified Chinese UI | `docs/superpowers/specs/2026-05-23-ui-chinese-design.md` | All pages, errors, PWA manifest |
+| Dual AI provider | `docs/superpowers/specs/2026-05-24-openai-provider-design.md` | Claude + OpenAI via `.env` |
+| Regenerate meal plan | `docs/superpowers/specs/2026-05-24-meal-plan-regenerate-design.md` | Full-week AI replan; deletes shopping list |
+| Multi-dish meals | `docs/superpowers/specs/2026-05-23-multi-dish-meal-design.md` | 3 AI dishes per meal; per-dish CRUD |
+
+Historical milestone sections below document the original M1–M9 build order; treat **Context**, **Design Decisions**, **Data Model**, **API Surface**, and **AI Integration** above as the authoritative current reference.
+
+---
 
 ## Milestones
 
@@ -702,25 +711,21 @@ Sections:
 
 ---
 
-## Verification (end-to-end after M9)
+## Verification (end-to-end)
 
-Run this entire walkthrough on a phone:
+Run this walkthrough on a phone (`make build && make serve`, same Wi‑Fi subnet):
 
-1. Open the PWA from the home screen → lands on `/plan` for the current week.
-2. Navigate to `/recipes` → empty list.
-3. Add 8 recipes spanning soup / meat / veg / noodle / rice.
-4. Return to `/plan` → 7 days × 2 slots, all empty.
-5. Manually assign 2 specific (date, slot) pairs.
-6. Tap "Auto-fill empty slots" → the remaining 12 slots fill with variety; the 2 manual entries are untouched.
-7. Navigate ▶ to next week → completely empty (independent of this week). ◀ back — last week's state intact.
-8. Tap "Generate shopping list" → categorized list for this week appears, ingredients merged across recipes (e.g. garlic totaled).
-9. Toggle 5 items checked. Reload the page → checks persist.
-10. Close the PWA. Reopen from home screen → land back on `/plan`, all state intact.
-11. From a second device on the same wifi, visit the same URL → see the same entries, the same shopping list, the same check states.
+1. Open `http://<lan-ip>:8000` → lands on `/plan` for the current week (Chinese UI).
+2. Add recipes including at least one **meat**, **veg**, and **soup**.
+3. Tap an empty meal → add dishes manually, or use **AI 自动填充空餐次** (3 dishes per empty meal).
+4. Tap a meal with dishes → **本餐菜单** modal: replace, delete, or add a 4th dish.
+5. **重新生成计划** → confirm → whole week replaced; shopping list for that week removed.
+6. **生成购物清单** → merged ingredients by category; check items; reload persists checks.
+7. Second device on same LAN sees the same data.
 
-If any step fails, the failure is the bug; the milestone wasn't done.
+If any step fails, the failure is the bug.
 
-## Out of Scope (do not build in v1)
+## Out of Scope (do not build without a new SPEC)
 
 - Auth / per-user accounts
 - Recipe import from URL or text
@@ -729,6 +734,7 @@ If any step fails, the failure is the bug; the milestone wasn't done.
 - Calendar / iCal export
 - Grocery store integrations
 - Multi-household / multi-tenant
-- Internationalization
+- Configurable AI dishes-per-meal in UI
+- English UI (Chinese only today)
 
-Each of these is tempting and each will add weeks. If they're wanted later, write a follow-up SPEC.
+Each of these is tempting and each will add weeks. If they're wanted later, write a follow-up SPEC under `docs/superpowers/specs/`.
