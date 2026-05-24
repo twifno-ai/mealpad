@@ -80,7 +80,7 @@ class Recipe(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True)
     description: str = ""
-    type: str = Field(index=True)                          # "soup" | "meat" | "veg" | "noodle" | "rice" | "salad" | "other"
+    type: str = Field(index=True)                          # "soup" | "meat" | "veg" | "other"
     ingredients: list[str] = Field(sa_column=Column(JSON)) # free-text lines, one per ingredient
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -346,7 +346,7 @@ def get_session():
 from pydantic import BaseModel, Field
 from datetime import datetime
 
-RECIPE_TYPES = {"soup", "meat", "veg", "noodle", "rice", "salad", "other"}
+RECIPE_TYPES = {"soup", "meat", "veg", "other"}
 
 class RecipeBase(BaseModel):
     name: str = Field(min_length=1)
@@ -393,8 +393,8 @@ Router endpoints (each ~5-line FastAPI handler using `Session = Depends(get_sess
 `frontend/src/api.ts`:
 
 ```ts
-export type RecipeType = 'soup' | 'meat' | 'veg' | 'noodle' | 'rice' | 'salad' | 'other';
-export const RECIPE_TYPES: RecipeType[] = ['soup','meat','veg','noodle','rice','salad','other'];
+export type RecipeType = 'soup' | 'meat' | 'veg' | 'other';
+export const RECIPE_TYPES: RecipeType[] = ['soup','meat','veg','other'];
 
 export interface Recipe {
   id: number;

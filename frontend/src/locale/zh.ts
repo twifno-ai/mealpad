@@ -71,9 +71,6 @@ const RECIPE_TYPE_LABELS: Record<string, string> = {
   soup: "汤",
   meat: "荤菜",
   veg: "素菜",
-  noodle: "面食",
-  rice: "米饭",
-  salad: "沙拉",
   other: "其他",
 };
 

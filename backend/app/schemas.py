@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-RECIPE_TYPES = {"soup", "meat", "veg", "noodle", "rice", "salad", "other"}
+RECIPE_TYPES = {"soup", "meat", "veg", "other"}
 
 SHOPPING_CATEGORIES = [
     "produce",

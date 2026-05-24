@@ -2,24 +2,9 @@ import { ApiError } from "./httpErrors";
 
 export { ApiError, formatHttpError } from "./httpErrors";
 
-export type RecipeType =
-  | "soup"
-  | "meat"
-  | "veg"
-  | "noodle"
-  | "rice"
-  | "salad"
-  | "other";
+export type RecipeType = "soup" | "meat" | "veg" | "other";
 
-export const RECIPE_TYPES: RecipeType[] = [
-  "soup",
-  "meat",
-  "veg",
-  "noodle",
-  "rice",
-  "salad",
-  "other",
-];
+export const RECIPE_TYPES: RecipeType[] = ["soup", "meat", "veg", "other"];
 
 export interface Recipe {
   id: number;
