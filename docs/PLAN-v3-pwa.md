@@ -8,6 +8,8 @@ v3 在 **零 Apple 开发者账号、不改后端 API** 前提下，强化 PWA �
 
 **设计 spec：** [superpowers/specs/2026-05-23-pwa-mobile-shell-design.md](superpowers/specs/2026-05-23-pwa-mobile-shell-design.md)
 
+**逐步实施计划（Task 级）：** [superpowers/plans/2026-05-23-pwa-mobile-shell.md](superpowers/plans/2026-05-23-pwa-mobile-shell.md)
+
 ## v3 锁定决策
 
 | 区域 | 选择 |
