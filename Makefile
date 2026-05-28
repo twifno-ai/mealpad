@@ -1,8 +1,10 @@
-.PHONY: dev-backend dev-frontend build serve test setup-backend seed-recipes seed-japanese-recipes seed-french-recipes seed-spanish-recipes seed-italian-recipes seed-american-recipes
+.PHONY: dev-backend dev-frontend build serve test setup-backend setup-frontend seed-recipes seed-japanese-recipes seed-french-recipes seed-spanish-recipes seed-italian-recipes seed-american-recipes
 
 VENV := backend/.venv
 PYTHON := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip
+FRONTEND := frontend
+FRONTEND_VITE := $(FRONTEND)/node_modules/.bin/vite
 
 setup-backend: $(VENV)/bin/uvicorn
 
@@ -16,11 +18,16 @@ dev-backend: setup-backend
 test: setup-backend
 	cd backend && MEALPAD_TESTING=1 .venv/bin/python -m pytest -v
 
-dev-frontend:
-	cd frontend && npm run dev
+setup-frontend: $(FRONTEND_VITE)
 
-build:
-	cd frontend && npm run build
+$(FRONTEND_VITE):
+	cd $(FRONTEND) && npm ci
+
+dev-frontend: setup-frontend
+	cd $(FRONTEND) && npm run dev
+
+build: setup-frontend
+	cd $(FRONTEND) && npm run build
 
 serve: setup-backend
 	cd backend && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000
